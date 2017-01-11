@@ -17,7 +17,7 @@ CREATE TABLE Users (
     PRIMARY KEY (UserID)
 );
 
-CREATE TABLE ROLES (
+CREATE TABLE Roles (
     UserRoleID INT NOT NULL AUTO_INCREMENT,
     UserID INT NOT NULL,
     Username VARCHAR (120) NOT NULL,
@@ -27,3 +27,11 @@ CREATE TABLE ROLES (
     CONSTRAINT fk_UserID FOREIGN KEY (UserID) REFERENCES Users (UserID),
     CONSTRAINT fk_Username FOREIGN KEY (Username) REFERENCES Users (Username),
 );
+
+INSERT INTO Users (Username, Password, User_Status) VALUES ('Carter','f58cf5e7e10f195e21b553096d092c763ed18b0e',true);
+INSERT INTO Users (Username, Password, User_Status) VALUES ('Jax','f58cf5e7e10f195e21b553096d092c763ed18b0e',true);
+INSERT INTO Users (Username, Password, User_Status) VALUES ('Jackie','f58cf5e7e10f195e21b553096d092c763ed18b0e',true);
+
+INSERT INTO Roles (Username, UserRole) VALUES ('Carter','ADMIN');
+INSERT INTO Roles (Username, UserRole) VALUES ('Jax','USER');
+INSERT INTO Roles (Username, UserRole) VALUES ('Jackie','MANAGER');
