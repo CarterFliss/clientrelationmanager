@@ -10,6 +10,8 @@
 /**
 *  Initial creation of tables
 */
+CREATE DATABASE ClientDB;
+
 CREATE TABLE Clients
 (
     ClientID INT NOT NULL AUTO_INCREMENT,
@@ -34,6 +36,6 @@ CREATE TABLE Interactions
     Interaction_Date DATE NOT NULL,    
     PRIMARY KEY  (EventID),
     CONSTRAINT fk_clientID FOREIGN KEY (ClientID) REFERENCES Clients (ClientID),
-    CONSTRAINT fk_userID FOREIGN KEY (UserID) REFERENCES Users.Users(UserID)
+    CONSTRAINT fk_userID FOREIGN KEY (UserID) REFERENCES UsersDB.Users(UserID)
 );
 
