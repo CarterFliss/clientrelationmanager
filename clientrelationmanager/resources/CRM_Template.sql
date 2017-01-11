@@ -10,8 +10,6 @@
 /**
 *  Initial creation of tables
 */
-CREATE DATABASE ClientDB;
-
 CREATE TABLE Clients
 (
     ClientID INT NOT NULL AUTO_INCREMENT,

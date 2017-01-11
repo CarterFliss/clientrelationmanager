@@ -7,8 +7,6 @@
  * Author:  Carter
  * Created: Jan 10, 2017
  */
-CREATE DATABASE UsersDB;
-
 CREATE TABLE Users (
     UserID INT NOT NULL AUTO_INCREMENT,
     Username VARCHAR (120) NOT NULL,
