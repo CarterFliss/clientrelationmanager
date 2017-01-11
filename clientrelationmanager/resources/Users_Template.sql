@@ -7,7 +7,11 @@
  * Author:  Carter
  * Created: Jan 10, 2017
  */
-CREATE TABLE Users (
+CREATE DATABASE IF NOT EXISTS UsersDB;
+
+USE UsersDB;
+
+CREATE TABLE IF NOT EXISTS Users (
     UserID INT NOT NULL AUTO_INCREMENT,
     Username VARCHAR (120) NOT NULL,
     Password VARCHAR (120) NOT NULL,
@@ -15,15 +19,12 @@ CREATE TABLE Users (
     PRIMARY KEY (UserID)
 );
 
-CREATE TABLE Roles (
-    UserRoleID INT NOT NULL AUTO_INCREMENT,
-    UserID INT NOT NULL,
+CREATE TABLE IF NOT EXISTS Roles (
+    UserRoleID INT NOT NULL AUTO_INCREMENT,    
     Username VARCHAR (120) NOT NULL,
     UserRole VARCHAR (10) NOT NULL,
     PRIMARY KEY (UserRoleID),
-    UNIQUE KEY uni_UserRole (UserRole, Username),
-    CONSTRAINT fk_UserID FOREIGN KEY (UserID) REFERENCES Users (UserID),
-    CONSTRAINT fk_Username FOREIGN KEY (Username) REFERENCES Users (Username),
+    UNIQUE KEY uni_UserRole (UserRole, Username)   
 );
 
 INSERT INTO Users (Username, Password, User_Status) VALUES ('Carter','f58cf5e7e10f195e21b553096d092c763ed18b0e',true);

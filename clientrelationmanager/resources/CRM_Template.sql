@@ -10,7 +10,11 @@
 /**
 *  Initial creation of tables
 */
-CREATE TABLE Clients
+CREATE DATABASE IF NOT EXISTS ClientDB;
+
+USE ClientDB;
+
+CREATE TABLE IF NOT EXISTS Clients
 (
     ClientID INT NOT NULL AUTO_INCREMENT,
     First_Name VARCHAR (60) NOT NULL,    
@@ -22,10 +26,11 @@ CREATE TABLE Clients
     ZIP INT NOT NULL,
     Phone VARCHAR (12),
     Email VARCHAR (120),
-    PRIMARY KEY (ClientID)
+    PRIMARY KEY (ClientID),
+    INDEX (ClientID, First_Name, Last_Name)
 );
 
-CREATE TABLE Interactions
+CREATE TABLE IF NOT EXISTS Interactions
 (
     EventID INT NOT NULL AUTO_INCREMENT,
     ClientID INT NOT NULL,
@@ -33,19 +38,17 @@ CREATE TABLE Interactions
     Last_Name VARCHAR (60) NOT NULL,
     UserID INT NOT NULL,
     Username VARCHAR (60) NOT NULL,
-    Interaction_Type VARCHAR(MAX) NOT NULL,
+    Interaction_Type TEXT NOT NULL,
     Interaction_Date DATE NOT NULL,    
     PRIMARY KEY  (EventID),
-    CONSTRAINT fk_clientID FOREIGN KEY (ClientID) REFERENCES Clients (ClientID),
-    CONSTRAINT fk_clientFirst FOREIGN KEY (First_Name) REFERENCES Clients (First_Name),
-    CONSTRAINT fk_clientLast FOREIGN KEY (Last_Name) REFERENCES Clients (Last_Name),
+    CONSTRAINT fk_clientID FOREIGN KEY (ClientID) REFERENCES Clients (ClientID),    
     CONSTRAINT fk_userID FOREIGN KEY (UserID) REFERENCES UsersDB.Users(UserID),
-    CONSTRAINT fk_userName FOREIGN KEY (Username) REFERENCES UsersDB.Users(Username),
+    INDEX (EventID,ClientID,UserID)
 );
 
-INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State) VALUES ('Larry','Fliss','Active','2411 Robinson Ave','Conway','AR');
-INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State) VALUES ('Yukiko','Sato','Prospective','12 Illinois Ave','Urbana','IL');
-INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State) VALUES ('Gerald','Washington','Former','123 Fake St','Austin','TX');
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Larry','Fliss','Active','2411 Robinson Ave','Conway','AR',72034);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Yukiko','Sato','Prospective','12 Illinois Ave','Urbana','IL',12345);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Gerald','Washington','Former','123 Fake St','Austin','TX',54321clients);
 
 INSERT INTO Interactions (ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date) VALUES (2,'Yukiko','Sato',2,'Jax','Phone Call','2017-01-10');
 INSERT INTO Interactions (ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date) VALUES (1,'Larry','Fliss',3,'Jackie','Changed to Active status','2017-01-10');
