@@ -28,6 +28,10 @@ public class Users implements Serializable{
     public boolean isUserStatus() {
         return userStatus;
     }
+    
+    public String getPassword() {
+        return password;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -40,11 +44,7 @@ public class Users implements Serializable{
     public void setUserStatus(boolean userStatus) {
         this.userStatus = userStatus;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
+   
     public void setPassword(String password) {
         this.password = password;
     }
