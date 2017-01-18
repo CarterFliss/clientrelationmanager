@@ -14,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 
 /**
@@ -29,25 +30,25 @@ public class UsersDAO {
     }
      
     public int addUser (Users user){
-        this.sql = "INSERT INTO users (Username,Password,User_Status) VALUES ('"
-                + user.getUsername()+"," + user.getPassword() + "," + user.isUserStatus();
-        return this.template.update(sql);
+        this.sql = "INSERT INTO users (Username,Password,User_Status) VALUES (?,?,?)";
+        Object[] values = {user.getUsername(),user.getPassword(),user.isUserStatus()};
+        return this.template.update(sql, values);
     }
     
     public int updateUser(Users user){
-        this.sql = "UPDATE users SET Username = " + user.getUsername() + "," +
-                "Password = " + user.getPassword() + "," + "User_Status = " +
-                user.isUserStatus() + "WHERE UserID = " + user.getId();
-        return this.template.update(sql);
+        this.sql = "UPDATE users SET Username = ?, Password = ?,User_Status = ? WHERE UserID = ?";
+        Object[] values = {user.getUsername(),user.getPassword(),user.isUserStatus(),user.getId()};
+        return this.template.update(sql, values);
     }
     
     public int deleteUser (int id){
-        this.sql = "DELETE FROM users WHERE UserID = " + id +"";
-        return this.template.update(sql);
+        this.sql = "DELETE FROM users WHERE UserID = ?";
+        Object[] values = {id};
+        return this.template.update(sql, values);
     }
     
-    public List<Users> getArtistsList(){
-        return template.query("SELECT * FROM Artist",new RowMapper<Users>(){
+    public List<Users> getUsersList(){
+        return template.query("SELECT * FROM users",new RowMapper<Users>(){
             public Users mapRow(ResultSet rs,int row) throws SQLException{
                 Users a = new Users();
                 a.setId(rs.getInt("UserID"));
@@ -62,5 +63,28 @@ public class UsersDAO {
     public Users getUsersById(int id){
         String sql = "SELECT UserID AS UserID, Username, Password FROM users WHERE UserID = ?";
         return template.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper<Users>(Users.class));
+    }
+    
+    public List<Users> getUsersByPage(int start, int total){
+        String sql = "SELECT * FROM users LIMIT " + (start - 1) + "," + total;
+        return template.query(sql,new RowMapper<Users>(){
+            public Users mapRow(ResultSet rs,int row) throws SQLException{
+                Users a = new Users();
+                a.setId(rs.getInt(1));
+                a.setUsername(rs.getString(2));
+                return a;
+            }
+        });
+    }
+    
+    public int getUsersCount() {
+        String sql = "SELECT COUNT(UserID) AS rowcount FROM users";
+        SqlRowSet rs = template.queryForRowSet(sql);
+        
+        if (rs.next()) {
+            return rs.getInt("rowcount");
+        }
+        
+        return 1;
     }
 }
