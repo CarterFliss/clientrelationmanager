@@ -77,7 +77,7 @@ public class UsersDAO {
         });
     }
     
-    public int getArtistsCount() {
+    public int getUsersCount() {
         String sql = "SELECT COUNT(UserID) AS rowcount FROM users";
         SqlRowSet rs = template.queryForRowSet(sql);
         
