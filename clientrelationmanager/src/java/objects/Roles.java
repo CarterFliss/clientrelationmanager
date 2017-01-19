@@ -14,7 +14,16 @@ import java.io.Serializable;
 public class Roles implements Serializable {
     private String username;
     private String userRole;
+    private int userRoleID;
 
+    public void setUserRoleID(int userRoleID) {
+        this.userRoleID = userRoleID;
+    }
+
+    public int getUserRoleID() {
+        return userRoleID;
+    }   
+    
     public void setUsername(String username) {
         this.username = username;
     }
@@ -33,6 +42,7 @@ public class Roles implements Serializable {
     
     public String toString() {
         StringBuffer buffer = new StringBuffer();
+        buffer.append("User Role ID: " + userRoleID);
         buffer.append("Username: " + username);
         buffer.append("User Role: " + userRole);
         return buffer.toString();
