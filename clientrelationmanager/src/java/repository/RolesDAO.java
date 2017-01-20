@@ -45,7 +45,7 @@ public class RolesDAO {
         return this.template.update(sql, values);
     }
     
-    public List<Roles> getUsersList(){
+    public List<Roles> getRolesList(){
         return template.query("SELECT * FROM roles",new RowMapper<Roles>(){
             public Roles mapRow(ResultSet rs,int row) throws SQLException{
                 Roles a = new Roles();
@@ -57,12 +57,12 @@ public class RolesDAO {
         });
     }
     
-    public Roles getUsersById(int id){
+    public Roles getRolesById(int id){
         String sql = "SELECT UserRoleID AS UserRoleID, Username, UserRole FROM roles WHERE UserRoleID = ?";
         return template.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper<Roles>(Roles.class));
     }
     
-    public List<Roles> getUsersByPage(int start, int total){
+    public List<Roles> getRolesByPage(int start, int total){
         String sql = "SELECT * FROM roles LIMIT " + (start - 1) + "," + total;
         return template.query(sql,new RowMapper<Roles>(){
             public Roles mapRow(ResultSet rs,int row) throws SQLException{
@@ -75,7 +75,7 @@ public class RolesDAO {
         });
     }
     
-    public int getUsersCount() {
+    public int getRolesCount() {
         String sql = "SELECT COUNT(UserRoleID) AS rowcount FROM roles";
         SqlRowSet rs = template.queryForRowSet(sql);
         
