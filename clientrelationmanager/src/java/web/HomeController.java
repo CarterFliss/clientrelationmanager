@@ -5,10 +5,21 @@
  */
 package web;
 
+import objects.Clients;
+import objects.EventLog;
+import objects.Roles;
+import objects.Users;
+import java.util.List;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 /**
  *
  * @author Carter
  */
 public class HomeController {
-    
+    @RequestMapping("/")
+    public ModelAndView viewhome(){
+        return new ModelAndView("index");
+    }
 }

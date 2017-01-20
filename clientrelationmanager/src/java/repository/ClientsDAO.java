@@ -71,7 +71,7 @@ public class ClientsDAO {
         return template.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper<Clients>(Clients.class));
     }
     
-    public List<Clients> getUsersByPage(int start, int total){
+    public List<Clients> getClientsByPage(int start, int total){
         String sql = "SELECT * FROM clients LIMIT " + (start - 1) + "," + total;
         return template.query(sql,new RowMapper<Clients>(){
             public Clients mapRow(ResultSet rs,int row) throws SQLException{
@@ -91,7 +91,7 @@ public class ClientsDAO {
         });
     }
     
-    public int getArtistsCount() {
+    public int getClientsCount() {
         String sql = "SELECT COUNT(ClientID) AS rowcount FROM clients";
         SqlRowSet rs = template.queryForRowSet(sql);
         
