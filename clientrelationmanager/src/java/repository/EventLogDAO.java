@@ -5,10 +5,14 @@
  */
 package repository;
 
+import objects.Clients;
+import objects.Users;
 import objects.EventLog;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -68,16 +72,32 @@ public class EventLogDAO {
     }
     
     public List<EventLog> getEventsByPage(int start, int total){
-        String sql = "SELECT * FROM users LIMIT " + (start - 1) + "," + total;
+        String sql = "SELECT interactions.EventID,clients.ClientID,clients.First_Name,"
+                + "clients.Last_Name,users.UserID,users.Username,interactions.Interaction_Type"
+                + "interactions.Interaction_Date FROM interactions "
+                + "INNER JOIN clients AS clients ON clients.ClientID = interactions.ClientID,"
+                + "clients.First_Name = interactions.First_Name, clients.Last_Name = interactions.Last_Name "
+                + "INNER JOIN users AS users ON users.UserID = interactions.UserID, users.Username = interactions.Username "
+                + "ORDER BY interactions.Interaction_Date "
+                + "LIMIT " + (start - 1) + "," + total;
         return template.query(sql,new RowMapper<EventLog>(){
             public EventLog mapRow(ResultSet rs,int row) throws SQLException{
                 EventLog a = new EventLog();
-                a.setEventid(rs.getInt("EventID"));
-                a.setClientid(rs.getInt("ClientID"));
-                a.setClientFirstName(rs.getString("First_Name"));
-                a.setClientLastName(rs.getString("Last_Name"));
-                a.setUserid(rs.getInt("UserID"));
-                a.setUsername(rs.getString("Username"));
+                a.setEventid(rs.getInt(1));
+                
+                Clients client = new Clients();
+                client.setClientid(rs.getInt("ClientID"));
+                client.setFirstName(rs.getString("First_Name"));
+                client.setLastName(rs.getString("Last_Name"));
+                
+                a.setClient(client);
+                
+                Users user = new Users();
+                user.setId(rs.getInt("UserID"));
+                user.setUsername(rs.getString("Username"));
+                
+                a.setUser(user);
+                
                 a.setInteraction(rs.getString("Interaction_Type"));
                 a.setDate(rs.getString("Interaction_Date"));
                 return a;
@@ -94,5 +114,17 @@ public class EventLogDAO {
         }
         
         return 1;
+    }
+    
+    public Map<Integer,String> getClientsMap(){
+        Map<Integer,String> clients = new LinkedHashMap<Integer,String>();
+        String sql = "SELECT ClientID,First_Name,Last_Name FROM clients";
+        
+        SqlRowSet srs = template.queryForRowSet(sql);
+        
+        while(srs.next()){
+            clients.put(srs.getInt("ClientID"),srs.getString("First_Name")+ " " + srs.getString("Last_Name"));
+        }
+        return clients;
     }
 }

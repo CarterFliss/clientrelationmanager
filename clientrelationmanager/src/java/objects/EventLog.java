@@ -6,6 +6,8 @@
 package objects;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -20,9 +22,46 @@ public class EventLog implements Serializable {
     private String username;
     private String interaction;
     private String date;
+    
+    private Clients client;
+    private Map<Integer,String> clients;
+    private Users user;
+    private Map<Integer,String> users;
+
+    public Users getUser() {
+        return user;
+    }
+
+    public Map<Integer, String> getUsers() {
+        return users;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public void setUsers(Map<Integer, String> users) {
+        this.users = users;
+    }
+    
+    public void setClient(Clients client) {
+        this.client = client;
+    }
+
+    public void setClients(Map<Integer, String> clients) {
+        this.clients = clients;
+    }
 
     public int getEventid() {
         return eventid;
+    }
+
+    public Clients getClient() {
+        return client;
+    }
+
+    public Map<Integer, String> getClients() {
+        return clients;
     }
 
     public int getClientid() {

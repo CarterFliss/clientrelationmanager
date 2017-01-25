@@ -30,13 +30,13 @@ public class UsersDAO {
     }
      
     public int addUser (Users user){
-        this.sql = "INSERT INTO users (Username,Password,User_Status) VALUES (?,?,?)";
+        this.sql = "INSERT INTO users (Username,Password,User_Status) VALUES (?,SHA(?),?)";
         Object[] values = {user.getUsername(),user.getPassword(),user.isUserStatus()};
         return this.template.update(sql, values);
     }
     
     public int updateUser(Users user){
-        this.sql = "UPDATE users SET Username = ?, Password = ?,User_Status = ? WHERE UserID = ?";
+        this.sql = "UPDATE users SET Username = ?, Password = SHA(?),User_Status = ? WHERE UserID = ?";
         Object[] values = {user.getUsername(),user.getPassword(),user.isUserStatus(),user.getId()};
         return this.template.update(sql, values);
     }
@@ -48,12 +48,11 @@ public class UsersDAO {
     }
     
     public List<Users> getUsersList(){
-        return template.query("SELECT * FROM users",new RowMapper<Users>(){
+        return template.query("SELECT UserID,Username,User_Status FROM users",new RowMapper<Users>(){
             public Users mapRow(ResultSet rs,int row) throws SQLException{
                 Users a = new Users();
                 a.setId(rs.getInt("UserID"));
                 a.setUsername(rs.getString("Username"));
-                a.setPassword(rs.getString("Password"));
                 a.setUserStatus(rs.getBoolean("User_Status"));
                 return a;
             }
