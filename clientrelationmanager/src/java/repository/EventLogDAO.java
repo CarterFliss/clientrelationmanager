@@ -127,4 +127,16 @@ public class EventLogDAO {
         }
         return clients;
     }
+    
+    public Map<Integer,String> getUsersMap(){
+        Map<Integer,String> users = new LinkedHashMap<Integer,String>();
+        String sql = "SELECT UserID,Username FROM users";
+        
+        SqlRowSet srs = template.queryForRowSet(sql);
+        
+        while(srs.next()){
+            users.put(srs.getInt("UserID"),srs.getString("Username"));
+        }
+        return users;
+    }
 }
