@@ -6,6 +6,8 @@
 package objects;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -15,7 +17,26 @@ public class Roles implements Serializable {
     private String username;
     private String userRole;
     private int userRoleID;
+    
+    private Users user;
+    private List<String> users;
 
+    public Users getUser() {
+        return user;
+    }
+
+    public List<String> getUsers() {
+        return users;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public void setUsers(List<String> users) {
+        this.users = users;
+    }
+    
     public void setUserRoleID(int userRoleID) {
         this.userRoleID = userRoleID;
     }
