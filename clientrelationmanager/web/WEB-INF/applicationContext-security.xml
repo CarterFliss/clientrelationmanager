@@ -8,16 +8,17 @@
   
   <!-- enable use-expressions -->
   <http auto-config="true" use-expressions="true">
-    <intercept-url pattern="/viewclients/**" access="hasAnyRole('ADMIN','MANAGER','USER')" />
-    <intercept-url pattern="/viewclients/{id}" access="hasAnyRole('ADMIN','MANAGER','USER')" />
-    <intercept-url pattern="/vieweventlog/" access="hasAnyRole('ADMIN','MANAGER','USER')" />
-    <intercept-url pattern="/vieweventlog/addevent" access="hasAnyRole('ADMIN','MANAGER','USER')" />
-    <intercept-url pattern="/viewevent/updatevent/{id}" access="hasAnyRole('ADMIN','MANAGER','USER')" />
-    <intercept-url pattern="/viewclients/addclient" access="hasAnyRole('ADMIN','MANAGER')" />
-    <intercept-url pattern="/viewclients/removeclient/{id}" access="hasAnyRole('ADMIN','MANAGER')" />
-    <intercept-url pattern="/viewclients/updateclient/{id}" access="hasAnyRole('ADMIN','MANAGER')" />
+    <intercept-url pattern="/clients/viewclients" access="hasAnyRole('ADMIN','MANAGER','USER')" />
+    <intercept-url pattern="/clients/viewclients/{id}" access="hasAnyRole('ADMIN','MANAGER','USER')" />
+    <intercept-url pattern="/eventlog/vieweventlog" access="hasAnyRole('ADMIN','MANAGER','USER')" />
+    <intercept-url pattern="/eventlog/addevent" access="hasAnyRole('ADMIN','MANAGER','USER')" />
+    <intercept-url pattern="/eventlog/editevent/{id}" access="hasAnyRole('ADMIN','MANAGER','USER')" />
+    <intercept-url pattern="/clients/addclient" access="hasAnyRole('ADMIN','MANAGER')" />
+    <intercept-url pattern="/clients/removeclient/{id}" access="hasAnyRole('ADMIN','MANAGER')" />
+    <intercept-url pattern="/clients/editclient/{id}" access="hasAnyRole('ADMIN','MANAGER')" />
     <intercept-url pattern="/vieweventlog/removeevent/{id}" access="hasRole('ADMIN')" />
-    <intercept-url pattern="/viewusers/**" access="hasRole('ADMIN')" />
+    <intercept-url pattern="/users/**" access="hasRole('ADMIN')" />
+    <intercept-url pattern="/roles/**" access="hasRole('ADMIN')" />
 		
     <!-- access denied page -->
     <access-denied-handler error-page="/403" />
