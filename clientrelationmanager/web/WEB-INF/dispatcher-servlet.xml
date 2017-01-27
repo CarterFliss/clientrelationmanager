@@ -29,15 +29,15 @@
   </bean>  
   
   <bean id="clientsdao" class="clientrelationmanager.repository.ClientsDAO">  
-    <property name="template" ref="jtc"></property>  
+    <property name="template" ref="jt"></property>  
   </bean>
   <bean id="usersdao" class="clientrelationmanager.repository.UsersDAO">  
-    <property name="template" ref="jtu"></property>  
+    <property name="template" ref="jt"></property>  
   </bean>
   <bean id="rolesdao" class="clientrelationmanager.repository.RolesDAO">  
-    <property name="template" ref="jtr"></property>  
+    <property name="template" ref="jt"></property>  
   </bean>
   <bean id="eventsdao" class="clientrelationmanager.repository.EventLogDAO">  
-    <property name="template" ref="jtel"></property>  
+    <property name="template" ref="jt"></property>  
   </bean>  
 </beans>

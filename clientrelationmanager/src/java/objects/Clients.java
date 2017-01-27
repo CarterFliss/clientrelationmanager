@@ -104,7 +104,7 @@ public class Clients implements Serializable {
     
     public String toString() {
         StringBuffer buffer = new StringBuffer();
-        buffer.append("Client ID: " + this.clientid + ";");
+        buffer.append("Client ID: " + this.clientid);
         buffer.append("Client Name: " + firstName + " " + lastName);        
         buffer.append("User Status: " + userStatus);
         buffer.append("Address: " + address + ", "+city+", "+homeState+", "+zip);
