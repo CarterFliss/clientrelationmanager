@@ -5,6 +5,7 @@
  */
 package repository;
 
+import objects.Users;
 import objects.Roles;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -63,7 +64,10 @@ public class RolesDAO {
     }
     
     public List<Roles> getRolesByPage(int start, int total){
-        String sql = "SELECT * FROM roles LIMIT " + (start - 1) + "," + total;
+        String sql = "SELECT roles.UserRoleID,users.Username,roles.UserRole FROM roles "
+                + "INNER JOIN users AS users ON users.Username = roles.Username "
+                + "ORDER BY users.Username "
+                + "LIMIT " + (start - 1) + "," + total;
         return template.query(sql,new RowMapper<Roles>(){
             public Roles mapRow(ResultSet rs,int row) throws SQLException{
                 Roles a = new Roles();
@@ -84,5 +88,15 @@ public class RolesDAO {
         }
         
         return 1;
+    }
+    
+    public List<String> getUsersMap(){
+        List<String> users = null;
+        String sql = "SELECT Username FROM users";
+        SqlRowSet srs = template.queryForRowSet(sql);
+        while(srs.next()){
+            users.add(srs.getString("Username"));
+        }
+        return users;
     }
 }

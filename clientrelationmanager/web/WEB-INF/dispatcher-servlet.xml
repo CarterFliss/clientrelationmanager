@@ -6,12 +6,18 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
   
-  <context:component-scan base-package="edu.uca.aca2016.web"></context:component-scan>  
+  <context:component-scan base-package="clientrelationmanager.web"></context:component-scan>
+  
+    <mvc:resources mapping="/media/**" location="/media/" cache-period="10000" />
+  
+    <mvc:annotation-driven />  
   
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
     <property name="prefix" value="/WEB-INF/jsp/"></property>  
@@ -22,7 +28,16 @@
     <property name="dataSource" ref="ds"></property>  
   </bean>  
   
-  <bean id="dao" class="edu.uca.aca2016.repository.ArtistDAO">  
+  <bean id="clientsdao" class="clientrelationmanager.repository.ClientsDAO">  
+    <property name="template" ref="jt"></property>  
+  </bean>
+  <bean id="usersdao" class="clientrelationmanager.repository.UsersDAO">  
+    <property name="template" ref="jt"></property>  
+  </bean>
+  <bean id="rolesdao" class="clientrelationmanager.repository.RolesDAO">  
+    <property name="template" ref="jt"></property>  
+  </bean>
+  <bean id="eventsdao" class="clientrelationmanager.repository.EventLogDAO">  
     <property name="template" ref="jt"></property>  
   </bean>  
 </beans>
