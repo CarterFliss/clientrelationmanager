@@ -19,6 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import objects.Messages;
 import objects.Roles;
 import repository.RolesDAO;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import javax.validation.Valid;
+import validation.RolesValidator;
 /**
  *
  * @author Carter
@@ -27,20 +32,26 @@ public class RolesController {
     @Autowired
     RolesDAO dao;
     
+    @Autowired
+    RolesValidator rolesValidator;
+    
     private static final Logger logger = Logger.getLogger(RolesController.class.getName());
     
     @RequestMapping("/roles/viewroles")
     public ModelAndView showroles(){
-        return new ModelAndView("viewroles","command",new Roles());
+        return new ModelAndView("viewroles","roles",new Roles());
     }
     
     @RequestMapping(value = "/roles/addroles", method = RequestMethod.POST)
-    public ModelAndView save (@ModelAttribute("role") Roles role, HttpServletRequest request){
-        int x = dao.addRole(role);
+    public ModelAndView save (@ModelAttribute("roles") @Valid Roles roles, BindingResult result,HttpServletRequest request){
+        if(result.hasErrors()){
+            return new ModelAndView("viewroles","roles",new Roles());
+        }
+        int x = dao.addRole(roles);
         
         Messages msg = null;
         if (x == 1){
-            msg = new Messages(Messages.Level.SUCCESS,"role successfullly added.");
+            msg = new Messages(Messages.Level.SUCCESS,"Role successfullly added.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error adding role to database.");
         }
@@ -75,12 +86,15 @@ public class RolesController {
     }
     
     @RequestMapping(value="/roles/editrole/{id}")
-    public ModelAndView edit(@ModelAttribute("role") Roles role, HttpServletRequest request){
-        int x = dao.updateRole(role);
+    public ModelAndView edit(@ModelAttribute("roles") @Valid Roles roles, BindingResult result,HttpServletRequest request){
+        if(result.hasErrors()){
+            return new ModelAndView("viewroles","roles",new Roles());
+        }
+        int x = dao.updateRole(roles);
         
         Messages msg = null;
         if (x==1){
-            msg = new Messages(Messages.Level.SUCCESS,"role successfullly edited.");
+            msg = new Messages(Messages.Level.SUCCESS,"Role successfullly edited.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error editing role.");
         }
@@ -102,5 +116,17 @@ public class RolesController {
         
         request.getSession().setAttribute("message",msg);
         return new ModelAndView("redirect:/roles/viewroles");       
+    }
+    @InitBinder("roles")
+    public void initBinder(WebDataBinder webDataBinder){
+        webDataBinder.setValidator(rolesValidator);
+    }
+
+    public RolesValidator getRolesValidator() {
+        return rolesValidator;
+    }
+
+    public void setRolesValidator(RolesValidator rolesValidator) {
+        this.rolesValidator = rolesValidator;
     }
 }

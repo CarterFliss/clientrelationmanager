@@ -19,6 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import objects.Messages;
 import objects.Users;
 import repository.UsersDAO;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import javax.validation.Valid;
+import validation.UsersValidator;
 /**
  *
  * @author Carter
@@ -27,16 +32,21 @@ public class UsersController {
     @Autowired
     UsersDAO dao;
     
+    @Autowired
+    UsersValidator usersValidator;
     private static final Logger logger = Logger.getLogger(UsersController.class.getName());
     
     @RequestMapping("/users/viewusers")
     public ModelAndView showusers(){
-        return new ModelAndView("viewusers","command",new Users());
+        return new ModelAndView("viewusers","users",new Users());
     }
     
     @RequestMapping(value = "/users/addusers", method = RequestMethod.POST)
-    public ModelAndView save (@ModelAttribute("user") Users user, HttpServletRequest request){
-        int x = dao.addUser(user);
+    public ModelAndView save (@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
+        if(result.hasErrors()){
+            return new ModelAndView("viewusers","users",new Users());
+        }
+        int x = dao.addUser(users);
         
         Messages msg = null;
         if (x == 1){
@@ -75,8 +85,11 @@ public class UsersController {
     }
     
     @RequestMapping(value="/users/edituser/{id}")
-    public ModelAndView edit(@ModelAttribute("user") Users user, HttpServletRequest request){
-        int x = dao.updateUser(user);
+    public ModelAndView edit(@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
+        if(result.hasErrors()){
+            return new ModelAndView("viewusers","users",new Users());
+        }
+        int x = dao.updateUser(users);
         
         Messages msg = null;
         if (x==1){
@@ -102,5 +115,17 @@ public class UsersController {
         
         request.getSession().setAttribute("message",msg);
         return new ModelAndView("redirect:/users/viewusers");       
+    }
+    @InitBinder("users")
+    public void initBinder(WebDataBinder webDataBinder){
+        webDataBinder.setValidator(usersValidator);
+    }
+
+    public UsersValidator getUsersValidator() {
+        return usersValidator;
+    }
+
+    public void setUsersValidator(UsersValidator usersValidator) {
+        this.usersValidator = usersValidator;
     }
 }

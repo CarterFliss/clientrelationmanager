@@ -19,6 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import objects.Messages;
 import objects.EventLog;
 import repository.EventLogDAO;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import javax.validation.Valid;
+import validation.EventLogValidator;
 /**
  *
  * @author Carter
@@ -27,15 +32,21 @@ public class EventLogController {
     @Autowired
     EventLogDAO dao;
     
+    @Autowired
+    EventLogValidator eventLogValidator;
+    
     private static final Logger logger = Logger.getLogger(EventLogController.class.getName());
     
     @RequestMapping("/eventlog/vieweventlog")
     public ModelAndView showEventLog(){
-        return new ModelAndView("vieweventlog","command",new EventLog());
+        return new ModelAndView("vieweventlog","eventlog",new EventLog());
     }
     
     @RequestMapping(value = "/eventlog/addevent", method = RequestMethod.POST)
-    public ModelAndView save (@ModelAttribute("eventlog") EventLog eventlog, HttpServletRequest request){
+    public ModelAndView save (@ModelAttribute("eventlog") @Valid EventLog eventlog, BindingResult result,HttpServletRequest request){
+        if(result.hasErrors()){
+            return new ModelAndView("vieweventlog","eventlog",new EventLog());
+        }
         int x = dao.addEvent(eventlog);
         
         Messages msg = null;
@@ -75,7 +86,10 @@ public class EventLogController {
     }
     
     @RequestMapping(value="/eventlog/editevent/{id}")
-    public ModelAndView edit(@ModelAttribute("eventlog") EventLog eventlog, HttpServletRequest request){
+    public ModelAndView edit(@ModelAttribute("eventlog") @Valid EventLog eventlog, BindingResult result,HttpServletRequest request){
+        if(result.hasErrors()){
+            return new ModelAndView("vieweventlog","eventlog",new EventLog());
+        }
         int x = dao.updateEvent(eventlog);
         
         Messages msg = null;
@@ -102,5 +116,17 @@ public class EventLogController {
         
         request.getSession().setAttribute("message",msg);
         return new ModelAndView("redirect:/eventlog/vieweventlog");       
+    }
+    @InitBinder("eventlog")
+    public void initBinder(WebDataBinder webDataBinder){
+        webDataBinder.setValidator(eventLogValidator);
+    }
+
+    public EventLogValidator getEventLogValidator() {
+        return eventLogValidator;
+    }
+
+    public void setEventLogValidator(EventLogValidator eventLogValidator) {
+        this.eventLogValidator = eventLogValidator;
     }
 }
