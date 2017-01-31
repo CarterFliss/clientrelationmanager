@@ -74,5 +74,14 @@ public class ClientsValidator implements Validator {
 "|NE|NV|NH|NJ|NM|NY|NC|ND|MP|OH|OK|OR|PW|PA|PR|RI|SC|SD|TN|TX|UT|VT|VI|VA|WA|WV|WI|WY")){
            errors.rejectValue("homeState","client.homeState.pattern");
        }
+       if (clients.getPhone().length() > 12){
+           errors.rejectValue("phone", "client.phone.length");
+       }
+       if(!clients.getPhone().matches("(^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$")){
+           errors.rejectValue("phone","client.phone.pattern");
+       }
+       if (clients.getEmail().length() > 120){
+           errors.rejectValue("email", "client.email.length");
+       }
     }
 }
