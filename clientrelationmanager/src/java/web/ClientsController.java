@@ -16,9 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import objects.Messages;
 import objects.Clients;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import repository.ClientsDAO;
+import validation.ClientsValidator;
 /**
  *
  * @author Carter
@@ -28,6 +33,9 @@ public class ClientsController {
     @Autowired
     ClientsDAO dao;
     
+    @Autowired
+    ClientsValidator clientsValidator;
+    
     private static final Logger logger = Logger.getLogger(ClientsController.class.getName());
     
     @RequestMapping("/clients/viewclients")
@@ -36,7 +44,10 @@ public class ClientsController {
     }
     
     @RequestMapping(value = "/clients/addclient", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute("clients") Clients clients, HttpServletRequest request){
+    public ModelAndView save(@ModelAttribute("clients") @Valid Clients clients, BindingResult result, HttpServletRequest request){
+        if(result.hasErrors()){
+            return new ModelAndView("viewclients","clients",new Clients());
+        }
         int x = dao.addClient(clients);
         
         Messages msg = null;
@@ -76,7 +87,10 @@ public class ClientsController {
     }
     
     @RequestMapping(value="/clients/editclient/{id}")
-    public ModelAndView edit(@ModelAttribute("clients") Clients clients, HttpServletRequest request){
+    public ModelAndView edit(@ModelAttribute("clients") @Valid Clients clients, BindingResult result, HttpServletRequest request){
+        if(result.hasErrors()){
+            return new ModelAndView("viewclients","clients",new Clients());
+        }
         int x = dao.updateClient(clients);
         
         Messages msg = null;
@@ -104,4 +118,18 @@ public class ClientsController {
         request.getSession().setAttribute("message",msg);
         return new ModelAndView("redirect:/clients/viewclients");       
     }
+    
+    @InitBinder("clients")
+    public void initBinder(WebDataBinder webDataBinder){
+        webDataBinder.setValidator(clientsValidator);
+    }
+
+    public ClientsValidator getClientsValidator() {
+        return clientsValidator;
+    }
+
+    public void setClientsValidator(ClientsValidator clientsValidator) {
+        this.clientsValidator = clientsValidator;
+    }
+    
 }

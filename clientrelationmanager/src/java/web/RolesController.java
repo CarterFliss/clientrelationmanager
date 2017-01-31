@@ -19,6 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import objects.Messages;
 import objects.Roles;
 import repository.RolesDAO;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import javax.validation.Valid;
+import validation.RolesValidator;
 /**
  *
  * @author Carter
@@ -26,6 +31,9 @@ import repository.RolesDAO;
 public class RolesController {
     @Autowired
     RolesDAO dao;
+    
+    @Autowired
+    RolesValidator rolesValidator;
     
     private static final Logger logger = Logger.getLogger(RolesController.class.getName());
     
@@ -35,7 +43,10 @@ public class RolesController {
     }
     
     @RequestMapping(value = "/roles/addroles", method = RequestMethod.POST)
-    public ModelAndView save (@ModelAttribute("roles") Roles roles, HttpServletRequest request){
+    public ModelAndView save (@ModelAttribute("roles") @Valid Roles roles, BindingResult result,HttpServletRequest request){
+        if(result.hasErrors()){
+            return new ModelAndView("viewroles","roles",new Roles());
+        }
         int x = dao.addRole(roles);
         
         Messages msg = null;
@@ -75,7 +86,10 @@ public class RolesController {
     }
     
     @RequestMapping(value="/roles/editrole/{id}")
-    public ModelAndView edit(@ModelAttribute("roles") Roles roles, HttpServletRequest request){
+    public ModelAndView edit(@ModelAttribute("roles") @Valid Roles roles, BindingResult result,HttpServletRequest request){
+        if(result.hasErrors()){
+            return new ModelAndView("viewroles","roles",new Roles());
+        }
         int x = dao.updateRole(roles);
         
         Messages msg = null;
@@ -102,5 +116,17 @@ public class RolesController {
         
         request.getSession().setAttribute("message",msg);
         return new ModelAndView("redirect:/roles/viewroles");       
+    }
+    @InitBinder("roles")
+    public void initBinder(WebDataBinder webDataBinder){
+        webDataBinder.setValidator(rolesValidator);
+    }
+
+    public RolesValidator getRolesValidator() {
+        return rolesValidator;
+    }
+
+    public void setRolesValidator(RolesValidator rolesValidator) {
+        this.rolesValidator = rolesValidator;
     }
 }
