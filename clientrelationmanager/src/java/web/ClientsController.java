@@ -32,12 +32,12 @@ public class ClientsController {
     
     @RequestMapping("/clients/viewclients")
     public ModelAndView showClients(){
-        return new ModelAndView("viewclients","command",new Clients());
+        return new ModelAndView("viewclients","clients",new Clients());
     }
     
     @RequestMapping(value = "/clients/addclient", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute("client") Clients client, HttpServletRequest request){
-        int x = dao.addClient(client);
+    public ModelAndView save(@ModelAttribute("clients") Clients clients, HttpServletRequest request){
+        int x = dao.addClient(clients);
         
         Messages msg = null;
         if (x == 1){
@@ -76,8 +76,8 @@ public class ClientsController {
     }
     
     @RequestMapping(value="/clients/editclient/{id}")
-    public ModelAndView edit(@ModelAttribute("client") Clients client, HttpServletRequest request){
-        int x = dao.updateClient(client);
+    public ModelAndView edit(@ModelAttribute("clients") Clients clients, HttpServletRequest request){
+        int x = dao.updateClient(clients);
         
         Messages msg = null;
         if (x==1){

@@ -31,12 +31,12 @@ public class UsersController {
     
     @RequestMapping("/users/viewusers")
     public ModelAndView showusers(){
-        return new ModelAndView("viewusers","command",new Users());
+        return new ModelAndView("viewusers","users",new Users());
     }
     
     @RequestMapping(value = "/users/addusers", method = RequestMethod.POST)
-    public ModelAndView save (@ModelAttribute("user") Users user, HttpServletRequest request){
-        int x = dao.addUser(user);
+    public ModelAndView save (@ModelAttribute("users") Users users, HttpServletRequest request){
+        int x = dao.addUser(users);
         
         Messages msg = null;
         if (x == 1){
@@ -75,8 +75,8 @@ public class UsersController {
     }
     
     @RequestMapping(value="/users/edituser/{id}")
-    public ModelAndView edit(@ModelAttribute("user") Users user, HttpServletRequest request){
-        int x = dao.updateUser(user);
+    public ModelAndView edit(@ModelAttribute("users") Users users, HttpServletRequest request){
+        int x = dao.updateUser(users);
         
         Messages msg = null;
         if (x==1){

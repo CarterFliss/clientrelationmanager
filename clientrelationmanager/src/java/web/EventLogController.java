@@ -31,7 +31,7 @@ public class EventLogController {
     
     @RequestMapping("/eventlog/vieweventlog")
     public ModelAndView showEventLog(){
-        return new ModelAndView("vieweventlog","command",new EventLog());
+        return new ModelAndView("vieweventlog","eventlog",new EventLog());
     }
     
     @RequestMapping(value = "/eventlog/addevent", method = RequestMethod.POST)

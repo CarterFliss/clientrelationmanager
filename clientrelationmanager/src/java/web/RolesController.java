@@ -31,16 +31,16 @@ public class RolesController {
     
     @RequestMapping("/roles/viewroles")
     public ModelAndView showroles(){
-        return new ModelAndView("viewroles","command",new Roles());
+        return new ModelAndView("viewroles","roles",new Roles());
     }
     
     @RequestMapping(value = "/roles/addroles", method = RequestMethod.POST)
-    public ModelAndView save (@ModelAttribute("role") Roles role, HttpServletRequest request){
-        int x = dao.addRole(role);
+    public ModelAndView save (@ModelAttribute("roles") Roles roles, HttpServletRequest request){
+        int x = dao.addRole(roles);
         
         Messages msg = null;
         if (x == 1){
-            msg = new Messages(Messages.Level.SUCCESS,"role successfullly added.");
+            msg = new Messages(Messages.Level.SUCCESS,"Role successfullly added.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error adding role to database.");
         }
@@ -75,12 +75,12 @@ public class RolesController {
     }
     
     @RequestMapping(value="/roles/editrole/{id}")
-    public ModelAndView edit(@ModelAttribute("role") Roles role, HttpServletRequest request){
-        int x = dao.updateRole(role);
+    public ModelAndView edit(@ModelAttribute("roles") Roles roles, HttpServletRequest request){
+        int x = dao.updateRole(roles);
         
         Messages msg = null;
         if (x==1){
-            msg = new Messages(Messages.Level.SUCCESS,"role successfullly edited.");
+            msg = new Messages(Messages.Level.SUCCESS,"Role successfullly edited.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error editing role.");
         }
