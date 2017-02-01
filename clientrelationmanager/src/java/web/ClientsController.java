@@ -43,6 +43,8 @@ public class ClientsController {
         return new ModelAndView("viewclients","clients",new Clients());
     }
     
+    //todo: add showClientsByID ModelAndView; should incorporate EventLog events where ClientID matches
+    
     @RequestMapping(value = "/clients/addclient", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute("clients") @Valid Clients clients, BindingResult result, HttpServletRequest request){
         if(result.hasErrors()){
