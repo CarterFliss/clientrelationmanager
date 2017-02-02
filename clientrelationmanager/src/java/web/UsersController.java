@@ -24,6 +24,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import javax.validation.Valid;
 import validation.UsersValidator;
+import objects.EventLog;
+import repository.EventLogDAO;
 /**
  *
  * @author Carter
@@ -34,10 +36,21 @@ public class UsersController {
     
     @Autowired
     UsersValidator usersValidator;
+    
+    @Autowired
+    EventLogDAO adao;
+    
     private static final Logger logger = Logger.getLogger(UsersController.class.getName());
     
     @RequestMapping("/users/viewusers")
     public ModelAndView showusers(){
+        return new ModelAndView("viewusers","users",new Users());
+    }
+    
+    @RequestMapping(value="/users/viewusers/{id}",method=RequestMethod.GET)
+    public ModelAndView showUsersByUserID(@PathVariable int id,HttpServletRequest request){
+        Users x = dao.getUsersById(id);
+        EventLog y = adao.getEventsByUserID(id);
         return new ModelAndView("viewusers","users",new Users());
     }
     

@@ -50,7 +50,8 @@ public class ClientsController {
     
     @RequestMapping(value="/clients/viewclient/{id}",method = RequestMethod.GET)
     public ModelAndView showClientsByClientID(@PathVariable int id,HttpServletRequest request){
-       EventLog x = adao.getEventsByClientID(id);
+       Clients y = dao.getClientsById(id);
+        EventLog x = adao.getEventsByClientID(id);
        return new ModelAndView("viewclients","clients",new Clients());
     }
     
