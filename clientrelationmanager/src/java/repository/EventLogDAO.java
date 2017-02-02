@@ -71,6 +71,16 @@ public class EventLogDAO {
         return template.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper<EventLog>(EventLog.class));
     }
     
+    public EventLog getEventsByClientID (int id){
+        String sql = "SELECT EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date FROM interactions WHERE ClientID = ?";
+        return template.queryForObject(sql, new Object []{id},new BeanPropertyRowMapper<EventLog>(EventLog.class));
+    }
+    
+    public EventLog getEventsByUserID (int id){
+        String sql = "SELECT EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date FROM interactions WHERE UserID = ?";
+        return template.queryForObject(sql, new Object []{id},new BeanPropertyRowMapper<EventLog>(EventLog.class));
+    }
+    
     public List<EventLog> getEventsByPage(int start, int total){
         String sql = "SELECT interactions.EventID,clients.ClientID,clients.First_Name,"
                 + "clients.Last_Name,users.UserID,users.Username,interactions.Interaction_Type"
