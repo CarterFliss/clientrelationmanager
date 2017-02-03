@@ -28,6 +28,7 @@ import objects.EventLog;
 import repository.EventLogDAO;
 import objects.Roles;
 import repository.RolesDAO;
+import validation.RolesValidator;
 /**
  *
  * @author Carter
@@ -44,6 +45,9 @@ public class UsersController {
     
     @Autowired
     RolesDAO bdao;
+    
+    @Autowired
+    RolesValidator rolesValidator;
     
     private static final Logger logger = Logger.getLogger(UsersController.class.getName());
     
@@ -66,9 +70,12 @@ public class UsersController {
             return new ModelAndView("viewusers","users",new Users());
         }
         int x = dao.addUser(users);
+        Roles b = new Roles();
+        b.setUser(users);
+        int y = bdao.addRole(b);
         
         Messages msg = null;
-        if (x == 1){
+        if (x == 1 && y == 1){
             msg = new Messages(Messages.Level.SUCCESS,"User successfullly added.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error adding user to database.");
@@ -109,9 +116,12 @@ public class UsersController {
             return new ModelAndView("viewusers","users",new Users());
         }
         int x = dao.updateUser(users);
+        Roles b = new Roles();
+        b.setUser(users);
+        int y = bdao.updateRole(b);
         
         Messages msg = null;
-        if (x==1){
+        if (x==1 && y == 1){
             msg = new Messages(Messages.Level.SUCCESS,"user successfullly edited.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error editing user.");
@@ -124,6 +134,8 @@ public class UsersController {
     @RequestMapping(value="/users/removeuser/{id}",method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable int id,HttpServletRequest request){
        int x = dao.deleteUser(id);
+       int y = bdao.deleteRole(id);
+       
        
        Messages msg = null;
         if (x==1){
