@@ -26,6 +26,8 @@ import javax.validation.Valid;
 import validation.UsersValidator;
 import objects.EventLog;
 import repository.EventLogDAO;
+import objects.Roles;
+import repository.RolesDAO;
 /**
  *
  * @author Carter
@@ -40,6 +42,9 @@ public class UsersController {
     @Autowired
     EventLogDAO adao;
     
+    @Autowired
+    RolesDAO bdao;
+    
     private static final Logger logger = Logger.getLogger(UsersController.class.getName());
     
     @RequestMapping("/users/viewusers")
@@ -51,6 +56,7 @@ public class UsersController {
     public ModelAndView showUsersByUserID(@PathVariable int id,HttpServletRequest request){
         Users x = dao.getUsersById(id);
         EventLog y = adao.getEventsByUserID(id);
+        Roles z = bdao.getRolesById(id);
         return new ModelAndView("viewusers","users",new Users());
     }
     
