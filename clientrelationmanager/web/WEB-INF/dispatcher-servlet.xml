@@ -28,16 +28,16 @@
     <property name="dataSource" ref="ds"></property>  
   </bean>  
   
-  <bean id="clientsdao" class="clientrelationmanager.repository.ClientsDAO">  
+  <bean id="clientsdao" class="repository.ClientsDAO">  
     <property name="template" ref="jt"></property>  
   </bean>
-  <bean id="usersdao" class="clientrelationmanager.repository.UsersDAO">  
+  <bean id="usersdao" class="repository.UsersDAO">  
     <property name="template" ref="jt"></property>  
   </bean>
-  <bean id="rolesdao" class="clientrelationmanager.repository.RolesDAO">  
+  <bean id="rolesdao" class="repository.RolesDAO">  
     <property name="template" ref="jt"></property>  
   </bean>
-  <bean id="eventsdao" class="clientrelationmanager.repository.EventLogDAO">  
+  <bean id="eventsdao" class="repository.EventLogDAO">  
     <property name="template" ref="jt"></property>  
   </bean>  
 </beans>
