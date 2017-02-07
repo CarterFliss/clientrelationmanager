@@ -16,7 +16,7 @@
   <context:component-scan base-package="web"></context:component-scan>
   <context:component-scan base-package="validation"></context:component-scan>
     <mvc:resources mapping="/media/**" location="/media/" cache-period="10000" />
-  
+    <mvc:default-servlet-handler/>
     <mvc:annotation-driven />  
   
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
