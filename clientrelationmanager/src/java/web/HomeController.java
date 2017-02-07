@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Carter
  */
+@Controller
 public class HomeController {
     @RequestMapping("/")
     public ModelAndView viewhome(){

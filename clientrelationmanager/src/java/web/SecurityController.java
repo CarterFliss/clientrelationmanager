@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Carter
  */
+@Controller
 public class SecurityController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(@RequestParam(value = "error",required = false) String error,
