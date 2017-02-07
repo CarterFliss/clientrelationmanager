@@ -66,9 +66,23 @@ public class ClientsDAO {
         });
     }
     
-    public Clients getClientsById(int id){
-        String sql = "SELECT ClientID AS ClientID, First_Name, Last_Name, Status, Address, City, Home_State, ZIP, Phone, Email FROM clients WHERE ClientID = ?";
-        return template.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper<Clients>(Clients.class));
+    public List<Clients> getClientsById(int id){
+        return template.query("SELECT * FROM clients WHERE ClientID = ?",new RowMapper<Clients>(){
+            public Clients mapRow(ResultSet rs,int row) throws SQLException{
+                Clients a = new Clients();
+                a.setClientid(rs.getInt("ClientID"));
+                a.setFirstName(rs.getString("First_Name"));
+                a.setLastName(rs.getString("Last_Name"));
+                a.setUserStatus(rs.getString("Status"));
+                a.setAddress(rs.getString("Address"));
+                a.setCity(rs.getString("City"));
+                a.setHomeState(rs.getString("Home_State"));
+                a.setZip(rs.getInt("ZIP"));
+                a.setPhone(rs.getString("Phone"));
+                a.setEmail(rs.getString("Email"));
+                return a;
+            }
+        });
     }
     
     public List<Clients> getClientsByPage(int start, int total){

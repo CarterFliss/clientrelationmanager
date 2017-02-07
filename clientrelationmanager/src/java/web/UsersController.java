@@ -58,10 +58,14 @@ public class UsersController {
     
     @RequestMapping(value="/users/viewusers/{id}",method=RequestMethod.GET)
     public ModelAndView showUsersByUserID(@PathVariable int id,HttpServletRequest request){
-        Users x = dao.getUsersById(id);
-        EventLog y = adao.getEventsByUserID(id);
-        Roles z = bdao.getRolesById(id);
-        return new ModelAndView("viewusers","users",new Users());
+        List<Users> x = dao.getUsersById(id);
+        List<EventLog> y = adao.getEventsByUserID(id);
+        List<Roles> z = bdao.getRolesById(id);
+        HashMap<String,Object> context = new HashMap<String,Object>();
+        context.put("User",x);
+        context.put("Role",z);
+        context.put("Events",y);
+        return new ModelAndView("viewusers","users",context);
     }
     
     @RequestMapping(value = "/users/addusers", method = RequestMethod.POST)

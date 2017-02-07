@@ -50,9 +50,12 @@ public class ClientsController {
     
     @RequestMapping(value="/clients/viewclient/{id}",method = RequestMethod.GET)
     public ModelAndView showClientsByClientID(@PathVariable int id,HttpServletRequest request){
-       Clients y = dao.getClientsById(id);
-        EventLog x = adao.getEventsByClientID(id);
-       return new ModelAndView("viewclients","clients",new Clients());
+       List<Clients> y = dao.getClientsById(id);
+        List<EventLog> x = adao.getEventsByClientID(id);
+        HashMap<String,Object> context = new HashMap<String,Object>();
+        context.put("Client",y);
+        context.put("Events",x);
+       return new ModelAndView("viewclients","clients",context);
     }
     
     @RequestMapping(value = "/clients/addclient", method = RequestMethod.POST)

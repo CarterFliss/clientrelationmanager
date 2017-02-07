@@ -58,9 +58,16 @@ public class RolesDAO {
         });
     }
     
-    public Roles getRolesById(int id){
-        String sql = "SELECT UserRoleID AS UserRoleID, Username, UserRole FROM roles WHERE UserRoleID = ?";
-        return template.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper<Roles>(Roles.class));
+    public List<Roles> getRolesById(int id){
+        return template.query("SELECT * FROM roles",new RowMapper<Roles>(){
+            public Roles mapRow(ResultSet rs,int row) throws SQLException{
+                Roles a = new Roles();
+                a.setUserRoleID(rs.getInt("UserRoleID"));
+                a.setUsername(rs.getString("Username"));
+                a.setUserRole(rs.getString("UserRole"));
+                return a;
+            }
+        });
     }
     
     public List<Roles> getRolesByPage(int start, int total){

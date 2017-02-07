@@ -71,15 +71,37 @@ public class EventLogDAO {
         return template.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper<EventLog>(EventLog.class));
     }
     
-    public EventLog getEventsByClientID (int id){
-        String sql = "SELECT EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date FROM interactions WHERE ClientID = ?";
-        return template.queryForObject(sql, new Object []{id},new BeanPropertyRowMapper<EventLog>(EventLog.class));
-    }
+    public List<EventLog> getEventsByClientID (int id){
+        return template.query("SELECT * FROM interactions WHERE ClientID = ?",new RowMapper<EventLog>(){
+            public EventLog mapRow(ResultSet rs,int row) throws SQLException{
+                EventLog a = new EventLog();
+                a.setEventid(rs.getInt("EventID"));
+                a.setClientid(rs.getInt("ClientID"));
+                a.setClientFirstName(rs.getString("First_Name"));
+                a.setClientLastName(rs.getString("Last_Name"));
+                a.setUserid(rs.getInt("UserID"));
+                a.setUsername(rs.getString("Username"));
+                a.setInteraction(rs.getString("Interaction_Type"));
+                a.setDate(rs.getString("Interaction_Date"));
+                return a;
+            }
+        });}
     
-    public EventLog getEventsByUserID (int id){
-        String sql = "SELECT EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date FROM interactions WHERE UserID = ?";
-        return template.queryForObject(sql, new Object []{id},new BeanPropertyRowMapper<EventLog>(EventLog.class));
-    }
+    public List<EventLog> getEventsByUserID (int id){
+        return template.query("SELECT * FROM interactions WHERE UserID = ?",new RowMapper<EventLog>(){
+            public EventLog mapRow(ResultSet rs,int row) throws SQLException{
+                EventLog a = new EventLog();
+                a.setEventid(rs.getInt("EventID"));
+                a.setClientid(rs.getInt("ClientID"));
+                a.setClientFirstName(rs.getString("First_Name"));
+                a.setClientLastName(rs.getString("Last_Name"));
+                a.setUserid(rs.getInt("UserID"));
+                a.setUsername(rs.getString("Username"));
+                a.setInteraction(rs.getString("Interaction_Type"));
+                a.setDate(rs.getString("Interaction_Date"));
+                return a;
+            }
+        });}
     
     public List<EventLog> getEventsByPage(int start, int total){
         String sql = "SELECT interactions.EventID,clients.ClientID,clients.First_Name,"
