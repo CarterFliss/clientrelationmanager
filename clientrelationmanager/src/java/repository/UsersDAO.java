@@ -24,11 +24,15 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 public class UsersDAO {
     private JdbcTemplate template;
     private String sql;
-        
-    public void setJdbcTemplate (JdbcTemplate template){
-    this.template = template;
+
+    public JdbcTemplate getTemplate() {
+        return template;
     }
-     
+
+    public void setTemplate(JdbcTemplate template) {
+        this.template = template;
+    }
+       
     public int addUser (Users user){
         this.sql = "INSERT INTO users (Username,Password,User_Status) VALUES (?,SHA(?),?)";
         Object[] values = {user.getUsername(),user.getPassword(),user.isUserStatus()};
