@@ -33,9 +33,9 @@
       <th>Action</th>
     </tr>  
 
-    <c:forEach var="artist" items="${list}">   
+    <c:forEach var="clients" items="${clients}">   
       <tr>  
-        <td>${clients.name}</td>  
+        <td>${clients.firstName} ${clients.lastName}</td>  
         <td>
           <a href="<c:url value="/clients/viewclients/${clients.id}" />"><button class="w3-btn w3-round w3-blue">View</button></a>
           <a href="<c:url value="/clients/editclient/${clients.id}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
@@ -48,7 +48,7 @@
   <div class="w3-padding-8">
     <ul class="w3-pagination">
       <c:forEach begin="1" end="${pages}" varStatus="p">  
-        <li><a class="<c:if test="${p.index eq page}">w3-green</c:if>" href="<c:url value="/artist/viewartist/${p.index}" />">${p.index}</a></li>
+        <li><a class="<c:if test="${p.index eq page}">w3-green</c:if>" href="<c:url value="/clients/viewclients/${p.index}" />">${p.index}</a></li>
       </c:forEach>
     </ul>
   </div>
