@@ -5,6 +5,10 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<sec:authorize access="isAnonymous()">
+    <c:redirect url="/login"/>
+</sec:authorize>
+
 <sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')">
   <c:url value="/j_spring_security_logout" var="logoutUrl" />
   
@@ -22,6 +26,3 @@
   <%@ include file="theme/footer.jsp" %>
 </sec:authorize>
 
-<sec:authorize access="isAnonymous()">
-    <c:redirect url="/login"/>
-</sec:authorize>
