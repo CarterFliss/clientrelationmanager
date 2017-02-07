@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
  *
  * @author Carter
  */
+@Component
 public class ClientsValidator implements Validator {
     private static Logger logger = Logger.getLogger(ClientsValidator.class.getName());
     

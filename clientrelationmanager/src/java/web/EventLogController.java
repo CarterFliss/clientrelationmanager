@@ -28,6 +28,7 @@ import validation.EventLogValidator;
  *
  * @author Carter
  */
+@Controller
 public class EventLogController {
     @Autowired
     EventLogDAO dao;

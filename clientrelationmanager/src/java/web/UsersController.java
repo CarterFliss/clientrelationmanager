@@ -33,6 +33,7 @@ import validation.RolesValidator;
  *
  * @author Carter
  */
+@Controller
 public class UsersController {
     @Autowired
     UsersDAO dao;

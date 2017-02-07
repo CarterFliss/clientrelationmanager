@@ -28,6 +28,7 @@ import validation.RolesValidator;
  *
  * @author Carter
  */
+@Controller
 public class RolesController {
     @Autowired
     RolesDAO dao;

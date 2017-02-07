@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
  *
  * @author Carter
  */
+@Component
 public class RolesValidator implements Validator{
     private static Logger logger = Logger.getLogger(EventLogValidator.class.getName());
     
