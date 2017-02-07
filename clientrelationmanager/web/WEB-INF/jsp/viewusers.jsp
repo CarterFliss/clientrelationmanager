@@ -10,7 +10,7 @@
 <%@ include file="theme/header.jsp" %>
 
 <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-dashboard"></i> Manage Clients</b></h5>
+    <h5><b><i class="fa fa-dashboard"></i> Manage Users</b></h5>
   </header>
 
   <div class="w3-row-padding w3-margin-bottom">
@@ -29,13 +29,19 @@
 
   <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">  
     <tr>
-      <th>Name</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th>User Role</th>
+      <th>User Status</th>
       <th>Action</th>
     </tr>  
 
     <c:forEach var="users" items="${users}">   
       <tr>  
-        <td>${users.username}</td>  
+        <td>${users.username}</td>
+        <td>${users.password}</td>
+        <td>${roles.userRole}</td>
+        <td>${users.userStatus}</td>
         <td>
           <a href="<c:url value="/users/viewusers/${users.id}" />"><button class="w3-btn w3-round w3-blue">View</button></a>
           <a href="<c:url value="/users/edituser/${users.id}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
