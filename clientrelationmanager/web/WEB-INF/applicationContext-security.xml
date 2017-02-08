@@ -19,6 +19,7 @@
     <intercept-url pattern="/vieweventlog/removeevent/{id}" access="hasRole('ADMIN')" />
     <intercept-url pattern="/users/**" access="hasRole('ADMIN')" />
     <intercept-url pattern="/roles/**" access="hasRole('ADMIN')" />
+    
 		
     <!-- access denied page -->
     <access-denied-handler error-page="/403" />
@@ -42,8 +43,8 @@
     <authentication-provider>
       <password-encoder hash="sha" />
       <jdbc-user-service data-source-ref="ds"
-          users-by-username-query="select Username,Password, User_Status from users where username=?"
-          authorities-by-username-query="select Username, UserRole from roles where username =?  " />
+          users-by-username-query="select Username,Password, User_Status from users where Username=?"
+          authorities-by-username-query="select Username,UserRole from roles where Username =?" />
     </authentication-provider>
   </authentication-manager>
 </beans:beans>
