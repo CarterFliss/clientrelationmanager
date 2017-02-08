@@ -10,7 +10,7 @@
 </sec:authorize>
 
 <sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')">
-  <c:url value="/j_spring_security_logout" var="logoutUrl" />
+  <a href="<c:url value="/j_spring_security_logout" var="logoutUrl" />"><button class="w3-btn w3-round w3-blue">Logout</button></a>
   
 
   <%@ include file="theme/header.jsp" %>
