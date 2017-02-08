@@ -10,19 +10,6 @@
 </sec:authorize>
 
 <sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')">
-  <a href="<c:url value="/j_spring_security_logout" var="logoutUrl" />"><button class="w3-btn w3-round w3-blue">Logout</button></a>
-  
-
-  <%@ include file="theme/header.jsp" %>
-
-  <header class="w3-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-dashboard"></i> Dashboard</b></h5>
-  </header>
-
-  <div class="w3-row-padding w3-margin-bottom">
-
-  </div>
-  
-  <%@ include file="theme/footer.jsp" %>
+    <c:redirect url="/home"/>
 </sec:authorize>
 
