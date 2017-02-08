@@ -10,8 +10,6 @@
 </sec:authorize>
 
 <sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')">
-    
-    
 
   <%@ include file="theme/header.jsp" %>
 <header class="w3-container" style="padding-top:22px">
