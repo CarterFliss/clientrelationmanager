@@ -24,6 +24,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import repository.ClientsDAO;
 import validation.ClientsValidator;
+import repository.EventLogDAO;
+import objects.EventLog;
 /**
  *
  * @author Carter
@@ -36,11 +38,24 @@ public class ClientsController {
     @Autowired
     ClientsValidator clientsValidator;
     
+    @Autowired
+    EventLogDAO adao;
+    
     private static final Logger logger = Logger.getLogger(ClientsController.class.getName());
     
     @RequestMapping("/clients/viewclients")
     public ModelAndView showClients(){
         return new ModelAndView("viewclients","clients",new Clients());
+    }
+    
+    @RequestMapping(value="/clients/viewclient/{id}",method = RequestMethod.GET)
+    public ModelAndView showClientsByClientID(@PathVariable int id,HttpServletRequest request){
+       List<Clients> y = dao.getClientsById(id);
+        List<EventLog> x = adao.getEventsByClientID(id);
+        HashMap<String,Object> context = new HashMap<String,Object>();
+        context.put("Client",y);
+        context.put("Events",x);
+       return new ModelAndView("viewclients","clients",context);
     }
     
     @RequestMapping(value = "/clients/addclient", method = RequestMethod.POST)

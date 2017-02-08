@@ -24,11 +24,15 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 public class UsersDAO {
     private JdbcTemplate template;
     private String sql;
-        
-    public void setJdbcTemplate (JdbcTemplate template){
-    this.template = template;
+
+    public JdbcTemplate getTemplate() {
+        return template;
     }
-     
+
+    public void setTemplate(JdbcTemplate template) {
+        this.template = template;
+    }
+       
     public int addUser (Users user){
         this.sql = "INSERT INTO users (Username,Password,User_Status) VALUES (?,SHA(?),?)";
         Object[] values = {user.getUsername(),user.getPassword(),user.isUserStatus()};
@@ -59,9 +63,16 @@ public class UsersDAO {
         });
     }
     
-    public Users getUsersById(int id){
-        String sql = "SELECT UserID AS UserID, Username, Password FROM users WHERE UserID = ?";
-        return template.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper<Users>(Users.class));
+    public List<Users> getUsersById(int id){
+        return template.query("SELECT UserID,Username,User_Status FROM users WHERE UserID=?",new RowMapper<Users>(){
+            public Users mapRow(ResultSet rs,int row) throws SQLException{
+                Users a = new Users();
+                a.setId(rs.getInt("UserID"));
+                a.setUsername(rs.getString("Username"));
+                a.setUserStatus(rs.getBoolean("User_Status"));
+                return a;
+            }
+        });
     }
     
     public List<Users> getUsersByPage(int start, int total){

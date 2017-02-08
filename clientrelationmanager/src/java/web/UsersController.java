@@ -24,21 +24,49 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import javax.validation.Valid;
 import validation.UsersValidator;
+import objects.EventLog;
+import repository.EventLogDAO;
+import objects.Roles;
+import repository.RolesDAO;
+import validation.RolesValidator;
 /**
  *
  * @author Carter
  */
+@Controller
 public class UsersController {
     @Autowired
     UsersDAO dao;
     
     @Autowired
     UsersValidator usersValidator;
+    
+    @Autowired
+    EventLogDAO adao;
+    
+    @Autowired
+    RolesDAO bdao;
+    
+    @Autowired
+    RolesValidator rolesValidator;
+    
     private static final Logger logger = Logger.getLogger(UsersController.class.getName());
     
     @RequestMapping("/users/viewusers")
     public ModelAndView showusers(){
         return new ModelAndView("viewusers","users",new Users());
+    }
+    
+    @RequestMapping(value="/users/viewusers/{id}",method=RequestMethod.GET)
+    public ModelAndView showUsersByUserID(@PathVariable int id,HttpServletRequest request){
+        List<Users> x = dao.getUsersById(id);
+        List<EventLog> y = adao.getEventsByUserID(id);
+        List<Roles> z = bdao.getRolesById(id);
+        HashMap<String,Object> context = new HashMap<String,Object>();
+        context.put("User",x);
+        context.put("Role",z);
+        context.put("Events",y);
+        return new ModelAndView("viewusers","users",context);
     }
     
     @RequestMapping(value = "/users/addusers", method = RequestMethod.POST)
@@ -47,9 +75,12 @@ public class UsersController {
             return new ModelAndView("viewusers","users",new Users());
         }
         int x = dao.addUser(users);
+        Roles b = new Roles();
+        b.setUser(users);
+        int y = bdao.addRole(b);
         
         Messages msg = null;
-        if (x == 1){
+        if (x == 1 && y == 1){
             msg = new Messages(Messages.Level.SUCCESS,"User successfullly added.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error adding user to database.");
@@ -90,9 +121,12 @@ public class UsersController {
             return new ModelAndView("viewusers","users",new Users());
         }
         int x = dao.updateUser(users);
+        Roles b = new Roles();
+        b.setUser(users);
+        int y = bdao.updateRole(b);
         
         Messages msg = null;
-        if (x==1){
+        if (x==1 && y == 1){
             msg = new Messages(Messages.Level.SUCCESS,"user successfullly edited.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error editing user.");
@@ -105,6 +139,8 @@ public class UsersController {
     @RequestMapping(value="/users/removeuser/{id}",method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable int id,HttpServletRequest request){
        int x = dao.deleteUser(id);
+       int y = bdao.deleteRole(id);
+       
        
        Messages msg = null;
         if (x==1){

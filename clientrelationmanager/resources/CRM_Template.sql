@@ -10,6 +10,7 @@
 /**
 *  Initial creation of tables
 */
+DROP DATABASE IF EXISTS ClientDB;
 CREATE DATABASE IF NOT EXISTS ClientDB;
 
 USE ClientDB;
@@ -30,6 +31,14 @@ CREATE TABLE IF NOT EXISTS Clients
     INDEX (ClientID, First_Name, Last_Name)
 );
 
+CREATE TABLE IF NOT EXISTS Users (
+    UserID INT NOT NULL AUTO_INCREMENT,
+    Username VARCHAR (120) NOT NULL,
+    Password VARCHAR (120) NOT NULL,
+    User_Status TINYINT NOT NULL DEFAULT 1,
+    PRIMARY KEY (UserID)
+);
+
 CREATE TABLE IF NOT EXISTS Interactions
 (
     EventID INT NOT NULL AUTO_INCREMENT,
@@ -42,24 +51,17 @@ CREATE TABLE IF NOT EXISTS Interactions
     Interaction_Date DATE NOT NULL,    
     PRIMARY KEY  (EventID),
     CONSTRAINT fk_clientID FOREIGN KEY (ClientID) REFERENCES Clients (ClientID),    
-    CONSTRAINT fk_userID FOREIGN KEY (UserID) REFERENCES UsersDB.Users(UserID),
+    CONSTRAINT fk_userID FOREIGN KEY (UserID) REFERENCES Users (UserID),
     INDEX (EventID,ClientID,UserID)
 );
 
-CREATE TABLE IF NOT EXISTS Users (
+CREATE TABLE IF NOT EXISTS Roles (
     UserID INT NOT NULL AUTO_INCREMENT,
     Username VARCHAR (120) NOT NULL,
-    Password VARCHAR (120) NOT NULL,
-    User_Status TINYINT NOT NULL DEFAULT 1,
-    PRIMARY KEY (UserID)
-);
-
-CREATE TABLE IF NOT EXISTS Roles (
-    UserRoleID INT NOT NULL AUTO_INCREMENT,    
-    Username VARCHAR (120) NOT NULL,
     UserRole VARCHAR (10) NOT NULL,
-    PRIMARY KEY (UserRoleID),
-    UNIQUE KEY uni_UserRole (UserRole, Username)   
+    PRIMARY KEY (UserID),
+    UNIQUE KEY uni_UserRole (UserRole, Username)
+    
 );
 
 INSERT INTO Users (Username, Password, User_Status) VALUES ('Carter','f58cf5e7e10f195e21b553096d092c763ed18b0e',true);
