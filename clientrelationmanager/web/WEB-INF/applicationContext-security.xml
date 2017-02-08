@@ -19,6 +19,7 @@
     <intercept-url pattern="/vieweventlog/removeevent/{id}" access="hasRole('ADMIN')" />
     <intercept-url pattern="/users/**" access="hasRole('ADMIN')" />
     <intercept-url pattern="/roles/**" access="hasRole('ADMIN')" />
+    <intercept-url pattern="/index" access="hasAnyRole('ADMIN','MANAGER','USER')"/>
 		
     <!-- access denied page -->
     <access-denied-handler error-page="/403" />
