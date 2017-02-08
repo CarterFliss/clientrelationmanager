@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class HomeController {
-    @RequestMapping("/home")
+    @RequestMapping("/")
     public ModelAndView viewhome(){
         return new ModelAndView("index");
     }
