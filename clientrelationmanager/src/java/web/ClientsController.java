@@ -45,7 +45,8 @@ public class ClientsController {
     
     @RequestMapping("/clients/viewclients")
     public ModelAndView showClients(){
-        return new ModelAndView("viewclients","clients",new Clients());
+        List<Clients> client = dao.getClientsList();
+        return new ModelAndView("viewclients","clients",client);
     }
     
     @RequestMapping(value="/clients/viewclient/{id}",method = RequestMethod.GET)

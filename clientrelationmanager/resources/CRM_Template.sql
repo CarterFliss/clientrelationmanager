@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS Users (
     UserID INT NOT NULL AUTO_INCREMENT,
     Username VARCHAR (120) NOT NULL,
     Password VARCHAR (120) NOT NULL,
+    UserRole VARCHAR (20) NOT NULL,
     User_Status TINYINT NOT NULL DEFAULT 1,
     PRIMARY KEY (UserID)
 );
@@ -55,22 +56,12 @@ CREATE TABLE IF NOT EXISTS Interactions
     INDEX (EventID,ClientID,UserID)
 );
 
-CREATE TABLE IF NOT EXISTS Roles (
-    UserID INT NOT NULL AUTO_INCREMENT,
-    Username VARCHAR (120) NOT NULL,
-    UserRole VARCHAR (20) NOT NULL,
-    PRIMARY KEY (UserID),
-    UNIQUE KEY uni_UserRole (UserRole, Username)
-    
-);
 
-INSERT INTO Users (Username, Password, User_Status) VALUES ('Carter','f58cf5e7e10f195e21b553096d092c763ed18b0e',true);
-INSERT INTO Users (Username, Password, User_Status) VALUES ('Jax','f58cf5e7e10f195e21b553096d092c763ed18b0e',true);
-INSERT INTO Users (Username, Password, User_Status) VALUES ('Jackie','f58cf5e7e10f195e21b553096d092c763ed18b0e',true);
+INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Carter','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_ADMIN',true);
+INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Jax','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',true);
+INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Jackie','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',true);
 
-INSERT INTO Roles (Username, UserRole) VALUES ('Carter','ROLE_ADMIN');
-INSERT INTO Roles (Username, UserRole) VALUES ('Jax','ROLE_USER');
-INSERT INTO Roles (Username, UserRole) VALUES ('Jackie','ROLE_MANAGER');
+
 
 INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Larry','Fliss','Active','2411 Robinson Ave','Conway','AR',72034);
 INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Yukiko','Sato','Prospective','12 Illinois Ave','Urbana','IL',12345);

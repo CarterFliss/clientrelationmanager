@@ -36,16 +36,16 @@
       <th>Action</th>
     </tr>  
 
-    <c:forEach var="eventlog" items="${eventLogs}">   
+    <c:forEach var="eventlogs" items="${eventlog}">   
       <tr>  
-        <td>${eventLog.date}</td>
-        <td>${eventLog.clientFirstName} ${eventLog.clientLastName}</td>
-        <td>${eventLog.username}</td>
-        <td>${eventLog.interaction}</td>
+        <td>${eventlogs.date}</td>
+        <td>${eventlogs.clientFirstName} ${eventlogs.clientLastName}</td>
+        <td>${eventlogs.username}</td>
+        <td>${eventlogs.interaction}</td>
         <td>
           <a href="<c:url value="/eventlog/addevent/" />"><button class="w3-btn w3-round w3-blue">New Event</button></a>
-          <a href="<c:url value="/eventlog/editevent/${eventLogs.id}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
-          <a href="<c:url value="/eventlog/removeevent/${eventLogs.id}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
+          <a href="<c:url value="/eventlog/editevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
+          <a href="<c:url value="/eventlog/removeevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
         </td>  
       </tr>  
     </c:forEach>  

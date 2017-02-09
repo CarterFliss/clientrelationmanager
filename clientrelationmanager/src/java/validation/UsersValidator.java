@@ -32,6 +32,7 @@ public class UsersValidator implements Validator{
        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"username", "user.username.required");
        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"password", "user.password.required");
        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"userStatus", "user.status.required");
+       ValidationUtils.rejectIfEmpty(errors, "userrole", "user.userrole.required");
        
        Users users = (Users) target;
        if(users.getUsername().length() > 120){
@@ -45,6 +46,12 @@ public class UsersValidator implements Validator{
        }
        if(!users.getPassword().matches("/^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$/")){
            errors.rejectValue("password","user.password.pattern");
+       }
+       if(users.getUserrole().length() > 20){
+           errors.rejectValue("userrole", "user.userrole.length");
+       }
+       if(!users.getUserrole().matches("/^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$/")){
+           errors.rejectValue("userrole","user.userrole.pattern");
        }
     }
 }

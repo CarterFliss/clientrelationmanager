@@ -37,17 +37,17 @@
       <th>Action</th>
     </tr>  
 
-    <c:forEach var="clients" items="${clients}">   
+    <c:forEach var="client" items="${clients}">   
       <tr>  
-        <td>${clients.firstName} ${clients.lastName}</td>
-        <td>${clients.userStatus}</td>
-        <td>${clients.address}, ${clients.city}, ${clients.homeState}, ${clients.zip}</td>
-        <td>${clients.phone}</td>
-        <td>${clients.email}</td>
+        <td>${client.firstName} ${client.lastName}</td>
+        <td>${client.userStatus}</td>
+        <td>${client.address}, ${client.city}, ${client.homeState}, ${client.zip}</td>
+        <td>${client.phone}</td>
+        <td>${client.email}</td>
         <td>
-          <a href="<c:url value="/clients/viewclients/${clients.id}" />"><button class="w3-btn w3-round w3-blue">View</button></a>
-          <a href="<c:url value="/clients/editclient/${clients.id}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
-          <a href="<c:url value="/clients/removeclient/${clients.id}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
+          <a href="<c:url value="/clients/viewclients/${client.clientid}" />"><button class="w3-btn w3-round w3-blue">View</button></a>
+          <a href="<c:url value="/clients/editclient/${client.clientid}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
+          <a href="<c:url value="/clients/removeclient/${client.clientid}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
         </td>  
       </tr>  
     </c:forEach>  

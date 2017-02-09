@@ -30,22 +30,20 @@
   <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">  
     <tr>
       <th>Username</th>
-      <th>Password</th>
       <th>User Role</th>
       <th>User Status</th>
       <th>Action</th>
     </tr>  
 
-    <c:forEach var="users" items="${users}">   
+    <c:forEach var="u" items="${users}">   
       <tr>  
-        <td>${users.username}</td>
-        <td>${users.password}</td>
-        <td>${roles.userRole}</td>
-        <td>${users.userStatus}</td>
+        <td>${u.username}</td>
+        <td>${u.userrole}</td>
+        <td>${u.userStatus}</td>
         <td>
-          <a href="<c:url value="/users/viewusers/${users.id}" />"><button class="w3-btn w3-round w3-blue">View</button></a>
-          <a href="<c:url value="/users/edituser/${users.id}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
-          <a href="<c:url value="/users/removeuser/${users.id}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
+          <a href="<c:url value="/users/viewusers/${u.id}" />"><button class="w3-btn w3-round w3-blue">View</button></a>
+          <a href="<c:url value="/users/edituser/${u.id}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
+          <a href="<c:url value="/users/removeuser/${u.id}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
         </td>  
       </tr>  
     </c:forEach>  

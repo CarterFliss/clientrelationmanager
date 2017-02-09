@@ -7,7 +7,6 @@ package web;
 
 import objects.Clients;
 import objects.EventLog;
-import objects.Roles;
 import objects.Users;
 import java.util.List;
 import org.springframework.stereotype.Controller;
