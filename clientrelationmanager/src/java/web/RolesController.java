@@ -40,8 +40,8 @@ public class RolesController {
     
     @RequestMapping("/roles/viewroles")
     public ModelAndView showroles(){
-        List<Roles> role = dao.getRolesList();
-        return new ModelAndView("viewroles","roles",role);
+        List<Roles> roles = dao.getRolesList();
+        return new ModelAndView("viewroles","roles",roles);
     }
     
     @RequestMapping(value = "/roles/addroles", method = RequestMethod.POST)

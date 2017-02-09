@@ -16,7 +16,7 @@ import java.util.Map;
 public class Roles implements Serializable {
     private String username;
     private String userRole;
-    private int userRoleID;
+    private int userID;
     
     private Users user;
     private List<String> users;
@@ -38,11 +38,11 @@ public class Roles implements Serializable {
     }
     
     public void setUserRoleID(int userRoleID) {
-        this.userRoleID = userRoleID;
+        this.userID = userRoleID;
     }
 
     public int getUserRoleID() {
-        return userRoleID;
+        return userID;
     }   
     
     public void setUsername(String username) {
@@ -63,7 +63,7 @@ public class Roles implements Serializable {
     
     public String toString() {
         StringBuffer buffer = new StringBuffer();
-        buffer.append("User Role ID: " + userRoleID);
+        buffer.append("User Role ID: " + userID);
         buffer.append("Username: " + username);
         buffer.append("User Role: " + userRole);
         return buffer.toString();

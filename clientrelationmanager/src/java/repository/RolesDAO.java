@@ -41,13 +41,13 @@ public class RolesDAO {
     }
 
     public int updateRole(Roles role) {
-        this.sql = "UPDATE roles SET Username = ?, UserRole = ?,WHERE UserRoleID = ?";
+        this.sql = "UPDATE roles SET Username = ?, UserRole = ?,WHERE UserID = ?";
         Object[] values = {role.getUsername(), role.getUserRole(), role.getUserRoleID()};
         return this.template.update(sql, values);
     }
 
     public int deleteRole(int id) {
-        this.sql = "DELETE FROM roles WHERE UserRoleID = ?";
+        this.sql = "DELETE FROM roles WHERE UserID = ?";
         Object[] values = {id};
         return this.template.update(sql, values);
     }
@@ -56,7 +56,7 @@ public class RolesDAO {
         return template.query("SELECT * FROM roles", new RowMapper<Roles>() {
             public Roles mapRow(ResultSet rs, int row) throws SQLException {
                 Roles a = new Roles();
-                a.setUserRoleID(rs.getInt("UserRoleID"));
+                a.setUserRoleID(rs.getInt("UserID"));
                 a.setUsername(rs.getString("Username"));
                 a.setUserRole(rs.getString("UserRole"));
                 return a;
@@ -68,7 +68,7 @@ public class RolesDAO {
         return template.query("SELECT * FROM roles", new RowMapper<Roles>() {
             public Roles mapRow(ResultSet rs, int row) throws SQLException {
                 Roles a = new Roles();
-                a.setUserRoleID(rs.getInt("UserRoleID"));
+                a.setUserRoleID(rs.getInt("UserID"));
                 a.setUsername(rs.getString("Username"));
                 a.setUserRole(rs.getString("UserRole"));
                 return a;
@@ -77,7 +77,7 @@ public class RolesDAO {
     }
 
     public List<Roles> getRolesByPage(int start, int total) {
-        String sql = "SELECT roles.UserRoleID,users.Username,roles.UserRole FROM roles "
+        String sql = "SELECT roles.UserID,users.Username,roles.UserRole FROM roles "
                 + "INNER JOIN users AS users ON users.Username = roles.Username "
                 + "ORDER BY users.Username "
                 + "LIMIT " + (start - 1) + "," + total;
@@ -93,7 +93,7 @@ public class RolesDAO {
     }
 
     public int getRolesCount() {
-        String sql = "SELECT COUNT(UserRoleID) AS rowcount FROM roles";
+        String sql = "SELECT COUNT(UserID) AS rowcount FROM roles";
         SqlRowSet rs = template.queryForRowSet(sql);
 
         if (rs.next()) {

@@ -16,6 +16,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
+import objects.Roles;
+
 
 /**
  *
@@ -51,6 +53,16 @@ public class UsersDAO {
         return this.template.update(sql, values);
     }
     
+    public List<Roles> getRoleById (int id){
+       return template.query("SELECT UserRole FROM roles WHERE UserID = "+ id,new RowMapper<Roles>(){
+           public Roles mapRow (ResultSet rs,int row) throws SQLException{
+               Roles a = new Roles();
+               a.setUserRole(rs.getString("UserRole"));
+               return a;
+           }
+       });
+    }
+    
     public List<Users> getUsersList(){
         return template.query("SELECT UserID,Username,User_Status FROM users",new RowMapper<Users>(){
             public Users mapRow(ResultSet rs,int row) throws SQLException{
@@ -58,6 +70,13 @@ public class UsersDAO {
                 a.setId(rs.getInt("UserID"));
                 a.setUsername(rs.getString("Username"));
                 a.setUserStatus(rs.getBoolean("User_Status"));
+                
+                Roles b = new Roles();
+                b.setUserRoleID(rs.getInt("UserID"));
+                b.setUsername(rs.getString("Username"));
+                b.setUserRole(rs.getString("UserRole"));
+                
+                a.setRole(b);
                 return a;
             }
         });

@@ -6,6 +6,8 @@
 package objects;
 
 import java.io.Serializable;
+import java.util.List;
+import objects.Roles;
 
 /**
  *
@@ -16,7 +18,25 @@ public class Users implements Serializable{
     private String username;
     private String password;
     private boolean userStatus;
+    Roles role = new Roles();
+    List<Roles> roles;
 
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
+    public List<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
+    }
+    
     public int getId() {
         return id;
     }
