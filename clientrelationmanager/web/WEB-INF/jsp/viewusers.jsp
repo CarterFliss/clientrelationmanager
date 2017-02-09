@@ -35,12 +35,10 @@
       <th>Action</th>
     </tr>  
 
-    <c:forEach var="u" items="${User}">   
+    <c:forEach var="u" items="${users}">   
       <tr>  
         <td>${u.username}</td>
-        <td><c:forEach var="r" items="${Role}">
-        ${r.userRole}
-        </c:forEach></td>
+        <td>${u.userrole}</td>
         <td>${u.userStatus}</td>
         <td>
           <a href="<c:url value="/users/viewusers/${u.id}" />"><button class="w3-btn w3-round w3-blue">View</button></a>

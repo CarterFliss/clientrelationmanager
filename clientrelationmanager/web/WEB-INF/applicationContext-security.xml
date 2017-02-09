@@ -44,7 +44,7 @@
       <password-encoder hash="sha" />
       <jdbc-user-service data-source-ref="ds"
           users-by-username-query="select Username,Password, User_Status from users where Username=?"
-          authorities-by-username-query="select Username,UserRole from roles where Username =?" />
+          authorities-by-username-query="select Username,UserRole from users where Username =?" />
     </authentication-provider>
   </authentication-manager>
 </beans:beans>

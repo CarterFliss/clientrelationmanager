@@ -16,9 +16,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
-import objects.Roles;
-
-
 /**
  *
  * @author Carter
@@ -36,14 +33,14 @@ public class UsersDAO {
     }
        
     public int addUser (Users user){
-        this.sql = "INSERT INTO users (Username,Password,User_Status) VALUES (?,SHA(?),?)";
-        Object[] values = {user.getUsername(),user.getPassword(),user.isUserStatus()};
+        this.sql = "INSERT INTO users (Username,Password,UserRole,User_Status) VALUES (?,SHA(?),?,?)";
+        Object[] values = {user.getUsername(),user.getPassword(),user.getUserrole(),user.isUserStatus()};
         return this.template.update(sql, values);
     }
     
     public int updateUser(Users user){
-        this.sql = "UPDATE users SET Username = ?, Password = SHA(?),User_Status = ? WHERE UserID = ?";
-        Object[] values = {user.getUsername(),user.getPassword(),user.isUserStatus(),user.getId()};
+        this.sql = "UPDATE users SET Username = ?, Password = SHA(?), UserRole = ?, User_Status = ? WHERE UserID = ?";
+        Object[] values = {user.getUsername(),user.getPassword(),user.getUserrole(), user.isUserStatus(),user.getId()};
         return this.template.update(sql, values);
     }
     
@@ -52,42 +49,27 @@ public class UsersDAO {
         Object[] values = {id};
         return this.template.update(sql, values);
     }
-    
-    public List<Roles> getRoleById (int id){
-       return template.query("SELECT UserRole FROM roles WHERE UserID = "+ id,new RowMapper<Roles>(){
-           public Roles mapRow (ResultSet rs,int row) throws SQLException{
-               Roles a = new Roles();
-               a.setUserRole(rs.getString("UserRole"));
-               return a;
-           }
-       });
-    }
-    
+          
     public List<Users> getUsersList(){
-        return template.query("SELECT UserID,Username,User_Status FROM users",new RowMapper<Users>(){
+        return template.query("SELECT UserID,Username,UserRole,User_Status FROM users",new RowMapper<Users>(){
             public Users mapRow(ResultSet rs,int row) throws SQLException{
                 Users a = new Users();
                 a.setId(rs.getInt("UserID"));
                 a.setUsername(rs.getString("Username"));
-                a.setUserStatus(rs.getBoolean("User_Status"));
-                
-                Roles b = new Roles();
-                b.setUserRoleID(rs.getInt("UserID"));
-                b.setUsername(rs.getString("Username"));
-                b.setUserRole(rs.getString("UserRole"));
-                
-                a.setRole(b);
+                a.setUserrole(rs.getString("UserRole"));
+                a.setUserStatus(rs.getBoolean("User_Status"));                           
                 return a;
             }
         });
     }
     
     public List<Users> getUsersById(int id){
-        return template.query("SELECT UserID,Username,User_Status FROM users WHERE UserID=?",new RowMapper<Users>(){
+        return template.query("SELECT UserID,Username,UserRole, User_Status FROM users WHERE UserID=?",new RowMapper<Users>(){
             public Users mapRow(ResultSet rs,int row) throws SQLException{
                 Users a = new Users();
                 a.setId(rs.getInt("UserID"));
                 a.setUsername(rs.getString("Username"));
+                a.setUserrole(rs.getString("UserRole"));
                 a.setUserStatus(rs.getBoolean("User_Status"));
                 return a;
             }

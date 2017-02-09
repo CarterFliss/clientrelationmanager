@@ -7,7 +7,6 @@ package objects;
 
 import java.io.Serializable;
 import java.util.List;
-import objects.Roles;
 
 /**
  *
@@ -17,26 +16,17 @@ public class Users implements Serializable{
     private int id;
     private String username;
     private String password;
+    private String userrole;
     private boolean userStatus;
-    Roles role = new Roles();
-    List<Roles> roles;
 
-    public Roles getRole() {
-        return role;
+    public String getUserrole() {
+        return userrole;
     }
 
-    public void setRole(Roles role) {
-        this.role = role;
+    public void setUserrole(String userrole) {
+        this.userrole = userrole;
     }
-
-    public List<Roles> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Roles> roles) {
-        this.roles = roles;
-    }
-    
+        
     public int getId() {
         return id;
     }
@@ -74,6 +64,7 @@ public class Users implements Serializable{
         buffer.append("ID: " + this.id + ";");
         buffer.append("Username: " + username);
         buffer.append("Password: " + password);
+        buffer.append("User Role:" + userrole);
         buffer.append("User Status: " + userStatus);
         return buffer.toString();
     }
