@@ -54,7 +54,8 @@ public class UsersController {
     
     @RequestMapping("/users/viewusers")
     public ModelAndView showusers(){
-        return new ModelAndView("viewusers","users",new Users());
+        List<Users> user = dao.getUsersList();
+        return new ModelAndView("viewusers","users",user);
     }
     
     @RequestMapping(value="/users/viewusers/{id}",method=RequestMethod.GET)

@@ -40,7 +40,8 @@ public class EventLogController {
     
     @RequestMapping("/eventlog/vieweventlog")
     public ModelAndView showEventLog(){
-        return new ModelAndView("vieweventlog","eventlog",new EventLog());
+        List<EventLog> eventLog = dao.getEventsList();
+        return new ModelAndView("vieweventlog","eventlog",eventLog);
     }
     
     @RequestMapping(value = "/eventlog/addevent", method = RequestMethod.POST)
