@@ -34,9 +34,6 @@
   <bean id="usersdao" class="repository.UsersDAO">  
     <property name="template" ref="jt"></property>  
   </bean>
-  <bean id="rolesdao" class="repository.RolesDAO">  
-    <property name="template" ref="jt"></property>  
-  </bean>
   <bean id="eventsdao" class="repository.EventLogDAO">  
     <property name="template" ref="jt"></property>  
   </bean>  

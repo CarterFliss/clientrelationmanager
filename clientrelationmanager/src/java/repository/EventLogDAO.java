@@ -78,7 +78,7 @@ public class EventLogDAO {
     }
 
     public List<EventLog> getEventsByClientID(int id) {
-        return template.query("SELECT * FROM interactions WHERE ClientID = ?", new RowMapper<EventLog>() {
+        return template.query("SELECT * FROM interactions WHERE ClientID = "+id, new RowMapper<EventLog>() {
             public EventLog mapRow(ResultSet rs, int row) throws SQLException {
                 EventLog a = new EventLog();
                 a.setEventid(rs.getInt("EventID"));
@@ -95,7 +95,7 @@ public class EventLogDAO {
     }
 
     public List<EventLog> getEventsByUserID(int id) {
-        return template.query("SELECT * FROM interactions WHERE UserID = ?", new RowMapper<EventLog>() {
+        return template.query("SELECT * FROM interactions WHERE UserID = "+id, new RowMapper<EventLog>() {
             public EventLog mapRow(ResultSet rs, int row) throws SQLException {
                 EventLog a = new EventLog();
                 a.setEventid(rs.getInt("EventID"));

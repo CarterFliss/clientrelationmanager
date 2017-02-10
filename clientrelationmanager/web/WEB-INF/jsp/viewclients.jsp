@@ -26,7 +26,9 @@
     </c:choose>
     
   </c:if>
-
+  <sec:authorize access="hasAnyRole('MANAGER','ADMIN')">   
+  <a href="<c:url value="/clients/addclient" />"><button class="w3-btn w3-round w3-blue">New Client</button></a><br>
+  </sec:authorize>
   <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">  
     <tr>
       <th>Client Name</th>
@@ -45,9 +47,11 @@
         <td>${client.phone}</td>
         <td>${client.email}</td>
         <td>
-          <a href="<c:url value="/clients/viewclients/${client.clientid}" />"><button class="w3-btn w3-round w3-blue">View</button></a>
+          <a href="<c:url value="/clients/viewclient/${client.clientid}" />"><button class="w3-btn w3-round w3-blue">View</button></a>
+          <sec:authorize access="hasAnyRole('MANAGER','ADMIN')">
           <a href="<c:url value="/clients/editclient/${client.clientid}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
           <a href="<c:url value="/clients/removeclient/${client.clientid}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
+          </sec:authorize>
         </td>  
       </tr>  
     </c:forEach>  

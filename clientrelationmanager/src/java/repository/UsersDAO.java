@@ -64,7 +64,7 @@ public class UsersDAO {
     }
     
     public List<Users> getUsersById(int id){
-        return template.query("SELECT UserID,Username,UserRole, User_Status FROM users WHERE UserID=?",new RowMapper<Users>(){
+        return template.query("SELECT UserID,Username,UserRole, User_Status FROM users WHERE UserID="+id,new RowMapper<Users>(){
             public Users mapRow(ResultSet rs,int row) throws SQLException{
                 Users a = new Users();
                 a.setId(rs.getInt("UserID"));

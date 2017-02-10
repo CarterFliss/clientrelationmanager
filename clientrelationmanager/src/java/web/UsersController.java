@@ -50,17 +50,17 @@ public class UsersController {
         return new ModelAndView("viewusers","users",user);
     }
     
-    @RequestMapping(value="/users/viewusers/{id}",method=RequestMethod.GET)
+    @RequestMapping(value="/users/viewuser/{id}",method=RequestMethod.GET)
     public ModelAndView showUsersByUserID(@PathVariable int id,HttpServletRequest request){
         List<Users> x = dao.getUsersById(id);
         List<EventLog> y = adao.getEventsByUserID(id);
         HashMap<String,Object> context = new HashMap<String,Object>();
         context.put("User",x);
         context.put("Events",y);
-        return new ModelAndView("viewusers",context);
+        return new ModelAndView("viewuser",context);
     }
     
-    @RequestMapping(value = "/users/addusers", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/adduser", method = RequestMethod.POST)
     public ModelAndView save (@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
         if(result.hasErrors()){
             return new ModelAndView("viewusers","users",new Users());

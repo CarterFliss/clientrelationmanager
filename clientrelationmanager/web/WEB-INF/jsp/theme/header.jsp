@@ -21,7 +21,7 @@
   <!-- Top container -->
     <div class="w3-container w3-top w3-green w3-large w3-padding" style="z-index:4">
   <button class="w3-btn w3-hide-large w3-padding-0 w3-hover-text-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-  <span class="w3-right">Logo</span>
+  <span class="w3-right">Computational Regulation of Merchandise</span>
     </div>
   
   <!-- Sidenav/menu -->
@@ -35,11 +35,16 @@
           <c:if test="${pageContext.request.userPrincipal.name != null}">
             <span>Welcome, <strong>${pageContext.request.userPrincipal.name}</strong></span><br>
           </c:if>
+        <a href="<c:url value="/" />" class="w3-padding"><i class="fa fa-dashboard fa-fw"></i>  Dashboard</a>
           <div class="w3-dropdown-hover">
         <a href="<c:url value="/clients/viewclients" />" class="w3-padding"><i class="fa fa-music fa-fw"></i>  Clients  <i class="fa fa-caret-down"></i></a>
         <div class="w3-dropdown-hover">
           <a href="<c:url value="/eventlog/vieweventlog" />"><i class="fa fa-plus-square fa-fw"></i>  Event Log</a>
         </div>
+        <form action="<c:url value="/j_spring_security_logout" />" method="post" id="logoutForm">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        <a href="#" onclick="logoutFormSubmit();" class="w3-padding"><i class="fa fa-sign-out fa-fw"></i>  Logout</a>
+      </form>
       </div>
           </sec:authorize>
         </div>
@@ -47,19 +52,18 @@
       <hr>
 
       <a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-      <a href="<c:url value="/" />" class="w3-padding"><i class="fa fa-dashboard fa-fw"></i>  Dashboard</a>
+      
       
       <sec:authorize access="hasRole('ADMIN')">
+          <a href="<c:url value="/" />" class="w3-padding"><i class="fa fa-dashboard fa-fw"></i>  Admin Dashboard</a>
       <div class="w3-dropdown-hover">
         <a href="<c:url value="/users/viewusers" />" class="w3-padding"><i class="fa fa-music fa-fw"></i>  Users  <i class="fa fa-caret-down"></i></a>
        </div>
        </sec:authorize>     
       
-      <a href="#" onclick="logoutFormSubmit();" class="w3-padding"><i class="fa fa-sign-out fa-fw"></i>  Logout</a><br><br>
       
-      <form action="<c:url value="/j_spring_security_logout" />" method="post" id="logoutForm">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-      </form>
+      
+      
     </nav>
 
 <!-- Overlay effect when opening sidenav on small screens -->

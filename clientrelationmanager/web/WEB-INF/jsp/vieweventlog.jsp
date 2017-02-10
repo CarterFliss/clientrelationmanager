@@ -26,7 +26,9 @@
     </c:choose>
     
   </c:if>
-
+        
+  <a href="<c:url value="/eventlog/addevent" />"><button class="w3-btn w3-round w3-blue">New Event</button></a><br>      
+  
   <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">  
     <tr>
       <th>Date</th>
@@ -43,9 +45,10 @@
         <td>${eventlogs.username}</td>
         <td>${eventlogs.interaction}</td>
         <td>
-          <a href="<c:url value="/eventlog/addevent/" />"><button class="w3-btn w3-round w3-blue">New Event</button></a>
           <a href="<c:url value="/eventlog/editevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
+          <sec:authorize access="hasRole('ADMIN')">
           <a href="<c:url value="/eventlog/removeevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
+          </sec:authorize>
         </td>  
       </tr>  
     </c:forEach>  
