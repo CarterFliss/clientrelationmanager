@@ -56,7 +56,7 @@ public class ClientsController {
         HashMap<String,Object> context = new HashMap<String,Object>();
         context.put("Client",y);
         context.put("Events",x);
-       return new ModelAndView("viewclients","clients",context);
+       return new ModelAndView("viewclient",context);
     }
     
     @RequestMapping(value = "/clients/addclient", method = RequestMethod.POST)

@@ -72,7 +72,7 @@ public class ClientsDAO {
     }
 
     public List<Clients> getClientsById(int id) {
-        return template.query("SELECT * FROM clients WHERE ClientID = ?", new RowMapper<Clients>() {
+        return template.query("SELECT * FROM clients WHERE ClientID = "+id, new RowMapper<Clients>() {
             public Clients mapRow(ResultSet rs, int row) throws SQLException {
                 Clients a = new Clients();
                 a.setClientid(rs.getInt("ClientID"));
