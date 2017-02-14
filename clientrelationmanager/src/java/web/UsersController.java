@@ -59,10 +59,15 @@ public class UsersController {
         context.put("Events",y);
         return new ModelAndView("viewuser",context);
     }
-    
-    @RequestMapping(value = "/users/adduser", method = RequestMethod.POST)
+    @RequestMapping(value="/users/adduser",method=RequestMethod.GET)
+    public ModelAndView addUser(){
+        return new ModelAndView("adduser","users",new Users());
+    }
+
+    @RequestMapping(value = "/users/save", method = RequestMethod.POST)
     public ModelAndView save (@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
         if(result.hasErrors()){
+            logger.info(result.getFieldErrors().toString());
             return new ModelAndView("viewusers","users",new Users());
         }
         int x = dao.addUser(users);
