@@ -38,8 +38,8 @@ public class EventLogDAO {
     }
 
     public int addEvent(EventLog events) {
-        this.sql = "INSERT INTO interactions (EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date) VALUES (?,?,?,?,?,?,?,?)";
-        Object[] values = {events.getEventid(), events.getClientid(), events.getClientFirstName(), events.getClientLastName(), events.getUserid(), events.getUsername(), events.getInteraction(), events.getDate()};
+        this.sql = "INSERT INTO interactions (First_Name,Last_Name,Username,Interaction_Type,Interaction_Date) VALUES (?,?,?,?,?)";
+        Object[] values = {events.getClientFirstName(), events.getClientLastName(), events.getUsername(), events.getInteraction(), events.getDate()};
         return this.template.update(sql, values);
     }
 

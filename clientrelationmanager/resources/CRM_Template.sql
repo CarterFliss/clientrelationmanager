@@ -43,13 +43,13 @@ CREATE TABLE IF NOT EXISTS Users (
 CREATE TABLE IF NOT EXISTS Interactions
 (
     EventID INT NOT NULL AUTO_INCREMENT,
-    ClientID INT NOT NULL,
+    ClientID INT,
     First_Name VARCHAR (60) NOT NULL,
     Last_Name VARCHAR (60) NOT NULL,
-    UserID INT NOT NULL,
+    UserID INT,
     Username VARCHAR (60) NOT NULL,
     Interaction_Type TEXT NOT NULL,
-    Interaction_Date DATE NOT NULL,    
+    Interaction_Date VARCHAR (30) NOT NULL,    
     PRIMARY KEY  (EventID),
     CONSTRAINT fk_clientID FOREIGN KEY (ClientID) REFERENCES Clients (ClientID),    
     CONSTRAINT fk_userID FOREIGN KEY (UserID) REFERENCES Users (UserID),

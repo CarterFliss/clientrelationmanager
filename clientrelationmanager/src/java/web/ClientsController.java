@@ -59,16 +59,22 @@ public class ClientsController {
        return new ModelAndView("viewclient",context);
     }
     
-    @RequestMapping(value = "/clients/addclient", method = RequestMethod.POST)
+    @RequestMapping(value="/clients/addclient", method = RequestMethod.GET)
+    public ModelAndView addClient(){
+        return new ModelAndView("addclient","clients",new Clients());
+    }
+    
+    @RequestMapping(value = "/clients/save", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute("clients") @Valid Clients clients, BindingResult result, HttpServletRequest request){
         if(result.hasErrors()){
-            return new ModelAndView("viewclients","clients",new Clients());
+            logger.info(result.getFieldErrors().toString());
+            return new ModelAndView("addclient","clients",new Clients());
         }
         int x = dao.addClient(clients);
         
         Messages msg = null;
         if (x == 1){
-            msg = new Messages(Messages.Level.SUCCESS,"Client successfullly added.");
+            msg = new Messages(Messages.Level.SUCCESS,"Client successfullly added.  Please add client creation to Event Log.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error adding client to database.");
         }
@@ -111,7 +117,7 @@ public class ClientsController {
         
         Messages msg = null;
         if (x==1){
-            msg = new Messages(Messages.Level.SUCCESS,"Client successfullly edited.");
+            msg = new Messages(Messages.Level.SUCCESS,"Client successfullly edited.  Please add client edit to Event Log.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error editing client.");
         }
@@ -126,7 +132,7 @@ public class ClientsController {
        
        Messages msg = null;
         if (x==1){
-            msg = new Messages(Messages.Level.SUCCESS,"Client successfullly edited.");
+            msg = new Messages(Messages.Level.SUCCESS,"Client successfullly deleted.  Please add client deletion to Event Log.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error editing client.");
         }

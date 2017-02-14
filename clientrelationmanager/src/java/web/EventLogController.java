@@ -43,10 +43,14 @@ public class EventLogController {
         List<EventLog> eventLog = dao.getEventsList();
         return new ModelAndView("vieweventlog","eventlog",eventLog);
     }
-    
-    @RequestMapping(value = "/eventlog/addevent", method = RequestMethod.POST)
+    @RequestMapping(value="/eventlog/addevent",method=RequestMethod.GET)
+    public ModelAndView addEvent(){
+        return new ModelAndView("addevent","eventlog",new EventLog());
+    }
+    @RequestMapping(value = "/eventlog/save", method = RequestMethod.POST)
     public ModelAndView save (@ModelAttribute("eventlog") @Valid EventLog eventlog, BindingResult result,HttpServletRequest request){
         if(result.hasErrors()){
+            logger.info(result.getFieldErrors().toString());
             return new ModelAndView("vieweventlog","eventlog",new EventLog());
         }
         int x = dao.addEvent(eventlog);

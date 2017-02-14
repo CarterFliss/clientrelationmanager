@@ -40,19 +40,19 @@ public class EventLogValidator implements Validator {
         if (eventlog.getClientFirstName().length() > 60){
            errors.rejectValue("clientFirstName", "event.firstName.length");
        }
-        if(!eventlog.getClientFirstName().matches("/^[a-z ,.'-]+$/i")){
+        if(!eventlog.getClientFirstName().matches("^[A-Z]'?[- a-zA-Z]([a-zA-Z])*$")){
            errors.rejectValue("clientFirstName","event.firstName.pattern");}
         if (eventlog.getClientLastName().length() > 60){
            errors.rejectValue("clientLastName", "event.lastName.length");
        }
-        if(!eventlog.getClientLastName().matches("/^[a-z ,.'-]+$/i")){
+        if(!eventlog.getClientLastName().matches("^[A-Z]'?[- a-zA-Z]([a-zA-Z])*$")){
            errors.rejectValue("clientLastName","event.lastName.pattern");}
         if (eventlog.getUsername().length() > 60){
            errors.rejectValue("username", "event.username.length");
        }
-        if(!eventlog.getUsername().matches("/^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$/")){
+        if(!eventlog.getUsername().matches("^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$")){
            errors.rejectValue("username","event.username.pattern");}
-        if(!eventlog.getDate().matches("[0-9]{2}/[0-9]{2}/[0-9]{4}")){
+        if(!eventlog.getDate().matches("[0-9]{1,2}/[0-9]{1,2}/[0-9]{2,4}")){
            errors.rejectValue("date","event.date.pattern");}
     }
     

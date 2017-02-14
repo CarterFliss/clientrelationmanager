@@ -38,19 +38,19 @@ public class UsersValidator implements Validator{
        if(users.getUsername().length() > 120){
            errors.rejectValue("username", "user.username.length");
        }
-       if(!users.getUsername().matches("/^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$/")){
+       if(!users.getUsername().matches("^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$")){
            errors.rejectValue("username","user.username.pattern");
        }
        if(users.getPassword().length() > 120){
            errors.rejectValue("password", "user.password.length");
        }
-       if(!users.getPassword().matches("/^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$/")){
+       if(!users.getPassword().matches("^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$")){
            errors.rejectValue("password","user.password.pattern");
        }
        if(users.getUserrole().length() > 20){
            errors.rejectValue("userrole", "user.userrole.length");
        }
-       if(!users.getUserrole().matches("/^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$/")){
+       if(!users.getUserrole().matches("^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$")){
            errors.rejectValue("userrole","user.userrole.pattern");
        }
     }
