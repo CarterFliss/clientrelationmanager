@@ -70,6 +70,11 @@ public class ClientsDAO {
             }
         });
     }
+    
+    public Clients getClientByID (int id){
+        this.sql = "SELECT First_Name,Last_Name,Status,Address,City,Home_State,ZIP,Phone,Email FROM clients WHERE ClientID = ?";
+        return this.template.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<Clients>(Clients.class));
+    }
 
     public List<Clients> getClientsById(int id) {
         return template.query("SELECT * FROM clients WHERE ClientID = "+id, new RowMapper<Clients>() {

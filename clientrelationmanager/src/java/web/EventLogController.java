@@ -92,7 +92,12 @@ public class EventLogController {
     }
     
     @RequestMapping(value="/eventlog/editevent/{id}")
-    public ModelAndView edit(@ModelAttribute("eventlog") @Valid EventLog eventlog, BindingResult result,HttpServletRequest request){
+    public ModelAndView edit(@PathVariable int id){
+        EventLog eventlog = dao.getEventsById(id);
+        return new ModelAndView("editevent","eventlog",eventlog);
+    }
+    @RequestMapping(value="/eventlog/editsave",method=RequestMethod.POST)
+    public ModelAndView editSave(@ModelAttribute("eventlog") @Valid EventLog eventlog, BindingResult result,HttpServletRequest request){
         if(result.hasErrors()){
             return new ModelAndView("vieweventlog","eventlog",new EventLog());
         }

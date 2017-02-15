@@ -64,8 +64,31 @@ public class ClientsController {
         return new ModelAndView("addclient","clients",new Clients());
     }
     
-    @RequestMapping(value = "/clients/save", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute("clients") @Valid Clients clients, BindingResult result, HttpServletRequest request){
+    @RequestMapping(value = "/clients/editclient/{id}")
+    public ModelAndView save(@PathVariable int id){
+        Clients clients = dao.getClientByID(id);
+        return new ModelAndView("editclient","clients",clients);
+    }
+    
+    @RequestMapping(value="/clients/editsave",method=RequestMethod.POST)
+    public ModelAndView editSave(@ModelAttribute("clients") @Valid Clients clients, BindingResult result, HttpServletRequest request){
+        if(result.hasErrors()){
+            logger.info(result.getFieldErrors().toString());
+            return new ModelAndView("addclient","clients",new Clients());
+        }
+        int x = dao.updateClient(clients);
+        
+        Messages msg = null;
+        if (x == 1){
+            msg = new Messages(Messages.Level.SUCCESS,"Client successfullly added.  Please add client creation to Event Log.");
+        } else{
+            msg = new Messages(Messages.Level.ERROR,"Error adding client to database.");
+        }
+        request.getSession().setAttribute("message",msg);
+        return new ModelAndView("redirect:/clients/viewclients");
+    }
+    @RequestMapping(value="/clients/addsave",method=RequestMethod.POST)
+    public ModelAndView addSave(@ModelAttribute("clients") @Valid Clients clients, BindingResult result, HttpServletRequest request){
         if(result.hasErrors()){
             logger.info(result.getFieldErrors().toString());
             return new ModelAndView("addclient","clients",new Clients());
@@ -108,24 +131,7 @@ public class ClientsController {
         return new ModelAndView("viewclients",context);
     }
     
-    @RequestMapping(value="/clients/editclient/{id}")
-    public ModelAndView edit(@ModelAttribute("clients") @Valid Clients clients, BindingResult result, HttpServletRequest request){
-        if(result.hasErrors()){
-            return new ModelAndView("viewclients","clients",new Clients());
-        }
-        int x = dao.updateClient(clients);
         
-        Messages msg = null;
-        if (x==1){
-            msg = new Messages(Messages.Level.SUCCESS,"Client successfullly edited.  Please add client edit to Event Log.");
-        } else{
-            msg = new Messages(Messages.Level.ERROR,"Error editing client.");
-        }
-        
-        request.getSession().setAttribute("message",msg);
-        return new ModelAndView("redirect:/clients/viewclients");
-    }
-    
     @RequestMapping(value="/clients/removeclient/{id}",method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable int id,HttpServletRequest request){
        int x = dao.deleteClient(id);
