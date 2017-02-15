@@ -59,29 +59,28 @@ public class UsersController {
         context.put("Events",y);
         return new ModelAndView("viewuser",context);
     }
-    @RequestMapping(value="/users/adduser",method=RequestMethod.GET)
+    @RequestMapping(value="/users/adduser")
     public ModelAndView addUser(){
         return new ModelAndView("adduser","users",new Users());
     }
-
-    @RequestMapping(value = "/users/save", method = RequestMethod.POST)
-    public ModelAndView save (@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
+    
+    @RequestMapping(value="/users/addsave",method=RequestMethod.POST)
+    public ModelAndView addUserSave (@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
         if(result.hasErrors()){
-            logger.info(result.getFieldErrors().toString());
             return new ModelAndView("viewusers","users",new Users());
         }
         int x = dao.addUser(users);
                 
         Messages msg = null;
-        if (x == 1){
-            msg = new Messages(Messages.Level.SUCCESS,"User successfullly added.");
+        if (x==1){
+            msg = new Messages(Messages.Level.SUCCESS,"user successfullly edited.");
         } else{
-            msg = new Messages(Messages.Level.ERROR,"Error adding user to database.");
+            msg = new Messages(Messages.Level.ERROR,"Error editing user.");
         }
+        
         request.getSession().setAttribute("message",msg);
         return new ModelAndView("redirect:/users/viewusers");
     }
-    
     @RequestMapping("/users/viewusers/{pageid}")
     public ModelAndView showusersPager (@PathVariable int pageid,HttpServletRequest request){
         int total = 25;
@@ -109,7 +108,13 @@ public class UsersController {
     }
     
     @RequestMapping(value="/users/edituser/{id}")
-    public ModelAndView edit(@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
+    public ModelAndView edit(@PathVariable int id){
+       Users users = dao.getUserById(id);
+       return new ModelAndView("edituser","users",users);
+    }
+    
+    @RequestMapping(value="/users/editsave",method = RequestMethod.POST)
+    public ModelAndView editSave(@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
         if(result.hasErrors()){
             return new ModelAndView("viewusers","users",new Users());
         }

@@ -20,7 +20,7 @@
       <h2>User Information</h2>
     </div>
 
-    <form:form method="post" action="save" cssClass="w3-container" commandName="users">
+    <form:form method="post" action="addsave" cssClass="w3-container" commandName="users">
       <div class="w3-padding-8">
         <label><b>Username</b></label>
         <form:input path="username" cssClass="w3-input w3-border"  />

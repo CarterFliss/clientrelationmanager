@@ -49,6 +49,11 @@ public class UsersDAO {
         Object[] values = {id};
         return this.template.update(sql, values);
     }
+    
+    public Users getUserById(int id){
+        this.sql = "SELECT Username,Password,UserRole,User_Status FROM users WHERE UserID = ?";
+        return this.template.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper<Users>(Users.class));
+    }
           
     public List<Users> getUsersList(){
         return template.query("SELECT UserID,Username,UserRole,User_Status FROM users",new RowMapper<Users>(){

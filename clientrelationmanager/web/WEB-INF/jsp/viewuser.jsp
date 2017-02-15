@@ -31,10 +31,6 @@
         <td><c:forEach var="u" items="${User}">${u.username}</c:forEach></td>
     </tr>
     <tr>
-        <th><strong>Password:  </strong></th>
-    <c:forEach var="u" items="${User}"><td>${u.password}</td></c:forEach>
-    </tr>
-    <tr>
         <th><strong>User Role:  </strong></th>
         <c:forEach var="u" items="${User}"><td><c:choose>
             <c:when test="${u.userrole == 'ROLE_ADMIN'}">Admin</c:when>
