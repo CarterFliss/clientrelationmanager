@@ -34,8 +34,8 @@
       <div class="w3-padding-8">
         <label><b>User Status</b></label>
         <form:select path="userStatus" cssClass="w3-input w3-border"  >
-            <form:option value="true">Active</form:option>
-            <form:option value="false">Inactive</form:option>
+            <form:option value="1">Active</form:option>
+            <form:option value="0">Inactive</form:option>
         </form:select>
         <form:errors path="userStatus" cssClass="w3-red w3-padding-8 w3-panel" cssStyle="display: block; width: 100%; font-weight:bold;" />
       </div>

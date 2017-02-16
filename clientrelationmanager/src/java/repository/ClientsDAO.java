@@ -40,9 +40,9 @@ public class ClientsDAO {
         return this.template.update(sql, values);
     }
 
-    public int updateClient(Clients client) {
+    public int updateClient(Clients clients) {
         this.sql = "UPDATE clients SET First_Name = ?, Last_Name = ?, Status = ?,  Address = ?, City = ?, Home_State = ?, ZIP = ?, Phone = ?, Email = ? WHERE ClientID = ?";
-        Object[] values = {client.getFirstName(), client.getLastName(), client.getUserStatus(), client.getAddress(), client.getCity(), client.getHomeState(), client.getZip(), client.getPhone(), client.getEmail(), client.getClientid()};
+        Object[] values = {clients.getFirstName(), clients.getLastName(), clients.getUserStatus(), clients.getAddress(), clients.getCity(), clients.getHomeState(), clients.getZip(), clients.getPhone(), clients.getEmail(), clients.getClientid()};
         return this.template.update(sql, values);
     }
 
@@ -72,7 +72,7 @@ public class ClientsDAO {
     }
     
     public Clients getClientByID (int id){
-        this.sql = "SELECT First_Name,Last_Name,Status,Address,City,Home_State,ZIP,Phone,Email FROM clients WHERE ClientID = ?";
+        this.sql = "SELECT ClientID,First_Name,Last_Name,Status,Address,City,Home_State,ZIP,Phone,Email FROM clients WHERE ClientID = ?";
         return this.template.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<Clients>(Clients.class));
     }
 

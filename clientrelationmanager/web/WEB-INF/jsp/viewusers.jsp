@@ -45,13 +45,13 @@
             <c:when test="${u.userrole == 'ROLE_USER'}">User</c:when>
             </c:choose></td>
         <td><c:choose>
-                <c:when test="${u.userStatus = 'true'}">Active</c:when>
-                <c:when test="${u.userStatus = 'false'}">Inactive</c:when>
+                <c:when test="${u.userStatus == 1}">Active</c:when>
+                <c:when test="${u.userStatus == 0}">Inactive</c:when>
             </c:choose></td>
         <td>
-          <a href="<c:url value="/users/viewuser/${u.id}" />"><button class="w3-btn w3-round w3-blue">View</button></a>
-          <a href="<c:url value="/users/edituser/${u.id}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
-          <a href="<c:url value="/users/removeuser/${u.id}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
+          <a href="<c:url value="/users/viewuser/${u.userId}" />"><button class="w3-btn w3-round w3-blue">View</button></a>
+          <a href="<c:url value="/users/edituser/${u.userId}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
+          <a href="<c:url value="/users/removeuser/${u.userId}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
         </td>  
       </tr>  
     </c:forEach>  
