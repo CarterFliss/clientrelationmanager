@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
+import java.util.logging.Logger;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -28,6 +30,8 @@ public class EventLogDAO {
 
     private JdbcTemplate template;
     private String sql;
+    
+    private static final Logger logger = Logger.getLogger(EventLogDAO.class.getName());
 
     public JdbcTemplate getTemplate() {
         return template;
@@ -43,9 +47,10 @@ public class EventLogDAO {
         return this.template.update(sql, values);
     }
 
-    public int updateEvent(EventLog events) {
-        this.sql = "UPDATE interactions SET ClientID = ?, First_Name = ?, Last_Name = ?, UserID = ?, Username = ?, Interaction_Type = ?, Interaction_Date = ? WHERE EventID = ?";
-        Object[] values = {events.getClientid(), events.getClientFirstName(), events.getClientLastName(), events.getUserid(), events.getUsername(), events.getInteraction(), events.getDate(), events.getEventid()};
+    public int updateEvent(EventLog eventlog) {
+        this.sql = "UPDATE interactions SET First_Name = ?,Last_Name = ?,Username = ?,Interaction_Type = ?,Interaction_Date = ? WHERE EventID = ?";
+        Object[] values = {eventlog.getClientFirstName(), eventlog.getClientLastName(), eventlog.getUsername(), eventlog.getInteraction(), eventlog.getDate(), eventlog.getEventid()};
+        logger.info(eventlog.getEventid()+"");
         return this.template.update(sql, values);
     }
 
@@ -73,12 +78,12 @@ public class EventLogDAO {
     }
 
     public EventLog getEventsById(int id) {
-        String sql = "SELECT First_Name, Last_Name, Username, Interaction_Type, Interaction_Date FROM interactions WHERE EventID = ?";
+        String sql = "SELECT EventID,First_Name, Last_Name, Username, Interaction_Type, Interaction_Date FROM interactions WHERE EventID = ?";
         return template.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<EventLog>(EventLog.class));
     }
 
     public List<EventLog> getEventsByClientID(int id) {
-        return template.query("SELECT * FROM interactions WHERE ClientID = "+id, new RowMapper<EventLog>() {
+        return template.query("SELECT EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date FROM interactions WHERE ClientID = "+id, new RowMapper<EventLog>() {
             public EventLog mapRow(ResultSet rs, int row) throws SQLException {
                 EventLog a = new EventLog();
                 a.setEventid(rs.getInt("EventID"));
@@ -95,7 +100,7 @@ public class EventLogDAO {
     }
 
     public List<EventLog> getEventsByUserID(int id) {
-        return template.query("SELECT * FROM interactions WHERE UserID = "+id, new RowMapper<EventLog>() {
+        return template.query("SELECT EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date FROM interactions WHERE UserID = "+id, new RowMapper<EventLog>() {
             public EventLog mapRow(ResultSet rs, int row) throws SQLException {
                 EventLog a = new EventLog();
                 a.setEventid(rs.getInt("EventID"));
@@ -133,7 +138,7 @@ public class EventLogDAO {
                 a.setClient(client);
 
                 Users user = new Users();
-                user.setId(rs.getInt("UserID"));
+                user.setUserId(rs.getInt("UserID"));
                 user.setUsername(rs.getString("Username"));
 
                 a.setUser(user);

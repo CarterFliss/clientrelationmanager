@@ -116,7 +116,7 @@ public class UsersController {
     @RequestMapping(value="/users/editsave",method = RequestMethod.POST)
     public ModelAndView editSave(@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
         if(result.hasErrors()){
-            return new ModelAndView("viewusers","users",new Users());
+            return new ModelAndView("viewusers","users",users);
         }
         int x = dao.updateUser(users);
                 
@@ -125,6 +125,7 @@ public class UsersController {
             msg = new Messages(Messages.Level.SUCCESS,"user successfullly edited.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error editing user.");
+            logger.info(result.getFieldErrors().toString());
         }
         
         request.getSession().setAttribute("message",msg);

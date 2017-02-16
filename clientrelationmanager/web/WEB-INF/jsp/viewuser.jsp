@@ -41,8 +41,8 @@
     <tr>
         <th><strong>User Status:  </strong></th>
         <c:forEach var="u" items="${User}"><td><c:choose>
-                <c:when test="${u.userStatus = 'true'}">Active</c:when>
-                <c:when test="${u.userStatus = 'false'}">Inactive</c:when>
+                <c:when test="${u.userStatus == 1}">Active</c:when>
+                <c:when test="${u.userStatus == 0}">Inactive</c:when>
             </c:choose></td></c:forEach>
     </tr>
 </table><br><br>

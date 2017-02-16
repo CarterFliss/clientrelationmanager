@@ -34,13 +34,13 @@ public class UsersDAO {
        
     public int addUser (Users user){
         this.sql = "INSERT INTO users (Username,Password,UserRole,User_Status) VALUES (?,SHA(?),?,?)";
-        Object[] values = {user.getUsername(),user.getPassword(),user.getUserrole(),user.isUserStatus()};
+        Object[] values = {user.getUsername(),user.getPassword(),user.getUserrole(),user.getUserStatus()};
         return this.template.update(sql, values);
     }
     
-    public int updateUser(Users user){
+    public int updateUser(Users users){
         this.sql = "UPDATE users SET Username = ?, Password = SHA(?), UserRole = ?, User_Status = ? WHERE UserID = ?";
-        Object[] values = {user.getUsername(),user.getPassword(),user.getUserrole(), user.isUserStatus(),user.getId()};
+        Object[] values = {users.getUsername(),users.getPassword(),users.getUserrole(), users.getUserStatus(),users.getUserId()};
         return this.template.update(sql, values);
     }
     
@@ -51,7 +51,7 @@ public class UsersDAO {
     }
     
     public Users getUserById(int id){
-        this.sql = "SELECT Username,Password,UserRole,User_Status FROM users WHERE UserID = ?";
+        this.sql = "SELECT UserID,Username,Password,UserRole,User_Status FROM users WHERE UserID = ?";
         return this.template.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper<Users>(Users.class));
     }
           
@@ -59,10 +59,10 @@ public class UsersDAO {
         return template.query("SELECT UserID,Username,UserRole,User_Status FROM users",new RowMapper<Users>(){
             public Users mapRow(ResultSet rs,int row) throws SQLException{
                 Users a = new Users();
-                a.setId(rs.getInt("UserID"));
+                a.setUserId(rs.getInt("UserID"));
                 a.setUsername(rs.getString("Username"));
                 a.setUserrole(rs.getString("UserRole"));
-                a.setUserStatus(rs.getBoolean("User_Status"));                           
+                a.setUserStatus(rs.getInt("User_Status"));                           
                 return a;
             }
         });
@@ -72,10 +72,10 @@ public class UsersDAO {
         return template.query("SELECT UserID,Username,UserRole, User_Status FROM users WHERE UserID="+id,new RowMapper<Users>(){
             public Users mapRow(ResultSet rs,int row) throws SQLException{
                 Users a = new Users();
-                a.setId(rs.getInt("UserID"));
+                a.setUserId(rs.getInt("UserID"));
                 a.setUsername(rs.getString("Username"));
                 a.setUserrole(rs.getString("UserRole"));
-                a.setUserStatus(rs.getBoolean("User_Status"));
+                a.setUserStatus(rs.getInt("User_Status"));
                 return a;
             }
         });
@@ -86,7 +86,7 @@ public class UsersDAO {
         return template.query(sql,new RowMapper<Users>(){
             public Users mapRow(ResultSet rs,int row) throws SQLException{
                 Users a = new Users();
-                a.setId(rs.getInt(1));
+                a.setUserId(rs.getInt(1));
                 a.setUsername(rs.getString(2));
                 return a;
             }

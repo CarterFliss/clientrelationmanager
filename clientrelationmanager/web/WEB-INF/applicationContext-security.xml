@@ -13,9 +13,11 @@
     <intercept-url pattern="/eventlog/vieweventlog" access="hasAnyRole('ADMIN','MANAGER','USER')" />
     <intercept-url pattern="/eventlog/addevent" access="hasAnyRole('ADMIN','MANAGER','USER')" />
     <intercept-url pattern="/eventlog/editevent/{id}" access="hasAnyRole('ADMIN','MANAGER','USER')" />
+    <intercept-url pattern="/eventlog/editsave" access="hasAnyRole('ADMIN','MANAGER','USER')" />
     <intercept-url pattern="/clients/addclient" access="hasAnyRole('ADMIN','MANAGER')" />
     <intercept-url pattern="/clients/removeclient/{id}" access="hasAnyRole('ADMIN','MANAGER')" />
     <intercept-url pattern="/clients/editclient/{id}" access="hasAnyRole('ADMIN','MANAGER')" />
+    <intercept-url pattern="/clients/editsave" access="hasAnyRole('ADMIN','MANAGER')" />
     <intercept-url pattern="/vieweventlog/removeevent/{id}" access="hasRole('ADMIN')" />
     <intercept-url pattern="/users/**" access="hasRole('ADMIN')" />
     <intercept-url pattern="/roles/**" access="hasRole('ADMIN')" />

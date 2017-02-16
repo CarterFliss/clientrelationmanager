@@ -51,7 +51,7 @@ public class EventLogController {
     public ModelAndView save (@ModelAttribute("eventlog") @Valid EventLog eventlog, BindingResult result,HttpServletRequest request){
         if(result.hasErrors()){
             logger.info(result.getFieldErrors().toString());
-            return new ModelAndView("vieweventlog","eventlog",new EventLog());
+            return new ModelAndView("vieweventlog","eventlog",eventlog);
         }
         int x = dao.addEvent(eventlog);
         
@@ -99,7 +99,7 @@ public class EventLogController {
     @RequestMapping(value="/eventlog/editsave",method=RequestMethod.POST)
     public ModelAndView editSave(@ModelAttribute("eventlog") @Valid EventLog eventlog, BindingResult result,HttpServletRequest request){
         if(result.hasErrors()){
-            return new ModelAndView("vieweventlog","eventlog",new EventLog());
+            return new ModelAndView("vieweventlog","eventlog",eventlog);
         }
         int x = dao.updateEvent(eventlog);
         
@@ -108,6 +108,7 @@ public class EventLogController {
             msg = new Messages(Messages.Level.SUCCESS,"Event Log successfullly edited.");
         } else{
             msg = new Messages(Messages.Level.ERROR,"Error editing Event Log.");
+            logger.info(result.getFieldErrors().toString());
         }
         
         request.getSession().setAttribute("message",msg);

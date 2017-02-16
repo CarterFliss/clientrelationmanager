@@ -74,15 +74,16 @@ public class ClientsController {
     public ModelAndView editSave(@ModelAttribute("clients") @Valid Clients clients, BindingResult result, HttpServletRequest request){
         if(result.hasErrors()){
             logger.info(result.getFieldErrors().toString());
-            return new ModelAndView("addclient","clients",new Clients());
+            return new ModelAndView("viewclients","clients",clients);
         }
         int x = dao.updateClient(clients);
         
         Messages msg = null;
         if (x == 1){
-            msg = new Messages(Messages.Level.SUCCESS,"Client successfullly added.  Please add client creation to Event Log.");
+            msg = new Messages(Messages.Level.SUCCESS,"Client successfullly edited.  Please add client creation to Event Log.");
         } else{
-            msg = new Messages(Messages.Level.ERROR,"Error adding client to database.");
+            msg = new Messages(Messages.Level.ERROR,"Error editing client.");
+            logger.info(result.getFieldErrors().toString());
         }
         request.getSession().setAttribute("message",msg);
         return new ModelAndView("redirect:/clients/viewclients");
