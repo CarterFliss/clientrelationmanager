@@ -36,6 +36,7 @@ function w3_close() {
 function logoutFormSubmit() {
   document.getElementById("logoutForm").submit();
 }
+
 </script>
 
 </body>
