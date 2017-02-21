@@ -47,7 +47,7 @@
         <td>
           <a href="<c:url value="/eventlog/editevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
           <sec:authorize access="hasRole('ADMIN')">
-          <a href="<c:url value="/eventlog/removeevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
+          <a href="<c:url value="/eventlog/removeevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-green" onclick="return confirm('Are you sure you want to delete this event?');">Delete</button></a>
           </sec:authorize>
         </td>  
       </tr>  

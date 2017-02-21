@@ -50,7 +50,7 @@
           <a href="<c:url value="/clients/viewclient/${client.clientid}" />"><button class="w3-btn w3-round w3-blue">View</button></a>
           <sec:authorize access="hasAnyRole('MANAGER','ADMIN')">
           <a href="<c:url value="/clients/editclient/${client.clientid}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
-          <a href="<c:url value="/clients/removeclient/${client.clientid}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
+          <a href="<c:url value="/clients/removeclient/${client.clientid}" />"><button class="w3-btn w3-round w3-green" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button></a>
           </sec:authorize>
         </td>  
       </tr>  
