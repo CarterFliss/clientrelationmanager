@@ -38,9 +38,31 @@
         <a href="<c:url value="/" />" class="w3-padding"><i class="fa fa-dashboard fa-fw"></i>  Dashboard</a>
           <div class="w3-dropdown-hover">
         <a href="<c:url value="/clients/viewclients" />" class="w3-padding"><i class="fa fa-music fa-fw"></i>  Clients  <i class="fa fa-caret-down"></i></a>
-        <div class="w3-dropdown-hover">
-          <a href="<c:url value="/eventlog/vieweventlog" />"><i class="fa fa-plus-square fa-fw"></i>  Event Log</a>
+        <div class="w3-dropdown-content w3-border">
+            <sec:authorize access="hasAnyRole('MANAGER','ADMIN')">
+                <a href="<c:url value="/clients/addclient"/>"class="w3-padding"><i class="fa fa-music fa-fw"></i>  Add Client  </a>
+            </sec:authorize>
         </div>
+          </div>
+        <div class="w3-dropdown-hover">
+          <a href="<c:url value="/eventlog/vieweventlog" />"><i class="fa fa-plus-square fa-fw"></i>  Event Log   <i class="fa fa-caret-down"></i></a>
+          <div class="w3-dropdown-content w3-border">
+            <sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')">
+                <a href="<c:url value="/eventlog/addevent"/>"class="w3-padding"><i class="fa fa-music fa-fw"></i>  Add Event  </a>
+            </sec:authorize>
+        </div>
+        </div>
+          <sec:authorize access="hasRole('ADMIN')">
+          
+      <div class="w3-dropdown-hover">
+        <a href="<c:url value="/users/viewusers" />" class="w3-padding"><i class="fa fa-music fa-fw"></i>  Users  <i class="fa fa-caret-down"></i></a>
+        <div class="w3-dropdown-content w3-border">
+            <sec:authorize access="hasRole('ADMIN')">
+                <a href="<c:url value="/users/adduser"/>"class="w3-padding"><i class="fa fa-music fa-fw"></i>  Add User  </a>
+            </sec:authorize>
+        </div>
+       </div>
+       </sec:authorize>     
         <form action="<c:url value="/j_spring_security_logout" />" method="post" id="logoutForm">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <a href="#" onclick="logoutFormSubmit();" class="w3-padding"><i class="fa fa-sign-out fa-fw"></i>  Logout</a>
@@ -54,12 +76,7 @@
       <a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
       
       
-      <sec:authorize access="hasRole('ADMIN')">
-          <a href="<c:url value="/" />" class="w3-padding"><i class="fa fa-dashboard fa-fw"></i>  Admin Dashboard</a>
-      <div class="w3-dropdown-hover">
-        <a href="<c:url value="/users/viewusers" />" class="w3-padding"><i class="fa fa-music fa-fw"></i>  Users  <i class="fa fa-caret-down"></i></a>
-       </div>
-       </sec:authorize>     
+      
       
       
       
