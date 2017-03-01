@@ -2,6 +2,8 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+ *
+ *Users Data Access Object
  */
 package repository;
 
@@ -9,6 +11,7 @@ import objects.Users;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+//logging imports kept for testing purposes
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -21,9 +24,10 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
  * @author Carter
  */
 public class UsersDAO {
+    //initializing class-wide variables
     private JdbcTemplate template;
     private String sql;
-
+    //getters and setters for jdbctemplate
     public JdbcTemplate getTemplate() {
         return template;
     }
@@ -31,7 +35,7 @@ public class UsersDAO {
     public void setTemplate(JdbcTemplate template) {
         this.template = template;
     }
-       
+    //methods for CRUD operations w/ MySQL database   
     public int addUser (Users user){
         this.sql = "INSERT INTO users (Username,Password,UserRole,User_Status) VALUES (?,SHA(?),?,?)";
         Object[] values = {user.getUsername(),user.getPassword(),user.getUserrole(),user.getUserStatus()};
@@ -49,12 +53,12 @@ public class UsersDAO {
         Object[] values = {id};
         return this.template.update(sql, values);
     }
-    
+    //for pulling a specific Users object, for editing pages
     public Users getUserById(int id){
         this.sql = "SELECT UserID,Username,Password,UserRole,User_Status FROM users WHERE UserID = ?";
         return this.template.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper<Users>(Users.class));
     }
-          
+    //prints list of Users for jsp pages      
     public List<Users> getUsersList(){
         return template.query("SELECT UserID,Username,UserRole,User_Status FROM users",new RowMapper<Users>(){
             public Users mapRow(ResultSet rs,int row) throws SQLException{
@@ -67,7 +71,7 @@ public class UsersDAO {
             }
         });
     }
-    
+    //for pulling a specific Users object, for editing pages
     public List<Users> getUsersById(int id){
         return template.query("SELECT UserID,Username,UserRole, User_Status FROM users WHERE UserID="+id,new RowMapper<Users>(){
             public Users mapRow(ResultSet rs,int row) throws SQLException{
@@ -80,7 +84,7 @@ public class UsersDAO {
             }
         });
     }
-    
+    //pagination method
     public List<Users> getUsersByPage(int start, int total){
         String sql = "SELECT * FROM users LIMIT " + (start - 1) + "," + total;
         return template.query(sql,new RowMapper<Users>(){
@@ -92,7 +96,7 @@ public class UsersDAO {
             }
         });
     }
-    
+    //gets count of all Clients for pagination purposes
     public int getUsersCount() {
         String sql = "SELECT COUNT(UserID) AS rowcount FROM users";
         SqlRowSet rs = template.queryForRowSet(sql);

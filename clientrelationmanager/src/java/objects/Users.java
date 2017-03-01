@@ -11,14 +11,17 @@ import java.util.List;
 /**
  *
  * @author Carter
+ * Users POJO
  */
 public class Users implements Serializable{
+    //initializing getters and setters
     private int userId;
     private String username;
     private String password;
     private String userrole;
     private int userStatus;
-
+    
+    //getters and setters
     public int getUserStatus() {
         return userStatus;
     }
@@ -59,6 +62,8 @@ public class Users implements Serializable{
         this.password = password;
     }
     
+    //puts variables to String for testing purposes
+    @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append("ID: " + this.userId + ";");

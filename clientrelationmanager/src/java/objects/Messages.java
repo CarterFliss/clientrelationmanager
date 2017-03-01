@@ -9,11 +9,14 @@ import java.io.Serializable;
 /**
  *
  * @author Carter
+ * Messages POJO
  */
 public class Messages implements Serializable{
+    //initializing class-wide variables
     private Level type;
     private String message;
     
+    //enumerates message levels
     public enum Level {
         ERROR, INFO, SUCCESS;
         
@@ -21,7 +24,8 @@ public class Messages implements Serializable{
             return this.name();
         }
     }
-
+    
+    //creation of Message Objects.  One w/ parameters and another w/out.
     public Messages(){
         
     }
@@ -31,6 +35,7 @@ public class Messages implements Serializable{
         this.message = message;
     }
 
+    //getters and setters
     public Level getType(){
         return type;
     }
@@ -47,6 +52,7 @@ public class Messages implements Serializable{
         this.message = message;
     }
 
+    //puts message into String for testing purposes
     @Override
     public String toString(){
         return "Message{" + "type=" + type + ", message=" + message + '}';

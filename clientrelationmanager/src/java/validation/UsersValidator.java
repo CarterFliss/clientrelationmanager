@@ -12,21 +12,23 @@ import org.springframework.stereotype.Component;
 
 import objects.Users;
 import java.util.logging.Logger;
+//regex import kept for validation purposes
 import java.util.regex.Pattern;
 /**
  *
  * @author Carter
+ * Users Validator, for validating requirements of User form input fields
  */
 @Component
 public class UsersValidator implements Validator{
 
     private static Logger logger = Logger.getLogger(UsersValidator.class.getName());
-    
+    //method connects form inputs to POJO variables
     @Override
     public boolean supports(Class<?> classy){
         return Users.class.isAssignableFrom(classy);
     }
-    
+    //validates input fields, based on requirements set in messages.properties
     @Override
     public void validate (Object target, Errors errors){
        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"username", "user.username.required");
