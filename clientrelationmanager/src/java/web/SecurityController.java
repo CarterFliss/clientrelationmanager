@@ -17,19 +17,21 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  *
  * @author Carter
+ * Security Controller
  */
 @Controller
 public class SecurityController {
+    //establishes login page
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(@RequestParam(value = "error",required = false) String error,
                               @RequestParam(value = "logout",required = false) String logout){
 
         ModelAndView model = new ModelAndView();
-        
+        //returns message if username or password is incorrect
         if(error != null){
             model.addObject("error","Invalid username and password!");
         }
-
+        //returns message if user logs out from web app
         if(logout != null){
             model.addObject("msg","You've been logged out successfully.");
         }
@@ -38,14 +40,16 @@ public class SecurityController {
 
         return model;
     }
-
+    //for when a user attempts access to page where they aren't allowed, based
+    //on User Role
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public ModelAndView accesssDenied(){
 
         ModelAndView model = new ModelAndView();
-
+        //authenticates User Role from applicationContext-Security
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        
+        //if User Role is not in line w/ pre-determined access, User is sent to 
+        //403 page.
         if(!(auth instanceof AnonymousAuthenticationToken)){
             UserDetails userDetail = (UserDetails) auth.getPrincipal();
             System.out.println(userDetail);

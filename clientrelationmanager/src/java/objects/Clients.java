@@ -9,8 +9,10 @@ import java.io.Serializable;
 /**
  *
  * @author Carter
+ * Clients POJO
  */
 public class Clients implements Serializable {
+    //initializing class-wide variables
     private int clientid;
     private String firstName;
     private String lastName;
@@ -21,7 +23,8 @@ public class Clients implements Serializable {
     private int zip;
     private String phone;
     private String email;
-
+    
+    //getters and setters
     public int getClientid() {
         return clientid;
     }
@@ -101,7 +104,8 @@ public class Clients implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+    //writes variables to String for testing purposes
+    @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append("Client ID: " + this.clientid);

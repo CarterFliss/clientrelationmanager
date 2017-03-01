@@ -12,8 +12,10 @@ import java.util.Map;
 /**
  *
  * @author Carter
+ * Event Log/Interactions POJO
  */
 public class EventLog implements Serializable {
+    //initializing class-wide variables
     private int eventid;
     private int clientid;
     private int userid;
@@ -27,7 +29,8 @@ public class EventLog implements Serializable {
     private Map<Integer,String> clients;
     private Users user;
     private Map<Integer,String> users;
-
+    
+    //getters and setters
     public Users getUser() {
         return user;
     }
@@ -124,6 +127,8 @@ public class EventLog implements Serializable {
         this.date = date;
     }
     
+    //prints variables to String for testing purposes
+    @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append("Event ID: " + this.eventid);

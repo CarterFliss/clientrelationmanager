@@ -12,20 +12,22 @@ import org.springframework.stereotype.Component;
 
 import objects.EventLog;
 import java.util.logging.Logger;
+//regex import kept for validation purposes
 import java.util.regex.Pattern;
 /**
  *
  * @author Carter
+ * Event Log Validator, for validating requirements of Event Log form input fields
  */
 @Component
 public class EventLogValidator implements Validator {
     private static Logger logger = Logger.getLogger(EventLogValidator.class.getName());
-    
+    //method connects form inputs to POJO variables
     @Override
     public boolean supports(Class<?> classy){
         return EventLog.class.isAssignableFrom(classy);
     }
-    
+    //validates input fields, based on requirements set in messages.properties
     @Override
     public void validate (Object target,Errors errors){
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"clientid", "event.clientid.required");

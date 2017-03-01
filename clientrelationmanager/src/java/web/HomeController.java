@@ -17,13 +17,14 @@ import repository.EventLogDAO;
 /**
  *
  * @author Carter
+ * Home Controller
  */
 @Controller
 public class HomeController {
-    
+    //wires Event Log DAO to display "recent history" on home page
     @Autowired
     EventLogDAO dao;
-    
+    //redirects from home.jsp to index.jsp; displays general Event Log list
     @RequestMapping("/")
     public ModelAndView viewhome(){
         List<EventLog> eventLog = dao.getEventsList();
