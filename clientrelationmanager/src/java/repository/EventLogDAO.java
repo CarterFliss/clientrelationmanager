@@ -63,7 +63,7 @@ public class EventLogDAO {
     }
     //prints list of EventLogs for jsp pages
     public List<EventLog> getEventsList() {
-        return template.query("SELECT * FROM interactions", new RowMapper<EventLog>() {
+        return template.query("SELECT EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date FROM interactions", new RowMapper<EventLog>() {
             public EventLog mapRow(ResultSet rs, int row) throws SQLException {
                 EventLog a = new EventLog();
                 a.setEventid(rs.getInt("EventID"));
