@@ -31,27 +31,28 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         </form>
         
+        <div class="w3-card">
+            <ul>
+                <li><sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')"><a href="<c:url value="/clients/viewclients/" />"></sec:authorize>${clientscount} Clients</a></li>
+                <li><sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')"><a href="<c:url value="/eventlog/vieweventlog/" />"></sec:authorize>${EventCount} Events</a></li>
+                <sec:authorize access="hasRole('ADMIN')"><li><a href="<c:url value="/users/viewusers/" />">${userscount} Users</a></li></sec:authorize>
+            </ul>
+        </div>
+        
         <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">  
     <tr>
       <th>Date</th>
       <th>Client Name</th>
       <th>Username</th>
       <th>Event</th>
-      <th>Action</th>
     </tr>  
 
     <c:forEach var="eventlogs" items="${eventlog}">   
       <tr>  
         <td>${eventlogs.date}</td>
-        <td>${eventlogs.clientFirstName} ${eventlogs.clientLastName}</td>
-        <td>${eventlogs.username}</td>
+        <td><sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')"><a href="<c:url value="/clients/viewclient/${eventlogs.clientid}" />">${eventlogs.clientFirstName} ${eventlogs.clientLastName}</a></sec:authorize></td>
+        <td><sec:authorize access="hasRole('ADMIN')"><a href="<c:url value="/users/viewuser/${eventlogs.userid}" />"></sec:authorize>${eventlogs.username}</a></td>
         <td>${eventlogs.interaction}</td>
-        <td>
-          <a href="<c:url value="/eventlog/editevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
-          <sec:authorize access="hasRole('ADMIN')">
-          <a href="<c:url value="/eventlog/removeevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-green" onclick="return confirm('Are you sure you want to delete this event?');">Delete</button></a>
-          </sec:authorize>
-        </td>  
       </tr>  
     </c:forEach>  
   </table> 
