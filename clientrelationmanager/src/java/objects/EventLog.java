@@ -134,8 +134,10 @@ public class EventLog implements Serializable {
         buffer.append("Event ID: " + this.eventid);
         buffer.append("Client ID: " + this.clientid);
         buffer.append("Client Name: " + clientFirstName+" "+clientLastName);
+        buffer.append("Client: "+client);
         buffer.append("User ID: " + this.userid);
         buffer.append("Username: " + this.username);
+        buffer.append("User: "+user);
         buffer.append("Event Description: " + interaction);
         buffer.append("Date of Event: " + date);
         return buffer.toString();
