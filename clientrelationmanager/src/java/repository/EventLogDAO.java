@@ -44,14 +44,14 @@ public class EventLogDAO {
     }
     //methods for CRUD operations w/ MySQL database
     public int addEvent(EventLog events) {
-        this.sql = "INSERT INTO interactions (First_Name,Last_Name,Username,Interaction_Type,Interaction_Date) VALUES (?,?,?,?,?)";
-        Object[] values = {events.getClientFirstName(), events.getClientLastName(), events.getUsername(), events.getInteraction(), events.getDate()};
+        this.sql = "INSERT INTO interactions (ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date) VALUES (?,?,?,?,?,?,?)";
+        Object[] values = {events.getClient().getClientid(),events.getClient().getFirstName(), events.getClient().getLastName(), events.getUser().getUserId(),events.getUser().getUsername(), events.getInteraction(), events.getDate()};
         return this.template.update(sql, values);
     }
 
     public int updateEvent(EventLog eventlog) {
-        this.sql = "UPDATE interactions SET First_Name = ?,Last_Name = ?,Username = ?,Interaction_Type = ?,Interaction_Date = ? WHERE EventID = ?";
-        Object[] values = {eventlog.getClientFirstName(), eventlog.getClientLastName(), eventlog.getUsername(), eventlog.getInteraction(), eventlog.getDate(), eventlog.getEventid()};
+        this.sql = "UPDATE interactions SET ClientID = ?, First_Name = ?,Last_Name = ?,UserID = ?,Username = ?,Interaction_Type = ?,Interaction_Date = ? WHERE EventID = ?";
+        Object[] values = {eventlog.getClientid(),eventlog.getClientFirstName(), eventlog.getClientLastName(), eventlog.getUserid(),eventlog.getUsername(), eventlog.getInteraction(), eventlog.getDate(), eventlog.getEventid()};
         logger.info(eventlog.getEventid()+"");
         return this.template.update(sql, values);
     }
@@ -121,17 +121,16 @@ public class EventLogDAO {
     //pagination method
     public List<EventLog> getEventsByPage(int start, int total) {
         String sql = "SELECT interactions.EventID,clients.ClientID,clients.First_Name,"
-                + "clients.Last_Name,users.UserID,users.Username,interactions.Interaction_Type"
+                + "clients.Last_Name,users.UserID,users.Username,interactions.Interaction_Type,"
                 + "interactions.Interaction_Date FROM interactions "
-                + "INNER JOIN clients AS clients ON clients.ClientID = interactions.ClientID,"
-                + "clients.First_Name = interactions.First_Name, clients.Last_Name = interactions.Last_Name "
-                + "INNER JOIN users AS users ON users.UserID = interactions.UserID, users.Username = interactions.Username "
+                + "INNER JOIN clients AS clients ON clients.ClientID = interactions.ClientID "
+                + "INNER JOIN users AS users ON users.UserID = interactions.UserID "
                 + "ORDER BY interactions.Interaction_Date "
                 + "LIMIT " + (start - 1) + "," + total;
         return template.query(sql, new RowMapper<EventLog>() {
             public EventLog mapRow(ResultSet rs, int row) throws SQLException {
                 EventLog a = new EventLog();
-                a.setEventid(rs.getInt(1));
+                a.setEventid(rs.getInt("EventID"));
 
                 Clients client = new Clients();
                 client.setClientid(rs.getInt("ClientID"));
@@ -149,6 +148,7 @@ public class EventLogDAO {
                 a.setInteraction(rs.getString("Interaction_Type"));
                 a.setDate(rs.getString("Interaction_Date"));
                 return a;
+                
             }
         });
     }

@@ -41,24 +41,30 @@ public class EventLogController {
     private static final Logger logger = Logger.getLogger(EventLogController.class.getName());
     //provides list of all Event Logs
     @RequestMapping("/eventlog/vieweventlog")
-    public ModelAndView showEventLog(){
-        List<EventLog> eventLog = dao.getEventsList();
-        return new ModelAndView("vieweventlog","eventlog",eventLog);
+    public ModelAndView showEventLog(HttpServletRequest request){
+        //List<EventLog> eventLog = dao.getEventsList();
+        //return new ModelAndView("vieweventlog","eventlog",eventLog);
+        return this.showEventLogPager(1,request);
     }
     //adds Event Log to database
     @RequestMapping(value="/eventlog/addevent",method=RequestMethod.GET)
     public ModelAndView addEvent(){
-        return new ModelAndView("addevent","eventlog",new EventLog());
+        EventLog el = new EventLog();
+        el.setClients(dao.getClientsMap());
+        el.setUsers(dao.getUsersMap());
+        return new ModelAndView("addevent","eventlog",el);
     }
     //saves new added Event Logs to database
     @RequestMapping(value = "/eventlog/save", method = RequestMethod.POST)
-    public ModelAndView save (@ModelAttribute("eventlog") @Valid EventLog eventlog, BindingResult result,HttpServletRequest request){
+    public ModelAndView save (@ModelAttribute("eventlog") @Valid EventLog el, BindingResult result,HttpServletRequest request){
         //returns error message if editing page fails
         if(result.hasErrors()){
+            el.setClients(dao.getClientsMap());
+            el.setUsers(dao.getUsersMap());
             logger.info(result.getFieldErrors().toString());
-            return new ModelAndView("vieweventlog","eventlog",eventlog);
+            return new ModelAndView("addevent","eventlog",el);
         }
-        int x = dao.addEvent(eventlog);
+        int x = dao.addEvent(el);
         //returns either a successful message or failure message
         Messages msg = null;
         if (x == 1){
@@ -94,7 +100,7 @@ public class EventLogController {
             context.put("message",msg);
             request.getSession().removeAttribute("message");
         }
-        
+        logger.info(eventLogs.toString());
         return new ModelAndView("vieweventlog",context);
     }
     //gets Event Log from database for editing

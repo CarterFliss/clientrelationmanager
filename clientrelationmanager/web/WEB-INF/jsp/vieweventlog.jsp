@@ -41,8 +41,8 @@
     <c:forEach var="eventlogs" items="${eventlog}">   
       <tr>  
         <td>${eventlogs.date}</td>
-        <td>${eventlogs.clientFirstName} ${eventlogs.clientLastName}</td>
-        <td>${eventlogs.username}</td>
+        <td>${eventlogs.client.firstName} ${eventlogs.client.lastName}</td>
+        <td>${eventlogs.user.username}</td>
         <td>${eventlogs.interaction}</td>
         <td>
           <a href="<c:url value="/eventlog/editevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
