@@ -32,9 +32,9 @@ public class EventLogValidator implements Validator {
     public void validate (Object target,Errors errors){
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"clientid", "event.clientid.required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"userid", "event.userid.required");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"clientFirstName", "event.firstName.required");
+        /*ValidationUtils.rejectIfEmptyOrWhitespace(errors,"clientFirstName", "event.firstName.required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"clientLastName", "event.lastName.required");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"username", "event.username.required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"username", "event.username.required");*/
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"interaction", "event.interaction.required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"date", "event.date.required");
         

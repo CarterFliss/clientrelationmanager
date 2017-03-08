@@ -45,7 +45,7 @@ public class EventLogDAO {
     //methods for CRUD operations w/ MySQL database
     public int addEvent(EventLog events) {
         this.sql = "INSERT INTO interactions (ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date) VALUES (?,?,?,?,?,?,?)";
-        Object[] values = {events.getClient().getClientid(),events.getClient().getFirstName(), events.getClient().getLastName(), events.getUser().getUserId(),events.getUser().getUsername(), events.getInteraction(), events.getDate()};
+        Object[] values = {events.getClientid(),events.getClientFirstName(), events.getClientLastName(), events.getUserid(),events.getUsername(), events.getInteraction(), events.getDate()};
         return this.template.update(sql, values);
     }
 
@@ -183,7 +183,7 @@ public class EventLogDAO {
         SqlRowSet srs = template.queryForRowSet(sql);
 
         while (srs.next()) {
-            users.put(srs.getInt("UserID"), srs.getString("Username"));
+            users.put(srs.getInt(1), srs.getString(2));
         }
         return users;
     }

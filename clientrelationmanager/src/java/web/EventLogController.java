@@ -107,6 +107,8 @@ public class EventLogController {
     @RequestMapping(value="/eventlog/editevent/{id}")
     public ModelAndView edit(@PathVariable int id){
         EventLog eventlog = dao.getEventsById(id);
+        eventlog.setUsers(dao.getUsersMap());
+        eventlog.setClients(dao.getClientsMap());
         return new ModelAndView("editevent","eventlog",eventlog);
     }
     //saves edits to a Event Log
