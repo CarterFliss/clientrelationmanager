@@ -24,7 +24,7 @@
       </c:when>
     </c:choose>
    </c:if>
-<table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">  
+<table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-half w3-white">  
     <tr>
         <th><strong>Client Name:  </strong></th>
         <td><c:forEach var="u" items="${Client}">${u.firstName} ${u.lastName}</c:forEach></td>
@@ -63,9 +63,9 @@
         <td>${e.username}</td>
         <td>${e.interaction}</td>
         <td>
-          <a href="<c:url value="/eventlog/editevent/${e.eventid}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
+          <a href="<c:url value="/eventlog/editevent/${e.eventid}" />"><button class="w3-btn w3-round w3-cyan">Edit</button></a>
           <sec:authorize access="hasRole('ADMIN')">
-          <a href="<c:url value="/eventlog/removeevent/${e.eventid}" />"><button class="w3-btn w3-round w3-green">Delete</button></a>
+          <a href="<c:url value="/eventlog/removeevent/${e.eventid}" />"><button class="w3-btn w3-round w3-blue">Delete</button></a>
           </sec:authorize>
         </td>  
       </tr>  
