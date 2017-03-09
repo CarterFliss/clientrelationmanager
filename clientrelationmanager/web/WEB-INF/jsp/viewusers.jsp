@@ -50,8 +50,8 @@
             </c:choose></td>
         <td>
           <a href="<c:url value="/users/viewuser/${u.userId}" />"><button class="w3-btn w3-round w3-blue">View</button></a>
-          <a href="<c:url value="/users/edituser/${u.userId}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
-          <a href="<c:url value="/users/removeuser/${u.userId}"/>"><button class="w3-btn w3-round w3-green" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button></a>
+          <a href="<c:url value="/users/edituser/${u.userId}" />"><button class="w3-btn w3-round w3-cyan">Edit</button></a>
+          <a href="<c:url value="/users/removeuser/${u.userId}"/>"><button class="w3-btn w3-round w3-teal" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button></a>
         </td>  
       </tr>  
     </c:forEach>  
@@ -60,7 +60,7 @@
   <div class="w3-padding-8">
     <ul class="w3-pagination">
       <c:forEach begin="1" end="${pages}" varStatus="p">  
-        <li><a class="<c:if test="${p.index eq page}">w3-green</c:if>" href="<c:url value="/users/viewusers/${p.index}" />">${p.index}</a></li>
+        <li><a class="<c:if test="${p.index eq page}">w3-indigo</c:if>" href="<c:url value="/users/viewusers/${p.index}" />">${p.index}</a></li>
       </c:forEach>
     </ul>
   </div>

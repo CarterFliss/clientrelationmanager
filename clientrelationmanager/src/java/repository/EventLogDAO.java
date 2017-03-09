@@ -45,7 +45,7 @@ public class EventLogDAO {
     //methods for CRUD operations w/ MySQL database
     public int addEvent(EventLog events) {
         this.sql = "INSERT INTO interactions (ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date) VALUES (?,?,?,?,?,?,?)";
-        Object[] values = {events.getClient().getClientid(),events.getClient().getFirstName(), events.getClient().getLastName(), events.getUser().getUserId(),events.getUser().getUsername(), events.getInteraction(), events.getDate()};
+        Object[] values = {events.getClientid(),events.getClientFirstName(), events.getClientLastName(), events.getUserid(),events.getUsername(), events.getInteraction(), events.getDate()};
         return this.template.update(sql, values);
     }
 
@@ -152,6 +152,24 @@ public class EventLogDAO {
             }
         });
     }
+    
+    //gets last 5 events from Event Log for index page
+    public List<EventLog> getLastFive(){
+        return template.query("SELECT EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date FROM interactions LIMIT 5", new RowMapper<EventLog>() {
+            public EventLog mapRow(ResultSet rs, int row) throws SQLException {
+                EventLog a = new EventLog();
+                a.setEventid(rs.getInt("EventID"));
+                a.setClientid(rs.getInt("ClientID"));
+                a.setClientFirstName(rs.getString("First_Name"));
+                a.setClientLastName(rs.getString("Last_Name"));
+                a.setUserid(rs.getInt("UserID"));
+                a.setUsername(rs.getString("Username"));
+                a.setInteraction(rs.getString("Interaction_Type"));
+                a.setDate(rs.getString("Interaction_Date"));
+                return a;
+            }
+        });
+    }
     //gets count of all Clients for pagination purposes
     public int getEventsCount() {
         String sql = "SELECT COUNT(EventID) AS rowcount FROM interactions";
@@ -163,7 +181,7 @@ public class EventLogDAO {
 
         return 1;
     }
-    //maps Clients for pagination purposes
+    //maps Clients for input purposes
     public Map<Integer, String> getClientsMap() {
         Map<Integer, String> clients = new LinkedHashMap<Integer, String>();
         String sql = "SELECT ClientID,First_Name,Last_Name FROM clients";
@@ -183,7 +201,7 @@ public class EventLogDAO {
         SqlRowSet srs = template.queryForRowSet(sql);
 
         while (srs.next()) {
-            users.put(srs.getInt("UserID"), srs.getString("Username"));
+            users.put(srs.getInt(1), srs.getString(2));
         }
         return users;
     }

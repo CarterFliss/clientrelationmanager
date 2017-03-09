@@ -23,6 +23,14 @@
     <form:form method="POST" action="/clientrelationmanager/eventlog/editsave" cssClass="w3-container" commandName="eventlog">
       <form:hidden path="eventid"  />
       <div class="w3-padding-8">
+          <label><b>Client Name</b></label>
+        <form:select path="clientid" cssClass="w3-input w3-border"  >
+        <form:option value="-1"> Select Client</form:option>
+        <form:options items="${eventlog.clients}"></form:options>
+        </form:select>
+        <form:errors path="clientid" cssClass="w3-red w3-padding-8 w3-panel" cssStyle="display: block; width: 100%; font-weight:bold;" />
+      </div>
+      <div class="w3-padding-8">
         <label><b>Client First Name</b></label>
         <form:input path="clientFirstName" cssClass="w3-input w3-border"  />
         <form:errors path="clientFirstName" cssClass="w3-red w3-padding-8 w3-panel" cssStyle="display: block; width: 100%; font-weight:bold;" />
@@ -31,6 +39,14 @@
         <label><b>Client Last Name</b></label>
         <form:input path="clientLastName" cssClass="w3-input w3-border"  />
         <form:errors path="clientLastName" cssClass="w3-red w3-padding-8 w3-panel" cssStyle="display: block; width: 100%; font-weight:bold;" />
+      </div>
+      <div class="w3-padding-8">
+          <label><b>Username</b></label>
+        <form:select path="userid" cssClass="w3-input w3-border"  >
+        <form:option value="-1"> Select user</form:option>
+        <form:options items="${eventlog.users}"></form:options>
+        </form:select>
+        <form:errors path="userid" cssClass="w3-red w3-padding-8 w3-panel" cssStyle="display: block; width: 100%; font-weight:bold;" />
       </div>
       <div class="w3-padding-8">
         <label><b>Username</b></label>

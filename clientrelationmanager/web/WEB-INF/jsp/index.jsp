@@ -18,8 +18,8 @@
 
     <div class="w3-row-padding w3-margin-bottom">
         <sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')">
-            <a href="<c:url value="/clients/viewclients/" />"><button class="w3-btn w3-round w3-blue">View Clients</button></a>
-            <a href="<c:url value="/eventlog/vieweventlog/" />"><button class="w3-btn w3-round w3-blue">View Event Log</button></a>
+            <a href="<c:url value="/clients/viewclients/" />"><button class="w3-btn w3-round w3-teal">View Clients</button></a>
+            <a href="<c:url value="/eventlog/vieweventlog/" />"><button class="w3-btn w3-round w3-cyan">View Event Log</button></a>
         </sec:authorize>
         <sec:authorize access="hasRole('ADMIN')">
             <a href="<c:url value="/users/viewusers/" />"><button class="w3-btn w3-round w3-blue">View Users</button></a>
@@ -31,7 +31,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         </form>
         
-        <div class="w3-card">
+        <div class="w3-card w3-indigo w3-half w3-row-padding">
             <ul>
                 <li><sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')"><a href="<c:url value="/clients/viewclients/" />"></sec:authorize>${clientscount} Clients</a></li>
                 <li><sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')"><a href="<c:url value="/eventlog/vieweventlog/" />"></sec:authorize>${EventCount} Events</a></li>
@@ -39,7 +39,7 @@
             </ul>
         </div>
         
-        <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">  
+        <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white w3-half">  
     <tr>
       <th>Date</th>
       <th>Client Name</th>
@@ -60,7 +60,7 @@
   <div class="w3-padding-8">
     <ul class="w3-pagination">
       <c:forEach begin="1" end="${pages}" varStatus="p">  
-        <li><a class="<c:if test="${p.index eq page}">w3-green</c:if>" href="<c:url value="/eventlog/vieweventlog/${p.index}" />">${p.index}</a></li>
+        <li><a class="<c:if test="${p.index eq page}">w3-indigo</c:if>" href="<c:url value="/eventlog/vieweventlog/${p.index}" />">${p.index}</a></li>
       </c:forEach>
     </ul>
   </div>

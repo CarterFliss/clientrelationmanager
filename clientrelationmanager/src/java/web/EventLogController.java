@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import objects.Messages;
 import objects.EventLog;
 import repository.EventLogDAO;
+import repository.ClientsDAO;
+import repository.UsersDAO;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -34,6 +36,12 @@ public class EventLogController {
     //wiring DAOs and Validators to controller
     @Autowired
     EventLogDAO dao;
+    
+    @Autowired
+    ClientsDAO cdao;
+    
+    @Autowired
+    UsersDAO udao;
     
     @Autowired
     EventLogValidator eventLogValidator;
@@ -64,6 +72,7 @@ public class EventLogController {
             logger.info(result.getFieldErrors().toString());
             return new ModelAndView("addevent","eventlog",el);
         }
+        
         int x = dao.addEvent(el);
         //returns either a successful message or failure message
         Messages msg = null;
@@ -107,6 +116,8 @@ public class EventLogController {
     @RequestMapping(value="/eventlog/editevent/{id}")
     public ModelAndView edit(@PathVariable int id){
         EventLog eventlog = dao.getEventsById(id);
+        eventlog.setUsers(dao.getUsersMap());
+        eventlog.setClients(dao.getClientsMap());
         return new ModelAndView("editevent","eventlog",eventlog);
     }
     //saves edits to a Event Log
@@ -114,7 +125,7 @@ public class EventLogController {
     public ModelAndView editSave(@ModelAttribute("eventlog") @Valid EventLog eventlog, BindingResult result,HttpServletRequest request){
         //returns error message if editing page fails
         if(result.hasErrors()){
-            return new ModelAndView("vieweventlog","eventlog",eventlog);
+            return new ModelAndView("editevent","eventlog",eventlog);
         }
         
         int x = dao.updateEvent(eventlog);

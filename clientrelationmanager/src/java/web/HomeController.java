@@ -36,7 +36,7 @@ public class HomeController {
     //redirects from home.jsp to index.jsp; displays general Event Log list
     @RequestMapping("/")
     public ModelAndView viewhome(){
-        List<EventLog> eventLog = dao.getEventsList();
+        List<EventLog> eventLog = dao.getLastFive();
         int eventCount = dao.getEventsCount();
         int usersCount = bdao.getUsersCount();
         int clientsCount = adao.getClientsCount();

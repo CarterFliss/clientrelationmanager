@@ -16,16 +16,16 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}</style>
-    <body class="w3-light-grey">
+    <body class="w3-white">
     
   <!-- Top container -->
-    <div class="w3-container w3-top w3-green w3-large w3-padding" style="z-index:4">
+    <div class="w3-container w3-top w3-indigo w3-large w3-padding" style="z-index:4">
   <button class="w3-btn w3-hide-large w3-padding-0 w3-hover-text-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
   <span class="w3-right">Computational Regulation of Merchandise</span>
     </div>
   
   <!-- Sidenav/menu -->
- <nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
+ <nav class="w3-sidenav w3-collapse w3-light-grey w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
       <div class="w3-container w3-row">
         <div class="w3-col s4">
           <img src="<c:url value="/media/img/avatar.jpg" />" class="w3-circle w3-margin-right" style="width:46px">
@@ -37,28 +37,28 @@
           </c:if>
         <a href="<c:url value="/" />" class="w3-padding"><i class="fa fa-dashboard fa-fw"></i>  Dashboard</a>
           <div class="w3-dropdown-hover">
-        <a href="<c:url value="/clients/viewclients" />" class="w3-padding"><i class="fa fa-music fa-fw"></i>  Clients  <i class="fa fa-caret-down"></i></a>
+        <a href="<c:url value="/clients/viewclients" />" class="w3-padding"><i class="fa fa-group fa-fw"></i>  Clients  <i class="fa fa-caret-down"></i></a>
         <div class="w3-dropdown-content w3-border">
             <sec:authorize access="hasAnyRole('MANAGER','ADMIN')">
-                <a href="<c:url value="/clients/addclient"/>"class="w3-padding"><i class="fa fa-music fa-fw"></i>  Add Client  </a>
+                <a href="<c:url value="/clients/addclient"/>"class="w3-padding"><i class="fa fa-user-plus fa-fw"></i>  Add Client  </a>
             </sec:authorize>
         </div>
           </div>
         <div class="w3-dropdown-hover">
-          <a href="<c:url value="/eventlog/vieweventlog" />"><i class="fa fa-plus-square fa-fw"></i>  Event Log   <i class="fa fa-caret-down"></i></a>
+          <a href="<c:url value="/eventlog/vieweventlog" />"><i class="fa fa-handshake-o fa-fw"></i>  Event Log   <i class="fa fa-caret-down"></i></a>
           <div class="w3-dropdown-content w3-border">
             <sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')">
-                <a href="<c:url value="/eventlog/addevent"/>"class="w3-padding"><i class="fa fa-music fa-fw"></i>  Add Event  </a>
+                <a href="<c:url value="/eventlog/addevent"/>"class="w3-padding"><i class="fa fa-ticket fa-fw"></i>  Add Event  </a>
             </sec:authorize>
         </div>
         </div>
           <sec:authorize access="hasRole('ADMIN')">
           
       <div class="w3-dropdown-hover">
-        <a href="<c:url value="/users/viewusers" />" class="w3-padding"><i class="fa fa-music fa-fw"></i>  Users  <i class="fa fa-caret-down"></i></a>
+        <a href="<c:url value="/users/viewusers" />" class="w3-padding"><i class="fa fa-address-book-o fa-fw"></i>  Users  <i class="fa fa-caret-down"></i></a>
         <div class="w3-dropdown-content w3-border">
             <sec:authorize access="hasRole('ADMIN')">
-                <a href="<c:url value="/users/adduser"/>"class="w3-padding"><i class="fa fa-music fa-fw"></i>  Add User  </a>
+                <a href="<c:url value="/users/adduser"/>"class="w3-padding"><i class="fa fa-plus-square-o fa-fw"></i>  Add User  </a>
             </sec:authorize>
         </div>
        </div>
