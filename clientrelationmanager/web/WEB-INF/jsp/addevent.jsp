@@ -43,16 +43,16 @@
       <div class="w3-padding-8">
         <label><b>Username</b></label>
         <form:select path="userid" cssClass="w3-input w3-border"  >
-        <form:option value="-1"> Select user</form:option>
+        <form:option value="-1"> Select User</form:option>
         <form:options items="${eventlog.users}"></form:options>
         </form:select>
         <form:errors path="userid" cssClass="w3-red w3-padding-8 w3-panel" cssStyle="display: block; width: 100%; font-weight:bold;" />
       </div>
-        <div class="w3-padding-8">
+         <div class="w3-padding-8">
         <label><b>Username</b></label>
         <form:input path="username" cssClass="w3-input w3-border"  />            
         <form:errors path="username" cssClass="w3-red w3-padding-8 w3-panel" cssStyle="display: block; width: 100%; font-weight:bold;" />
-      </div>
+      </div> 
       <div class="w3-padding-8">
         <label><b>Event Description</b></label>
         <form:textarea path="interaction" cssClass="w3-input w3-border"  />

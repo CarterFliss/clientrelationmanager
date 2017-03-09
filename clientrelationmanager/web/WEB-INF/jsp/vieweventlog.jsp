@@ -45,9 +45,9 @@
         <td>${eventlogs.user.username}</td>
         <td>${eventlogs.interaction}</td>
         <td>
-          <a href="<c:url value="/eventlog/editevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-red">Edit</button></a>
+          <a href="<c:url value="/eventlog/editevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-cyan">Edit</button></a>
           <sec:authorize access="hasRole('ADMIN')">
-          <a href="<c:url value="/eventlog/removeevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-green" onclick="return confirm('Are you sure you want to delete this event?');">Delete</button></a>
+          <a href="<c:url value="/eventlog/removeevent/${eventlogs.eventid}" />"><button class="w3-btn w3-round w3-teal" onclick="return confirm('Are you sure you want to delete this event?');">Delete</button></a>
           </sec:authorize>
         </td>  
       </tr>  
@@ -57,7 +57,7 @@
   <div class="w3-padding-8">
     <ul class="w3-pagination">
       <c:forEach begin="1" end="${pages}" varStatus="p">  
-        <li><a class="<c:if test="${p.index eq page}">w3-green</c:if>" href="<c:url value="/eventlog/vieweventlog/${p.index}" />">${p.index}</a></li>
+        <li><a class="<c:if test="${p.index eq page}">w3-indigo</c:if>" href="<c:url value="/eventlog/vieweventlog/${p.index}" />">${p.index}</a></li>
       </c:forEach>
     </ul>
   </div>
