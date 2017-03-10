@@ -81,12 +81,15 @@ public class ClientsValidator implements Validator {
        if (clients.getPhone().length() > 12){
            errors.rejectValue("phone", "client.phone.length");
        }
-       if(clients.getPhone().matches("^((\\d{3}-|\\(\\d{3}\\)\\s?)?\\d{3}-|^\\d{3}(\\.)?\\d{3}\\3)\\d{4}$")){
+       if(clients.getPhone().matches("^\\d{10}|^(\\(\\d{3}\\)\\s?)?\\d{3}-\\d{4}$|^\\d{3}([.-])\\d{3}\\2\\d{4}$")){
        } else {
            errors.rejectValue("phone","client.phone.pattern");
         }
        if (clients.getEmail().length() > 120){
            errors.rejectValue("email", "client.email.length");
+       }
+       if(!clients.getEmail().matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")){
+           errors.rejectValue("email", "client.email.pattern");
        }
     }
 }

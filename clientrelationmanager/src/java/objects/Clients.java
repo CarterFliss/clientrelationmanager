@@ -25,82 +25,163 @@ public class Clients implements Serializable {
     private String email;
     
     //getters and setters
+
+    /**
+     * Gets ClientID
+     * @return
+     */
     public int getClientid() {
         return clientid;
     }
 
+    /**
+     * Gets client's first name
+     * @return
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Gets client's last name
+     * @return
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Gets client's status (active, prospective, former)
+     * @return
+     */
     public String getUserStatus() {
         return userStatus;
     }
 
+    /**
+     * Gets client's address
+     * @return
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Gets client's city
+     * @return
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Gets client's home state (ex. AR)
+     * @return
+     */
     public String getHomeState() {
         return homeState;
     }
 
+    /**
+     * Gets client's ZIP code
+     * @return
+     */
     public int getZip() {
         return zip;
     }
 
+    /**
+     * Gets client's phone number
+     * @return
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * Gets client's email address
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets ClientID
+     * @param clientid
+     */
     public void setClientid(int clientid) {
         this.clientid = clientid;
     }
 
+    /**
+     * Sets client's first name
+     * @param firstName
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Sets client's last name
+     * @param lastName
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Sets client's status
+     * @param userStatus
+     */
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
     }
 
+    /**
+     * Sets client's address
+     * @param address
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     * Sets client's city
+     * @param city
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * Sets client's home state
+     * @param homeState
+     */
     public void setHomeState(String homeState) {
         this.homeState = homeState;
     }
 
+    /**
+     * Sets client's ZIP code
+     * @param zip
+     */
     public void setZip(int zip) {
         this.zip = zip;
     }
 
+    /**
+     * Sets client's phone number
+     * @param phone
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     * Sets client's email address
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }

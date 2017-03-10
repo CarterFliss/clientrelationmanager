@@ -181,7 +181,7 @@ public class EventLogDAO {
 
         return 1;
     }
-    //maps Clients for input purposes
+    //maps Clients for input purposes into Event Log
     public Map<Integer, String> getClientsMap() {
         Map<Integer, String> clients = new LinkedHashMap<Integer, String>();
         String sql = "SELECT ClientID,First_Name,Last_Name FROM clients";
@@ -193,7 +193,7 @@ public class EventLogDAO {
         }
         return clients;
     }
-    //maps Users for pagination purposes
+    //maps Users for input purposes into Event Log
     public Map<Integer, String> getUsersMap() {
         Map<Integer, String> users = new LinkedHashMap<Integer, String>();
         String sql = "SELECT UserID,Username FROM users";

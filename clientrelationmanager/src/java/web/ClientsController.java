@@ -78,7 +78,7 @@ public class ClientsController {
         //returns error message if editing page fails
         if(result.hasErrors()){
             logger.info(result.getFieldErrors().toString());
-            return new ModelAndView("viewclients","clients",clients);
+            return new ModelAndView("editclient","clients",clients);
         }
         int x = dao.updateClient(clients);
         //returns either a successful message or failure message
