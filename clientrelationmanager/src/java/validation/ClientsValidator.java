@@ -67,7 +67,7 @@ public class ClientsValidator implements Validator {
        if (clients.getCity().length() > 60){
            errors.rejectValue("city", "client.city.length");
        }
-       if(clients.getCity().matches("^[A-Z]'?[- a-zA-Z]([a-zA-Z])*$")){
+       if(clients.getCity().matches("^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$")){
        } else {
            errors.rejectValue("city","client.city.pattern");
         }
