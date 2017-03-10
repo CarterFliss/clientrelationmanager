@@ -72,7 +72,8 @@ public class UsersController {
     public ModelAndView addUserSave (@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
         //returns error message if editing page fails
         if(result.hasErrors()){
-            return new ModelAndView("viewusers","users",new Users());
+            logger.info(result.getFieldErrors().toString());
+            return new ModelAndView("adduser","users",new Users());
         }
         int x = dao.addUser(users);
         //returns either a successful message or failure message        
@@ -124,6 +125,7 @@ public class UsersController {
     public ModelAndView editSave(@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
         //returns error message if editing page fails
         if(result.hasErrors()){
+            logger.info(result.getFieldErrors().toString());
             return new ModelAndView("viewusers","users",users);
         }
         int x = dao.updateUser(users);
