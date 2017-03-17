@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS Interactions
     Interaction_Type TEXT NOT NULL,
     Interaction_Date VARCHAR (30) NOT NULL,    
     PRIMARY KEY  (EventID),
-    CONSTRAINT fk_clientID FOREIGN KEY (ClientID) REFERENCES Clients (ClientID),    
-    CONSTRAINT fk_userID FOREIGN KEY (UserID) REFERENCES Users (UserID),
+    CONSTRAINT fk_clientID FOREIGN KEY (ClientID) REFERENCES Clients (ClientID) ON delete cascade on update cascade,    
+    CONSTRAINT fk_userID FOREIGN KEY (UserID) REFERENCES Users (UserID) on delete cascade on update cascade,
     INDEX (EventID,ClientID,UserID)
 );
 

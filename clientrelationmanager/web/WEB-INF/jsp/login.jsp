@@ -8,7 +8,7 @@
 <%@page session="true" %>
 <!DOCTYPE html>
 <html>
-  <title>Computational Regulation of Merchandise</title>
+  <title>BluShark CRM</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
@@ -25,7 +25,7 @@
 
           <div class="w3-center"><br>
             <span onclick="document.getElementById('id01').style.display = 'none'" class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright" title="Close Modal">&times;</span>
-            <img src="<c:url value="/media/img/avatar.jpg" />" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+            <img src="<c:url value="/media/img/shark-icon-png-31.png" />" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
           </div>
 
           <form id="loginForm" class="w3-container w3-light-grey" action="<c:url value='/j_spring_security_login' />" method='POST'>

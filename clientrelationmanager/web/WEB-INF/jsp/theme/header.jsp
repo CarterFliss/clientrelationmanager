@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Computational Regulation of Merchandise</title>
+        <title>BluShark CRM</title>
         <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
@@ -19,9 +19,9 @@
     <body class="w3-white">
     
   <!-- Top container -->
-    <div class="w3-container w3-top w3-indigo w3-large w3-padding" style="z-index:4">
+    <div class="w3-container w3-top w3-blue w3-large w3-padding" style="z-index:4">
   <button class="w3-btn w3-hide-large w3-padding-0 w3-hover-text-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-  <span class="w3-right">Computational Regulation of Merchandise</span>
+  <span class="w3-right"><img src="<c:url value="/media/img/shark-icon-png-31.png" />" class="w3-circle" style="width:32px">BluShark CRM</span>
     </div>
   
   <!-- Sidenav/menu -->
