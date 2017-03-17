@@ -38,7 +38,7 @@
                 <sec:authorize access="hasRole('ADMIN')"><li><a href="<c:url value="/users/viewusers/" />">${userscount} Users</a></li></sec:authorize>
             </ul>
         </div>
-        
+            <div class="w3-teal">Last 5 Events</div>
         <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white w3-half">  
     <tr>
       <th>Date</th>

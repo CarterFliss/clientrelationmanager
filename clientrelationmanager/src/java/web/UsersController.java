@@ -73,7 +73,7 @@ public class UsersController {
         //returns error message if editing page fails
         if(result.hasErrors()){
             logger.info(result.getFieldErrors().toString());
-            return new ModelAndView("adduser","users",new Users());
+            return new ModelAndView("adduser","users",users);
         }
         int x = dao.addUser(users);
         //returns either a successful message or failure message        

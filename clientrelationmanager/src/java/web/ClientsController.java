@@ -99,7 +99,7 @@ public class ClientsController {
         //returns error message if adding page fails
         if(result.hasErrors()){
             logger.info(result.getFieldErrors().toString());
-            return new ModelAndView("addclient","clients",new Clients());
+            return new ModelAndView("addclient","clients",clients);
         }
         int x = dao.addClient(clients);
         //returns either a successful message or failure message
