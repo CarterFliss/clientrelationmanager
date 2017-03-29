@@ -23,11 +23,23 @@ import java.util.regex.Pattern;
 public class EventLogValidator implements Validator {
     private static Logger logger = Logger.getLogger(EventLogValidator.class.getName());
     //method connects form inputs to POJO variables
+
+    /**
+     * Allows linkage of validator to EventLog POJO and EventLogController.
+     * @param classy
+     * @return
+     */
     @Override
     public boolean supports(Class<?> classy){
         return EventLog.class.isAssignableFrom(classy);
     }
     //validates input fields, based on requirements set in messages.properties
+
+    /**
+     * Validates various fields for an EventLog object
+     * @param target
+     * @param errors
+     */
     @Override
     public void validate (Object target,Errors errors){
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"clientid", "event.clientid.required");

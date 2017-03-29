@@ -24,11 +24,23 @@ public class UsersValidator implements Validator{
 
     private static Logger logger = Logger.getLogger(UsersValidator.class.getName());
     //method connects form inputs to POJO variables
+
+    /**
+     * Allows linkage of validator to UsersController and Users POJO
+     * @param classy
+     * @return
+     */
     @Override
     public boolean supports(Class<?> classy){
         return Users.class.isAssignableFrom(classy);
     }
     //validates input fields, based on requirements set in messages.properties
+
+    /**
+     * Validates various fields for a Users object
+     * @param target
+     * @param errors
+     */
     @Override
     public void validate (Object target, Errors errors){
        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"username", "user.username.required");

@@ -32,6 +32,11 @@ public class EventLogRESTController {
     @Autowired
     EventLogDAO dao;
     //provides list of all available Events
+
+    /**
+     * Gets a list of events in the Event Log
+     * @return
+     */
     @RequestMapping(value="/api/eventlog/",method=RequestMethod.GET)
     public ResponseEntity<List<EventLog>> listEventLog(){
         List<EventLog> el = dao.getEventsList();
@@ -43,6 +48,12 @@ public class EventLogRESTController {
         return new ResponseEntity<List<EventLog>>(el,HttpStatus.OK);
     }
     //pulls Event info, based on specific EventID
+
+    /**
+     * Gets a specific event from the Event Log based on Event ID
+     * @param id
+     * @return
+     */
     @RequestMapping(value="/api/eventlog/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EventLog> getEventInfo(@PathVariable("id") int id){
         EventLog el = null;
@@ -56,6 +67,13 @@ public class EventLogRESTController {
         return new ResponseEntity<EventLog>(el,HttpStatus.OK);
     }
     //for adding an Event to the database through REST API
+
+    /**
+     * Adds an event to the Event Log through REST API
+     * @param el
+     * @param ucBuilder
+     * @return
+     */
     @RequestMapping(value="/api/eventlog/",method=RequestMethod.POST)
     public ResponseEntity<Void> addEvent(@RequestBody EventLog el,UriComponentsBuilder ucBuilder){
         dao.addEvent(el);
@@ -65,6 +83,13 @@ public class EventLogRESTController {
         return new ResponseEntity<Void>(headers,HttpStatus.CREATED);
     }
     //method for updating Event through REST API
+
+    /**
+     * Updates an event in the Event Log through REST API
+     * @param id
+     * @param el
+     * @return
+     */
     @RequestMapping(value="/api/eventlog/{id}",method=RequestMethod.PUT)
     public ResponseEntity<EventLog> updateEvent(@PathVariable("id") int id,@RequestBody EventLog el){
       EventLog currentEL = null;
@@ -85,6 +110,12 @@ public class EventLogRESTController {
       return new ResponseEntity<EventLog>(currentEL,HttpStatus.OK);
     }
     //method for deleting Event through REST API
+
+    /**
+     * Deletes an event from the Event Log through the REST API
+     * @param id
+     * @return
+     */
     @RequestMapping(value="/api/eventlog/{id}",method=RequestMethod.DELETE)
     public ResponseEntity<EventLog> deleteEvent(@PathVariable("id") int id){
         EventLog el = null;

@@ -36,6 +36,11 @@ public class ClientsRESTController {
     @Autowired
     EventLogDAO adao;
     //provides list of all available Clients
+
+    /**
+     * Lists all clients through a REST API
+     * @return
+     */
     @RequestMapping(value="/api/clients/",method=RequestMethod.GET)
     public ResponseEntity<List<Clients>> listClients(){
         List<Clients> clients = dao.getClientsList();
@@ -47,6 +52,12 @@ public class ClientsRESTController {
         return new ResponseEntity<List<Clients>>(clients,HttpStatus.OK);
     }
     //pulls Client info, based on specific ClientID
+
+    /**
+     * Gets a specific client's info based on a Client ID
+     * @param id
+     * @return
+     */
     @RequestMapping(value="/api/clients/clientinfo/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Clients> getClientInfo(@PathVariable("id") int id){
         Clients client = null;
@@ -60,6 +71,12 @@ public class ClientsRESTController {
         return new ResponseEntity<Clients>(client,HttpStatus.OK);
     }
     //pulls Event Log history, based on specific ClientID
+
+    /**
+     * Gets a list of events tied to a client's Client ID
+     * @param id
+     * @return
+     */
     @RequestMapping(value="/api/clients/clientevents/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<EventLog>> getClientEvents(@PathVariable("id") int id){
         List<EventLog> clientEL = null;
@@ -73,6 +90,13 @@ public class ClientsRESTController {
         return new ResponseEntity<List<EventLog>>(clientEL,HttpStatus.OK);
     }
     //for adding a Client to the database through REST API
+
+    /**
+     * Adds a client to the database through a REST API
+     * @param client
+     * @param ucBuilder
+     * @return
+     */
     @RequestMapping(value="/api/clients/",method=RequestMethod.POST)
     public ResponseEntity<Void> addClient(@RequestBody Clients client, UriComponentsBuilder ucBuilder){
         dao.addClient(client);
@@ -82,6 +106,13 @@ public class ClientsRESTController {
         return new ResponseEntity<Void>(headers,HttpStatus.CREATED);
     }
     //method for updating Client through REST API
+
+    /**
+     * Updates a client's info through a REST API
+     * @param id
+     * @param client
+     * @return
+     */
     @RequestMapping(value="/api/clients/clientinfo/{id}",method=RequestMethod.PUT)
     public ResponseEntity<Clients> updateClient(@PathVariable("id") int id,@RequestBody Clients client){
         Clients currentClient = null;
@@ -106,6 +137,12 @@ public class ClientsRESTController {
         return new ResponseEntity<Clients>(currentClient,HttpStatus.OK);
     }
     //method for deleting Client through REST API
+
+    /**
+     * Deletes a client from the database through a REST API
+     * @param id
+     * @return
+     */
     @RequestMapping(value="/api/clients/clientinfo/{id}",method=RequestMethod.DELETE)
     public ResponseEntity<Clients> deleteClient(@PathVariable("id") int id){
         Clients client = null;

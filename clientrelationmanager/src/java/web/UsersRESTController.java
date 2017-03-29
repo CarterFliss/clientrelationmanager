@@ -36,6 +36,11 @@ public class UsersRESTController {
     @Autowired
     EventLogDAO adao;
     //provides list of all available Users
+
+    /**
+     * Gets a list of users through a REST API
+     * @return
+     */
     @RequestMapping(value="/api/users/",method=RequestMethod.GET)
     public ResponseEntity<List<Users>> listUsers(){
         List<Users> users = dao.getUsersList();
@@ -47,6 +52,12 @@ public class UsersRESTController {
         return new ResponseEntity<List<Users>>(users,HttpStatus.OK);
     }
     //pulls Client info, based on specific UserID
+
+    /**
+     * Gets a specific user's info based on User ID through REST API
+     * @param id
+     * @return
+     */
     @RequestMapping(value="/api/users/userinfo/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Users> getUserInfo(@PathVariable("id") int id){
         Users user = null;
@@ -60,6 +71,13 @@ public class UsersRESTController {
         return new ResponseEntity<Users>(user,HttpStatus.OK);
     }
     //pulls Event Log history, based on specific UserID
+
+    /**
+     * Gets a list of events in the Event Log tied to a specific User ID through
+     *  REST API
+     * @param id
+     * @return
+     */
     @RequestMapping(value="/api/users/userevents/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<EventLog>> getUserEvents(@PathVariable("id") int id){
         List<EventLog> userEL = null;
@@ -73,6 +91,13 @@ public class UsersRESTController {
         return new ResponseEntity<List<EventLog>>(userEL,HttpStatus.OK);
     }
     //for adding a User to the database through REST API
+
+    /**
+     * Adds a user to the database through REST API
+     * @param user
+     * @param ucBuilder
+     * @return
+     */
     @RequestMapping(value="/api/users/",method=RequestMethod.POST)
     public ResponseEntity<Void> addUser(@RequestBody Users user, UriComponentsBuilder ucBuilder){
         dao.addUser(user);
@@ -82,6 +107,13 @@ public class UsersRESTController {
         return new ResponseEntity<Void>(headers,HttpStatus.CREATED);
     }
     //method for updating User through REST API
+
+    /**
+     * Edits a user in the database through REST API
+     * @param id
+     * @param user
+     * @return
+     */
     @RequestMapping(value="/api/users/userinfo/{id}",method=RequestMethod.PUT)
     public ResponseEntity<Users> updateUser(@PathVariable("id") int id,@RequestBody Users user){
         Users currentUser = null;
@@ -102,6 +134,12 @@ public class UsersRESTController {
         return new ResponseEntity<Users>(currentUser,HttpStatus.OK);
     }
     //method for deleting User through REST API
+
+    /**
+     * Removes a user from the database through REST API
+     * @param id
+     * @return
+     */
     @RequestMapping(value="/api/users/userinfo/{id}",method=RequestMethod.DELETE)
     public ResponseEntity<Users> deleteUser(@PathVariable("id") int id){
         Users user = null;

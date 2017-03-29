@@ -17,37 +17,85 @@ public class Messages implements Serializable{
     private String message;
     
     //enumerates message levels
+
+    /**
+     * Enumerates different message levels
+     */
     public enum Level {
-        ERROR, INFO, SUCCESS;
+
+        /**
+         *
+         */
+        ERROR,
+
+        /**
+         *
+         */
+        INFO,
+
+        /**
+         *
+         */
+        SUCCESS;
         
+        /**
+         * Returns the message type
+         * @return
+         */
         public String getString() {
             return this.name();
         }
     }
     
     //creation of Message Objects.  One w/ parameters and another w/out.
+
+    /**
+     * Initialization of a Messages object with no parameters
+     */
     public Messages(){
         
     }
     
+    /**
+     * Initialization of Messages object with parameters
+     * @param type
+     * @param message
+     */
     public Messages(Level type,String message){
         this.type = type;
         this.message = message;
     }
 
     //getters and setters
+
+    /**
+     * Gets the Messages type
+     * @return
+     */
     public Level getType(){
         return type;
     }
 
+    /**
+     * Sets the Messages type
+     * @param type
+     */
     public void setType(Level type){
         this.type = type;
     }
 
+    /**
+     * Gets the Messages object
+     * @return
+     */
     public String getMessage(){
         return message;
     }
 
+    /**
+     * Sets the Messages object
+     * @param message
+     */
     public void setMessage(String message){
         this.message = message;
     }

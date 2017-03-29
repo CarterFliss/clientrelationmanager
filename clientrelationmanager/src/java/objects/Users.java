@@ -22,42 +22,83 @@ public class Users implements Serializable{
     private int userStatus;
     
     //getters and setters
+
+    /**
+     * Gets the User account status
+     * @return
+     */
     public int getUserStatus() {
         return userStatus;
     }
 
+    /**
+     * Sets the User account status
+     * @param userStatus
+     */
     public void setUserStatus(int userStatus) {
         this.userStatus = userStatus;
     }
 
+    /**
+     * Gets the User's role
+     * @return
+     */
     public String getUserrole() {
         return userrole;
     }
 
+    /**
+     * Sets the User's role
+     * @param userrole
+     */
     public void setUserrole(String userrole) {
         this.userrole = userrole;
     }
         
+    /**
+     * Gets the User ID
+     * @return
+     */
     public int getUserId() {
         return userId;
     }
 
+    /**
+     * Gets the Username
+     * @return
+     */
     public String getUsername() {
         return username;
     }
       
+    /**
+     * Gets the Users password
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets the User ID
+     * @param userId
+     */
     public void setUserId(int userId) {
         this.userId = userId;
     }
 
+    /**
+     * Sets the Username
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
        
+    /**
+     * Sets the User's password
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }

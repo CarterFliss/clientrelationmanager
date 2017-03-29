@@ -45,6 +45,11 @@ public class ClientsController {
     
     private static final Logger logger = Logger.getLogger(ClientsController.class.getName());
     //provides list of all Clients
+
+    /**
+     * Maps the general viewclients page for a list of all clients
+     * @return
+     */
     @RequestMapping("/clients/viewclients")
     public ModelAndView showClients(){
         List<Clients> client = dao.getClientsList();
@@ -52,6 +57,13 @@ public class ClientsController {
     }
     //allows detailed view of specific Client, including Event Log in which current
     //Client was a part
+
+    /**
+     * Maps the page for a specific client profile
+     * @param id
+     * @param request
+     * @return
+     */
     @RequestMapping(value="/clients/viewclient/{id}",method = RequestMethod.GET)
     public ModelAndView showClientsByClientID(@PathVariable int id,HttpServletRequest request){
        List<Clients> y = dao.getClientsById(id);
@@ -62,17 +74,38 @@ public class ClientsController {
        return new ModelAndView("viewclient",context);
     }
     //adds Client to database
+
+    /**
+     * Maps the page for a new client
+     * @return
+     */
     @RequestMapping(value="/clients/addclient", method = RequestMethod.GET)
     public ModelAndView addClient(){
         return new ModelAndView("addclient","clients",new Clients());
     }
     //gets Client from database for editing
+
+    /**
+     * Maps to page for editing an existing client in the database
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/clients/editclient/{id}")
     public ModelAndView save(@PathVariable int id){
         Clients clients = dao.getClientByID(id);
         return new ModelAndView("editclient","clients",clients);
     }
     //saves edits to a Client
+
+    /**
+     * Saves the client to the database before redirecting to general clients
+     *  list;  Redirects back to the edit page and displays error messages when
+     *  editing fails.
+     * @param clients
+     * @param result
+     * @param request
+     * @return
+     */
     @RequestMapping(value="/clients/editsave",method=RequestMethod.POST)
     public ModelAndView editSave(@ModelAttribute("clients") @Valid Clients clients, BindingResult result, HttpServletRequest request){
         //returns error message if editing page fails
@@ -94,6 +127,15 @@ public class ClientsController {
         return new ModelAndView("redirect:/clients/viewclients");
     }
     //saves new added Clients to database
+
+    /**
+     * Saves the client to the database before redirecting to general clients 
+     *  list; Redirects to the add client form in the case of an error
+     * @param clients
+     * @param result
+     * @param request
+     * @return
+     */
     @RequestMapping(value="/clients/addsave",method=RequestMethod.POST)
     public ModelAndView addSave(@ModelAttribute("clients") @Valid Clients clients, BindingResult result, HttpServletRequest request){
         //returns error message if adding page fails
@@ -114,6 +156,13 @@ public class ClientsController {
         return new ModelAndView("redirect:/clients/viewclients");
     }
     //applies pagination to jsp page
+
+    /**
+     * Main method for pagination
+     * @param pageid
+     * @param request
+     * @return
+     */
     @RequestMapping("/clients/viewclients/{pageid}")
     public ModelAndView showClientsPager (@PathVariable int pageid,HttpServletRequest request){
         int total = 25;
@@ -142,6 +191,13 @@ public class ClientsController {
     }
     
     //method deletes Client from database    
+
+    /**
+     * Removes a client from the database
+     * @param id
+     * @param request
+     * @return
+     */
     @RequestMapping(value="/clients/removeclient/{id}",method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable int id,HttpServletRequest request){
        int x = dao.deleteClient(id);
@@ -157,15 +213,28 @@ public class ClientsController {
         return new ModelAndView("redirect:/clients/viewclients");       
     }
     //binds validator to controller
+
+    /**
+     * Binds the ClientsValidator to the controller
+     * @param webDataBinder
+     */
     @InitBinder("clients")
     public void initBinder(WebDataBinder webDataBinder){
         webDataBinder.setValidator(clientsValidator);
     }
 
+    /**
+     * Gets the ClientsValidator
+     * @return
+     */
     public ClientsValidator getClientsValidator() {
         return clientsValidator;
     }
 
+    /**
+     * Sets the ClientsValidator
+     * @param clientsValidator
+     */
     public void setClientsValidator(ClientsValidator clientsValidator) {
         this.clientsValidator = clientsValidator;
     }

@@ -50,6 +50,12 @@ public class EventLogController {
     private static final Logger logger = Logger.getLogger(EventLogController.class.getName());
 
     //provides list of all Event Logs
+
+    /**
+     * Maps to a general list of client-user interactions
+     * @param request
+     * @return
+     */
     @RequestMapping("/eventlog/vieweventlog")
     public ModelAndView showEventLog(HttpServletRequest request) {
         //List<EventLog> eventLog = dao.getEventsList();
@@ -58,6 +64,11 @@ public class EventLogController {
     }
 
     //adds Event Log to database
+
+    /**
+     * Maps to a form for adding events to the Event Log
+     * @return
+     */
     @RequestMapping(value = "/eventlog/addevent", method = RequestMethod.GET)
     public ModelAndView addEvent() {
         EventLog el = new EventLog();
@@ -67,6 +78,16 @@ public class EventLogController {
     }
 
     //saves new added Event Logs to database
+
+    /**
+     * Saves the new event to the database before redirecting to the general
+     *  Event Log list; Redirects to the form and displays error messages in
+     *  case of an error
+     * @param el
+     * @param result
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/eventlog/save", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute("eventlog") @Valid EventLog el, BindingResult result, HttpServletRequest request) {
         //returns error message if editing page fails
@@ -91,6 +112,13 @@ public class EventLogController {
     }
 
     //applies pagination to jsp page
+
+    /**
+     * Main method for paginating the list of events
+     * @param pageid
+     * @param request
+     * @return
+     */
     @RequestMapping("/eventlog/vieweventlog/{pageid}")
     public ModelAndView showEventLogPager(@PathVariable int pageid, HttpServletRequest request) {
         int total = 25;
@@ -119,6 +147,12 @@ public class EventLogController {
     }
 
     //gets Event Log from database for editing
+
+    /**
+     * Pulls up a form for editing an event in the Event Log
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/eventlog/editevent/{id}")
     public ModelAndView edit(@PathVariable int id) {
         EventLog eventlog = dao.getEventsById(id);
@@ -128,6 +162,16 @@ public class EventLogController {
     }
 
     //saves edits to a Event Log
+
+    /**
+     * Saves the edited event to the Event Log before redirecting to general
+     *  event list; Redirects back to the form in the case of an error while
+     *  displaying error messages
+     * @param eventlog
+     * @param result
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/eventlog/editsave", method = RequestMethod.POST)
     public ModelAndView editSave(@ModelAttribute("eventlog") @Valid EventLog eventlog, BindingResult result, HttpServletRequest request) {
         //returns error message if editing page fails
@@ -152,6 +196,13 @@ public class EventLogController {
     }
 
     //method deletes Event Log from database    
+
+    /**
+     * Maps a page to delete an event from the Event Log
+     * @param id
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/eventlog/removeevent/{id}", method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable int id, HttpServletRequest request) {
         int x = dao.deleteEvent(id);
@@ -168,15 +219,28 @@ public class EventLogController {
     }
 
     //binds validator to controller
+
+    /**
+     * Binds the EventLogValidator to the controller
+     * @param webDataBinder
+     */
     @InitBinder("eventlog")
     public void initBinder(WebDataBinder webDataBinder) {
         webDataBinder.setValidator(eventLogValidator);
     }
 
+    /**
+     * Gets the EventLogValidator
+     * @return
+     */
     public EventLogValidator getEventLogValidator() {
         return eventLogValidator;
     }
 
+    /**
+     * Sets the EventLogValidator
+     * @param eventLogValidator
+     */
     public void setEventLogValidator(EventLogValidator eventLogValidator) {
         this.eventLogValidator = eventLogValidator;
     }

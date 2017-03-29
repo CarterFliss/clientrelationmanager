@@ -46,6 +46,11 @@ public class UsersController {
            
     private static final Logger logger = Logger.getLogger(UsersController.class.getName());
     //provides list of all Users
+
+    /**
+     * Maps a general list of all users
+     * @return
+     */
     @RequestMapping("/users/viewusers")
     public ModelAndView showusers(){
         List<Users> user = dao.getUsersList();
@@ -53,6 +58,13 @@ public class UsersController {
     }
     //allows detailed view of specific User, including Event Log in which current
     //User was a part
+
+    /**
+     * Maps to a profile page for a specific user, based on User ID
+     * @param id
+     * @param request
+     * @return
+     */
     @RequestMapping(value="/users/viewuser/{id}",method=RequestMethod.GET)
     public ModelAndView showUsersByUserID(@PathVariable int id,HttpServletRequest request){
         List<Users> x = dao.getUsersById(id);
@@ -63,11 +75,26 @@ public class UsersController {
         return new ModelAndView("viewuser",context);
     }
     //adds User to database
+
+    /**
+     * Maps to a form for adding a user to the database
+     * @return
+     */
     @RequestMapping(value="/users/adduser")
     public ModelAndView addUser(){
         return new ModelAndView("adduser","users",new Users());
     }
     //saves new added Users to database
+
+    /**
+     * Saves the new user to the database before redirecting to the general
+     *  users list; Redirects back to the form and displays error messages in
+     *  the case of an error adding the new user.
+     * @param users
+     * @param result
+     * @param request
+     * @return
+     */
     @RequestMapping(value="/users/addsave",method=RequestMethod.POST)
     public ModelAndView addUserSave (@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
         //returns error message if editing page fails
@@ -88,6 +115,13 @@ public class UsersController {
         return new ModelAndView("redirect:/users/viewusers");
     }
     //applies pagination to jsp page
+
+    /**
+     * Main method for paginating the list of users
+     * @param pageid
+     * @param request
+     * @return
+     */
     @RequestMapping("/users/viewusers/{pageid}")
     public ModelAndView showusersPager (@PathVariable int pageid,HttpServletRequest request){
         int total = 25;
@@ -115,12 +149,28 @@ public class UsersController {
         return new ModelAndView("viewusers",context);
     }
     //gets User from database for editing
+
+    /**
+     * Maps to a form for editing a user in the database
+     * @param id
+     * @return
+     */
     @RequestMapping(value="/users/edituser/{id}")
     public ModelAndView edit(@PathVariable int id){
        Users users = dao.getUserById(id);
        return new ModelAndView("edituser","users",users);
     }
     //saves edits to a User
+
+    /**
+     * Saves the edited user info to the database before redirecting to the
+     *  general users list;  Redirects back to form, in the case of an error,
+     *  and displays error messages.
+     * @param users
+     * @param result
+     * @param request
+     * @return
+     */
     @RequestMapping(value="/users/editsave",method = RequestMethod.POST)
     public ModelAndView editSave(@ModelAttribute("users") @Valid Users users, BindingResult result,HttpServletRequest request){
         //returns error message if editing page fails
@@ -142,6 +192,13 @@ public class UsersController {
         return new ModelAndView("redirect:/users/viewusers");
     }
     //method deletes User from database    
+
+    /**
+     * Removes a user from the database
+     * @param id
+     * @param request
+     * @return
+     */
     @RequestMapping(value="/users/removeuser/{id}",method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable int id,HttpServletRequest request){
        int x = dao.deleteUser(id);
@@ -157,15 +214,28 @@ public class UsersController {
         return new ModelAndView("redirect:/users/viewusers");       
     }
     //binds validator to controller
+
+    /**
+     * Binds the UsersValidator to the UsersController and Users POJO
+     * @param webDataBinder
+     */
     @InitBinder("users")
     public void initBinder(WebDataBinder webDataBinder){
         webDataBinder.setValidator(usersValidator);
     }
 
+    /**
+     * Gets the UsersValidator
+     * @return
+     */
     public UsersValidator getUsersValidator() {
         return usersValidator;
     }
 
+    /**
+     * Sets the UsersValidator
+     * @param usersValidator
+     */
     public void setUsersValidator(UsersValidator usersValidator) {
         this.usersValidator = usersValidator;
     }
