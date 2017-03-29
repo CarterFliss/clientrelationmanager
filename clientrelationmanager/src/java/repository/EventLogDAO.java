@@ -35,20 +35,40 @@ public class EventLogDAO {
     
     private static final Logger logger = Logger.getLogger(EventLogDAO.class.getName());
     //getters and setters for jdbc template
+
+    /**
+     * Gets the JDBCTemplate
+     * @return
+     */
     public JdbcTemplate getTemplate() {
         return template;
     }
 
+    /**
+     * Sets the JDBCTemplate
+     * @param template
+     */
     public void setTemplate(JdbcTemplate template) {
         this.template = template;
     }
     //methods for CRUD operations w/ MySQL database
+
+    /**
+     * Adds an event into the database
+     * @param events
+     * @return
+     */
     public int addEvent(EventLog events) {
         this.sql = "INSERT INTO interactions (ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date) VALUES (?,?,?,?,?,?,?)";
         Object[] values = {events.getClientid(),events.getClientFirstName(), events.getClientLastName(), events.getUserid(),events.getUsername(), events.getInteraction(), events.getDate()};
         return this.template.update(sql, values);
     }
 
+    /**
+     * Updates an event in the Event Log
+     * @param eventlog
+     * @return
+     */
     public int updateEvent(EventLog eventlog) {
         this.sql = "UPDATE interactions SET ClientID = ?, First_Name = ?,Last_Name = ?,UserID = ?,Username = ?,Interaction_Type = ?,Interaction_Date = ? WHERE EventID = ?";
         Object[] values = {eventlog.getClientid(),eventlog.getClientFirstName(), eventlog.getClientLastName(), eventlog.getUserid(),eventlog.getUsername(), eventlog.getInteraction(), eventlog.getDate(), eventlog.getEventid()};
@@ -56,12 +76,22 @@ public class EventLogDAO {
         return this.template.update(sql, values);
     }
 
+    /**
+     * Deletes an event from the Event Log
+     * @param id
+     * @return
+     */
     public int deleteEvent(int id) {
         this.sql = "DELETE FROM interactions WHERE EventID = ?";
         Object[] values = {id};
         return this.template.update(sql, values);
     }
     //prints list of EventLogs for jsp pages
+
+    /**
+     * Gets a list of events in the Event Log
+     * @return
+     */
     public List<EventLog> getEventsList() {
         return template.query("SELECT EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date FROM interactions", new RowMapper<EventLog>() {
             public EventLog mapRow(ResultSet rs, int row) throws SQLException {
@@ -80,11 +110,23 @@ public class EventLogDAO {
     }
     //for pulling a specific EventLog object, for editing pages and providing
     //interaction history w/ a User or Client
+
+    /**
+     * Gets events based on its Event ID
+     * @param id
+     * @return
+     */
     public EventLog getEventsById(int id) {
         String sql = "SELECT EventID,First_Name, Last_Name, Username, Interaction_Type, Interaction_Date FROM interactions WHERE EventID = ?";
         return template.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<EventLog>(EventLog.class));
     }
 
+    /**
+     * Gets a list of events based on a Client ID, used for specific Client
+     *  and User profiles
+     * @param id
+     * @return
+     */
     public List<EventLog> getEventsByClientID(int id) {
         return template.query("SELECT EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date FROM interactions WHERE ClientID = "+id, new RowMapper<EventLog>() {
             public EventLog mapRow(ResultSet rs, int row) throws SQLException {
@@ -102,6 +144,12 @@ public class EventLogDAO {
         });
     }
 
+    /**
+     * Gets a list of events based on a User ID, used for specific Client
+     *  and User profiles
+     * @param id
+     * @return
+     */
     public List<EventLog> getEventsByUserID(int id) {
         return template.query("SELECT EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date FROM interactions WHERE UserID = "+id, new RowMapper<EventLog>() {
             public EventLog mapRow(ResultSet rs, int row) throws SQLException {
@@ -119,6 +167,13 @@ public class EventLogDAO {
         });
     }
     //pagination method
+
+    /**
+     * Gets a list of events based on a set number, 25.
+     * @param start
+     * @param total
+     * @return
+     */
     public List<EventLog> getEventsByPage(int start, int total) {
         String sql = "SELECT interactions.EventID,clients.ClientID,clients.First_Name,"
                 + "clients.Last_Name,users.UserID,users.Username,interactions.Interaction_Type,"
@@ -154,6 +209,11 @@ public class EventLogDAO {
     }
     
     //gets last 5 events from Event Log for index page
+
+    /**
+     * Gets a list of the last five events in the Event Log
+     * @return
+     */
     public List<EventLog> getLastFive(){
         return template.query("SELECT EventID,ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date FROM interactions LIMIT 5", new RowMapper<EventLog>() {
             public EventLog mapRow(ResultSet rs, int row) throws SQLException {
@@ -171,6 +231,11 @@ public class EventLogDAO {
         });
     }
     //gets count of all Clients for pagination purposes
+
+    /**
+     * Gets a count of the events in the Event Log, mainly for pagination
+     * @return
+     */
     public int getEventsCount() {
         String sql = "SELECT COUNT(EventID) AS rowcount FROM interactions";
         SqlRowSet rs = template.queryForRowSet(sql);
@@ -182,6 +247,11 @@ public class EventLogDAO {
         return 1;
     }
     //maps Clients for input purposes into Event Log
+
+    /**
+     * Gets a map of Clients, mainly for adding and editing events
+     * @return
+     */
     public Map<Integer, String> getClientsMap() {
         Map<Integer, String> clients = new LinkedHashMap<Integer, String>();
         String sql = "SELECT ClientID,First_Name,Last_Name FROM clients";
@@ -194,6 +264,11 @@ public class EventLogDAO {
         return clients;
     }
     //maps Users for input purposes into Event Log
+
+    /**
+     * Gets a map of Users, mainly for adding and editing events
+     * @return
+     */
     public Map<Integer, String> getUsersMap() {
         Map<Integer, String> users = new LinkedHashMap<Integer, String>();
         String sql = "SELECT UserID,Username FROM users";

@@ -22,6 +22,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SecurityController {
     //establishes login page
+
+    /**
+     * Presents error messages when logging into the app
+     * @param error
+     * @param logout
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(@RequestParam(value = "error",required = false) String error,
                               @RequestParam(value = "logout",required = false) String logout){
@@ -42,6 +49,12 @@ public class SecurityController {
     }
     //for when a user attempts access to page where they aren't allowed, based
     //on User Role
+
+    /**
+     * Displays the 403 page when user attempts to access a page for which they
+     *  don't have rights
+     * @return
+     */
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public ModelAndView accesssDenied(){
 
