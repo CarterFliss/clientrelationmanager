@@ -18,11 +18,11 @@
 
     <div class="w3-row-padding w3-margin-bottom">
         <sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')">
-            <a href="<c:url value="/clients/viewclients/" />"><button class="w3-btn w3-round w3-teal">View Clients</button></a>
-            <a href="<c:url value="/eventlog/vieweventlog/" />"><button class="w3-btn w3-round w3-cyan">View Event Log</button></a>
+            <a href="<c:url value="/clients/viewclients/1" />"><button class="w3-btn w3-round w3-teal">View Clients</button></a>
+            <a href="<c:url value="/eventlog/vieweventlog/1" />"><button class="w3-btn w3-round w3-cyan">View Event Log</button></a>
         </sec:authorize>
         <sec:authorize access="hasRole('ADMIN')">
-            <a href="<c:url value="/users/viewusers/" />"><button class="w3-btn w3-round w3-blue">View Users</button></a>
+            <a href="<c:url value="/users/viewusers/1" />"><button class="w3-btn w3-round w3-blue">View Users</button></a>
         </sec:authorize>
 
         <a href="#" onclick="logoutFormSubmit();" class="w3-padding"><i class="fa fa-sign-out fa-fw"></i>  Logout</a><br><br>
@@ -33,9 +33,9 @@
         
         <div class="w3-card w3-indigo w3-half w3-row-padding">
             <ul>
-                <li><sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')"><a href="<c:url value="/clients/viewclients/" />"></sec:authorize>${clientscount} Clients</a></li>
-                <li><sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')"><a href="<c:url value="/eventlog/vieweventlog/" />"></sec:authorize>${EventCount} Events</a></li>
-                <sec:authorize access="hasRole('ADMIN')"><li><a href="<c:url value="/users/viewusers/" />">${userscount} Users</a></li></sec:authorize>
+                <li><sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')"><a href="<c:url value="/clients/viewclients/1" />"></sec:authorize>${clientscount} Clients</a></li>
+                <li><sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')"><a href="<c:url value="/eventlog/vieweventlog/1" />"></sec:authorize>${EventCount} Events</a></li>
+                <sec:authorize access="hasRole('ADMIN')"><li><a href="<c:url value="/users/viewusers/1" />">${userscount} Users</a></li></sec:authorize>
             </ul>
         </div>
             <div class="w3-teal">Last 5 Events</div>

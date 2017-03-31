@@ -57,15 +57,53 @@ CREATE TABLE IF NOT EXISTS Interactions
 );
 
 
-INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Carter','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_ADMIN',true);
-INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Jax','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',true);
-INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Jackie','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',true);
+INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Carter','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_ADMIN',1);
+INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Jax','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Jackie','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Erin','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Stephanie','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Dustin','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Wesley','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Robert','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Tabatha','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Bruce','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Dave','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Leigh','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('David','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Chris','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Bradley','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+
 
 
 
 INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Larry','Fliss','Active','2411 Robinson Ave','Conway','AR',72034);
 INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Yukiko','Sato','Prospective','12 Illinois Ave','Urbana','IL',12345);
 INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Gerald','Washington','Former','123 Fake St','Austin','TX',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Debbie','Goggans','Active','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Arnold','Ripka','Prospective','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Donald','McNeil','Former','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Pamela','Webb','Active','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Jennifer','Neil','Prospective','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Jessica','Easton','Former','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Karen','Webb','Active','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Catherine','Higginbotham','Prospective','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Anthony','Griffin','Former','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Benjamin','Wray','Active','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Letha','Phelps','Prospective','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Ellen','Person','Former','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Alejandro','Peterson','Active','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Michelle','Smith','Prospective','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Karen','Norton','Former','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Jennifer','Teel','Active','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Michael','Petrick','Prospective','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Lovie','Pyle','Former','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Yvonne','Robertson','Active','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Wilma','Skinner','Prospective','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Debbie','Griffis','Former','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Ray','Snavely','Active','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Brian','Moore','Prospective','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('David','Turner','Former','123 Fake St','Little Rock','AR',54321);
+INSERT INTO Clients (First_Name,Last_Name,Status,Address,City,Home_State,ZIP) VALUES ('Daniel','Anderson','Active','123 Fake St','Little Rock','AR',54321);
 
 INSERT INTO Interactions (ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date) VALUES (2,'Yukiko','Sato',2,'Jax','Phone Call','2017-01-10');
 INSERT INTO Interactions (ClientID,First_Name,Last_Name,UserID,Username,Interaction_Type,Interaction_Date) VALUES (1,'Larry','Fliss',3,'Jackie','Changed to Active status','2017-01-10');

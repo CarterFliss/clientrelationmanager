@@ -169,7 +169,7 @@ public class ClientsController {
         int start = 1;
         //displays page if user isn't on first page
         if (pageid != 1){
-            start = (pageid - 1) + total + 1;
+            start = (pageid - 1) * total + 1;
         }
         //totals up results of pagination method in DAO to provide page numbers
         List<Clients> clients = dao.getClientsByPage(start, total);

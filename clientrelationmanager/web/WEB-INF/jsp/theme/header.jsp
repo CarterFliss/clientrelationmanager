@@ -37,7 +37,7 @@
           </c:if>
         <a href="<c:url value="/" />" class="w3-padding"><i class="fa fa-dashboard fa-fw"></i>  Dashboard</a>
           <div class="w3-dropdown-hover">
-        <a href="<c:url value="/clients/viewclients" />" class="w3-padding"><i class="fa fa-group fa-fw"></i>  Clients  <i class="fa fa-caret-down"></i></a>
+        <a href="<c:url value="/clients/viewclients/1" />" class="w3-padding"><i class="fa fa-group fa-fw"></i>  Clients  <i class="fa fa-caret-down"></i></a>
         <div class="w3-dropdown-content w3-border">
             <sec:authorize access="hasAnyRole('MANAGER','ADMIN')">
                 <a href="<c:url value="/clients/addclient"/>"class="w3-padding"><i class="fa fa-user-plus fa-fw"></i>  Add Client  </a>
@@ -45,7 +45,7 @@
         </div>
           </div>
         <div class="w3-dropdown-hover">
-          <a href="<c:url value="/eventlog/vieweventlog" />"><i class="fa fa-handshake-o fa-fw"></i>  Event Log   <i class="fa fa-caret-down"></i></a>
+          <a href="<c:url value="/eventlog/vieweventlog/1" />"><i class="fa fa-handshake-o fa-fw"></i>  Event Log   <i class="fa fa-caret-down"></i></a>
           <div class="w3-dropdown-content w3-border">
             <sec:authorize access="hasAnyRole('USER','MANAGER','ADMIN')">
                 <a href="<c:url value="/eventlog/addevent"/>"class="w3-padding"><i class="fa fa-ticket fa-fw"></i>  Add Event  </a>
@@ -55,7 +55,7 @@
           <sec:authorize access="hasRole('ADMIN')">
           
       <div class="w3-dropdown-hover">
-        <a href="<c:url value="/users/viewusers" />" class="w3-padding"><i class="fa fa-address-book-o fa-fw"></i>  Users  <i class="fa fa-caret-down"></i></a>
+        <a href="<c:url value="/users/viewusers/1" />" class="w3-padding"><i class="fa fa-address-book-o fa-fw"></i>  Users  <i class="fa fa-caret-down"></i></a>
         <div class="w3-dropdown-content w3-border">
             <sec:authorize access="hasRole('ADMIN')">
                 <a href="<c:url value="/users/adduser"/>"class="w3-padding"><i class="fa fa-plus-square-o fa-fw"></i>  Add User  </a>
