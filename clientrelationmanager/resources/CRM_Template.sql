@@ -57,21 +57,21 @@ CREATE TABLE IF NOT EXISTS Interactions
 );
 
 
-INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Carter','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_ADMIN',true);
-INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Jax','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',true);
-INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Jackie','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',true);
-INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Erin','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',true);
-INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Stephanie','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',true);
-INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Dustin','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',true);
-INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Wesley','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',true);
-INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Robert','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',true);
-INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Tabatha','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',true);
-INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Bruce','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',true);
-INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Dave','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',true);
-INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Leigh','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',true);
-INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('David','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',true);
-INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Chris','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',true);
-INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Bradley','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',true);
+INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Carter','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_ADMIN',1);
+INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Jax','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users (Username, Password, UserRole, User_Status) VALUES ('Jackie','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Erin','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Stephanie','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Dustin','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Wesley','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Robert','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Tabatha','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Bruce','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Dave','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Leigh','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('David','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_MANAGER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Chris','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
+INSERT INTO Users(Username, Password, UserRole, User_Status) VALUES('Bradley','f58cf5e7e10f195e21b553096d092c763ed18b0e','ROLE_USER',1);
 
 
 

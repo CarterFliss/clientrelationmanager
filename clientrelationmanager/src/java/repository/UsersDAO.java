@@ -142,6 +142,8 @@ public class UsersDAO {
                 Users a = new Users();
                 a.setUserId(rs.getInt(1));
                 a.setUsername(rs.getString(2));
+                a.setUserrole(rs.getString(4));
+                a.setUserStatus(rs.getInt(5));
                 return a;
             }
         });
